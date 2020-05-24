@@ -8,7 +8,7 @@ let test1 = ()=> {
     })
 }
 
-// 加载地图事件
+// test2
 let test2 = () => {
     setTimeout(function () {
         console.log("test2, 2222");
