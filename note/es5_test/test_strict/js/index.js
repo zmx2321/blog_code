@@ -9,3 +9,4 @@ function test() {
 
 test();  // a is not defined 
 */
+
