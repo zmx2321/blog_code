@@ -1,3 +1,18 @@
+// 添加js和cssdom
+/* let addJs = (url)=> {
+    let newScript = document.createElement("script");
+    newScript.type = "text/javascript";
+    newScript.src = url; 
+    let head = document.getElementsByTagName("head")[0];
+    head.appendChild(newScript);
+}
+
+let addClss = (url)=> {
+    var headHTML = document.getElementsByTagName('head')[0].innerHTML;
+    headHTML += `<link type="text/css" rel="stylesheet" href="${url}">`;
+    document.getElementsByTagName('head')[0].innerHTML = headHTML;
+} */
+
 // test1
 let test1 = ()=> {
     return new Promise((resolve, reject) => {
