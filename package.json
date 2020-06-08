@@ -1,0 +1,11 @@
+{
+  "name": "blog_code",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/zmx2321/blog_code.git",
+  "author": "zmx2321 <zmx2321@163.com>",
+  "license": "MIT",
+  "scripts": {
+    "main": "bash main.sh"
+  }
+}
