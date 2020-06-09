@@ -11,7 +11,7 @@ export default class CommentItem extends Component {
 
     render() {
         const { comment } = this.props;
-        console.log(comment);
+        // console.log(comment);
 
         return (
             <li>{comment.username}说：{comment.content}</li>
