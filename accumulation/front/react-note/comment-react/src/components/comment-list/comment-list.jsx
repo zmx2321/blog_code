@@ -25,18 +25,18 @@ export default class CommentList extends Component {
 
                 {/* 调用评论列表项组件 */}
                 <div className="comment-list">
-                    {/* <CommentItem comment={comments} /> */}
-                    {/* 使用map遍历CommentItem组件 */} */}
-                    {
-                        comments.map((comment, index)=> {
-                            // console.log(comment);
-
-                            // 第一个comment要与子组件的组件类的属性名一致
-                            // 第二个comment要与形参的名一致
-                            // 数组中的标签必须要有key，否则会有警告
-                            <CommentItem comment={comment} key={index} />
-                        })
-                    }
+                    <ul>
+                        <span>comment-item.jsx：评论列表项</span>
+                        {
+                            comments.map(
+                                (comment, index) => 
+                                    // 第一个comment要与子组件的组件类的属性名一致
+                                    // 第二个comment要与形参的名一致
+                                    // 数组中的标签必须要有key，否则会有警告
+                                    <CommentItem comment={comment} key={index} />
+                            )
+                        }
+                    </ul>
                 </div>
             </div>
         )

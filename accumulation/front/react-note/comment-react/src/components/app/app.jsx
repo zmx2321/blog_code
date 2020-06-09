@@ -16,10 +16,10 @@ export default class App extends Component {
             comments: [
                 {
                     username: "Tom",
-                    content: "React挺好的",
+                    content: "React 真香",
                 },{
                     username: "Jack",
-                    content: "React太难了",
+                    content: "React 太难了",
                 }
             ]
         }
@@ -30,17 +30,17 @@ export default class App extends Component {
         comments: [
             {
                 username: "Tom",
-                content: "React挺好的",
+                content: "React 真香",
             },{
                 username: "Jack",
-                content: "React太难了",
+                content: "React 太难了",
             }
         ]
     }
 
     render() {
         // 评论列表
-        const comments = this.state.comments;
+        const { comments } = this.state;
 
         return (
             <div>
