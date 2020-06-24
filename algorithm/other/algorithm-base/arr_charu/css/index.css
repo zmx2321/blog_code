@@ -1,0 +1,32 @@
+.tab{
+    width: 60%;
+    margin: 50px auto 0;
+}
+
+.tab ul{
+    position: relative;
+    top: 1px;
+}
+
+.tab li{
+    display: inline-block;
+    padding: 5px 20px;
+    border: solid 1px #ccc;
+    cursor: pointer;
+}
+
+.tab li.select{
+    background: #ccc;
+    border: solid 1px transparent;
+}
+
+.tab div{
+    display: none;
+}
+
+.tab div.select{
+    display: block;
+    border: solid 1px #ccc;
+    min-height: 108px;
+    background: #fff;
+}
