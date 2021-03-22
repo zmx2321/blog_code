@@ -190,4 +190,46 @@ console.log(file.size); */
 // fs.unlinkSync('data3.txt');
 
 // 删除文件 - 异步
-fs.unlink('data2.txt', err=>{});
+// fs.unlink('data2.txt', err=>{});
+
+// 读取所有txt文件
+const path = require('path');
+
+// 获取文件
+function getFile() {
+    // 解决回调嵌套的问题
+    return new Promise((resolve, rejects)=> {
+        // 获取文件目录，__dirname表示项目根目录
+        // path.resolve会返回绝对路径，进行拼接，然后返回
+        // 文件路径的处理
+        const filePath = path.resolve(__dirname, './doc');
+
+        // 异步读取文件目录
+        fs.readdir(filePath, (err, files)=> {
+            const fileArr = [];
+
+            files.forEach(fileName=> {
+                fileArr.push('/doc/' + fileName);
+            });
+
+            // 将结果resolve出去
+            resolve(fileArr);
+        })
+    })
+}
+
+// 他会等待getFile操作完之后再进行return
+async function getFilePath() {
+    const result = await getFile(); // 等待异步操作
+
+    return result;
+}
+
+function insertDbData() {
+    getFilePath().then(res=> {
+        // 数据库的操作
+        console.log(res);
+    });
+}
+
+insertDbData();
