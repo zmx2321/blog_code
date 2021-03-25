@@ -30,5 +30,39 @@ module.exports = {
             // 释放连接
             conn.release();
         });
+    },
+
+    // 获取异步数据写一个promise回调
+    sySqlConnect(sysql, sqlArr) {
+        // 写一个promise
+        return new Promise((resolve, reject)=> {
+            let pool = mysql.createPool(this.config);
+
+            pool.getConnection((err, conn)=> {
+                console.log("请求页面");
+    
+                if(err) {
+                    // 使用reject来提示错误
+                    reject(err);
+                } else {
+                    // 事件驱动回调
+                    // 直接返回数据
+                    conn.query(sysql, sqlArr, (err, data)=>{
+                        if(err) {
+                            reject(err);
+                        } else {
+                            // 使用resolve返回数据
+                            resolve(data);
+                        }
+                    });
+
+                    // 释放连接
+                    conn.release();
+                }
+            });
+            // 使用promise最好抛出错误
+        }).catch(err=> {
+            console.log(err);
+        });
     }
 }
