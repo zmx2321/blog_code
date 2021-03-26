@@ -201,7 +201,7 @@ let sendNodeMail = async ()=> {
         secure: true, // 开启加密协议，需要使用465端口(网易ssl协议)
         auth: {
             user: 'zmx2321@163.com', // 邮箱地址
-            pass: "JXOKFCNHYHGKGSRE", // 客户端授权密码(网易邮箱界面、设置、开启IMAP/SMTP)
+            pass: "JXOKFCNHYHGKGSRX", // 客户端授权密码(网易邮箱界面、设置、开启IMAP/SMTP)
         },
     });
 
