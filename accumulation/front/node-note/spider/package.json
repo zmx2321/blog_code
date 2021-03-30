@@ -11,9 +11,14 @@
   "license": "ISC",
   "dependencies": {
     "cheerio": "^1.0.0-rc.5",
+    "crypto-js": "^4.0.0",
     "exceljs": "^4.2.1",
+    "gm": "^1.23.1",
     "mysql": "^2.18.1",
     "node-schedule": "^2.0.0",
+    "node-tesseract": "^0.2.7",
+    "node-tesseract-ocr": "^2.0.0",
+    "puppeteer": "^8.0.0",
     "request": "^2.88.2",
     "require": "^2.4.20",
     "superagent": "^6.1.0"
