@@ -1,0 +1,12 @@
+{
+  "name": "gsmp-spider",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.5",
+    "mysql": "^2.18.1",
+    "request": "^2.88.2",
+    "superagent": "^6.1.0"
+  }
+}
