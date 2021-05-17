@@ -50,3 +50,35 @@
 .f-usn{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
 /* 边框圆角 */
 .bdr_radiu{border-radius: 4px;}
+
+ul {
+  width: 20%;
+  margin: 100px auto 0;
+  border: solid 1px #777777;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+li {
+  margin-bottom: 5px;
+  border-bottom: solid 1px #b3b3b3;
+  padding-bottom: 5px;
+}
+
+li a {
+  display: block;
+  width: 94.5%;
+  height: 100%;
+  font-size: 14px;
+  color: #333;
+  transition: 0.2s linear;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+li a:hover {
+  color: #715f5f;
+  background: #b3b3b3;
+  transition: 0.3s linear;
+}
+
