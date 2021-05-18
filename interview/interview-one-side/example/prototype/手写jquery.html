@@ -8,6 +8,9 @@
 </head>
 <body>
     鼠标右击查看源码
+    <p>123</p>
+    <p>123</p>
+    <p>123</p>
 </body>
 <script>
 class jQuery {
@@ -20,15 +23,21 @@ class jQuery {
         this.length = length
         this.selector = selector
     }
+
+    // 获取单个元素
     get(index) {
         return this[index]
     }
+
+    // 获取所有元素
     each(fn) {
         for (let i = 0; i < this.length; i++) {
             const elem = this[i]
             fn(elem)
         }
     }
+
+    // 绑定事件
     on(type, fn) {
         return this.each(elem => {
             elem.addEventListener(type, fn, false)
@@ -56,9 +65,13 @@ class myJQuery extends jQuery {
     }
 }
 
-// const $p = new jQuery('p')
-// $p.get(1)
-// $p.each((elem) => console.log(elem.nodeName))
-// $p.on('click', () => alert('clicked'))
+const $p = new jQuery('p')
+console.log("打印所有p标签", $p);
+
+console.log("获取第2个p标签", $p.get(1));
+
+$p.each((elem) => console.log("each", elem.nodeName))
+
+$p.on('click', () => alert('clicked'))
 </script>
 </html>
