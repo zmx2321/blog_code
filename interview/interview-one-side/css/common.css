@@ -53,7 +53,7 @@
 
 ul {
   width: 20%;
-  margin: 100px auto 0;
+  margin: 100px auto;
   border: solid 1px #777777;
   padding: 15px;
   border-radius: 10px;
@@ -78,6 +78,7 @@ li a {
 
 li a:hover {
   color: #715f5f;
+  /* color: #fff; */
   background: #b3b3b3;
   transition: 0.3s linear;
 }
