@@ -75,5 +75,19 @@ console.log(People.prototype === Student.prototype.__proto__);
 // 判断是否为自身属性
 console.log(xialuo.hasOwnProperty('name'));  // true
 console.log(xialuo.hasOwnProperty('sayHi'));  // false
+
+// 坑
+console.log(xialuo.__proto__.sayHi)  // 可以打印出方法
+// 这种的话就是当作xialuo这个对象的隐式原型的方法执行的
+// xialuo.__proto__.name这些值是没有的
+xialuo.__proto__.sayHi()  // 执行的时候里面的值 undefind
+
+xialuo.sayHi();  // sayHi是当作对象的方法执行的
+// 那么this就是xialuo这个对象/实例,
+// 对象的方法实际上都是在隐式原型上，
+// 实际上 xialuo.sayHi() 有些类似 xialuo.__proto__.sayHi.call(xialuo)
+
+// 执行隐私原型的方法，并把this指向实例
+xialuo.__proto__.sayHi.call(xialuo)
 </script>
 </html>
