@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>async和promise</title>
+</head>
+<body>
+    鼠标右击查看源码
+</body>
+<script>
+    // 执行async函数，返回的是Promise对象
+    async function fn1() {
+        return 100
+    }
+    const res1 = fn1();  // 执行async函数，返回的是一个promise对象
+    console.log("res1", res1);  // 100 resolved状态 promise对象
+    // resolved状态的promise对象，可以执行then回调
+    res1.then(data=> {
+        console.log("data", data)  // 100
+    })
+
+    async function fn2() {
+        return Promise.resolve(200)
+    }
+    const res2 = fn2();  // 返回的依然是一个promise对象
+
+    // await相当于promise的then
+    !(async ()=> {
+        const p1 = Promise.resolve(300)
+        const data = await p1  // await相当于promise的then
+        console.log('data', data);  // 300
+    })()
+
+    // 如果await下面只是一个值
+    !(async ()=> {
+        // 如果await后面是promise，他会当做then使用
+        // 如果不是promise，他会进行内部封装 => await Promise.resolve(400)
+        const data1 = await 400  
+        console.log('data1', data1);  // 400
+    })()
+
+    // 前面两条规则连起来
+    async function fn4() {
+        // 返回的都是promise对象
+        return 200
+        // return Promise.resolve(200)
+    }
+
+    !(async ()=> {
+        // await相当于promise的then
+        const data2 = await fn4()  
+        console.log('data2', data2);  // 200
+    })()
+
+    // try...catch可捕获异常，代替了promise的catch
+    !(async ()=> {
+        const p4 = Promise.reject('err')  // reject状态的promise
+
+        // promise如果是reject状态，就可以使用try catch捕获
+        try {
+            const res = await p4
+            console.log("p4", res)
+        } catch(ex) {
+            console.error(ex);  // try...catch相当于promise的catch
+        }
+    })()
+
+    // await相当于promise的then => 其他知识点 => 面试很可能会考
+    !(async ()=> {
+        const p5 = Promise.reject('err')  // reject状态的promise
+        const res = await p5  // 他是reject状态，不会走then，只会走try catch
+        // 下面不会执行
+        console.log("p5", res)
+    })()
+</script>
+</html>
