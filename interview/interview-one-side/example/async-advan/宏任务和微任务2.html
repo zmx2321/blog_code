@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>宏任务和微任务2</title>
+</head>
+<body>
+    <div id="container">
+        event loop和DOM渲染
+    </div>
+</body>
+<script src="../../js/lib/jquery1.8.3.min.js"></script>
+<script>
+    // event loop和DOM渲染
+    // 执行完js代码之后，还需要渲染到页面上
+    const $p1 = $('<p>一段文字</p>')
+    const $p2 = $('<p>一段文字</p>')
+    const $p3 = $('<p>一段文字</p>')
+
+    $('#container').append($p1)
+                   .append($p2)
+                   .append($p3)
+
+    // 示例一
+    // console.log("length", $('#container').children().length)
+    // // alert会阻断js执行，也会阻断DOM渲染，便于查看效果
+    // // alert之前，js已经执行完成了，但DOM还未渲染
+    // alert('本次调用栈结束，DOM结构已经更新，但尚未触发渲染')
+
+    // 示例二
+    // 微任务：DOM 渲染前触发
+    Promise.resolve().then(()=> {
+        console.log("length1", $('#container').children().length)
+
+        alert('Promise then')  // 此时dom未渲染
+    })
+
+    // 宏任务：DOM 渲染后触发
+    setTimeout(()=> {
+        console.log("length2", $('#container').children().length)
+
+        alert('Promise setTimeout')  // 此时dom渲染了
+    })
+</script>
+</html>
