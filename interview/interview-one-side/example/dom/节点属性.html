@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>节点属性</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    <div id="div1" class="container">
+        <p style="color: #f00;" class="tp">111</p>
+        <p>222</p>
+        <p class="p3">333</p>
+    </div>
+</body>
+<script>
+    // DOM节点的property
+    /* const pList = document.querySelectorAll('p')
+    const p = pList[0]
+    console.log(p.style, p.style.color)  // 获取样式
+    p.style.color = '#f0f'  // 修改样式
+    console.log(p.className);  // 获取class
+    p.className = 'p1'  // 修改class
+
+    // 获取nodeName和nodeType
+    console.log(p.nodeName);  // 标签
+    console.log(p.nodeType);  // 类型 */
+
+    // DOM节点的attribute - 直接修改html结构
+    const pList = document.querySelectorAll('p');
+    const p = pList[0]
+    p.setAttribute('data-name', 'imooc')
+    console.log(p.getAttribute('data-name'))
+    p.setAttribute('style', 'font-size:30px')
+    console.log(p.getAttribute('style'))
+</script>
+</html>
