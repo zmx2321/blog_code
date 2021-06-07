@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JSONP跨域原理</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    鼠标右击查看源码
+</body>
+<script>
+    // JSONP
+    window.abc = function(data) {
+        // 这是我们跨域得到的信息
+        console.log(data)
+    }
+</script>
+<!-- 通过http-server另起一个服务 -->
+<script src="http://127.0.0.1:3333/jsonp.js?callback=abc"></script>
+</html>
