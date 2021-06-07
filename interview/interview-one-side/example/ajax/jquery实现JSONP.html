@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jquery实现JSONP</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    鼠标右击查看源码
+</body>
+<script src="../../js/lib/jquery1.8.3.min.js"></script>
+<script>
+    /* $.ajax({
+        url: 'http://api.k780.com:88/?app=life.time&appkey=10003&sign=b59bc3ef6191eb9f747dd4e83c99f2a4&format=json',
+        type: 'GET',
+        dataType:"jsonp",
+        jsonp: 'jsoncallback',
+        callback: 'json',
+        success: function(data,status){
+            console.log(data);
+            var time;
+            time = data.result.datetime_2;
+            $('body').html(time);
+
+        }
+    });  */
+    $.ajax({
+        // ?code=utf-8&q=卫衣&callback=abc
+        url: "https://suggest.taobao.com/sug?code=utf-8",
+        type: 'GET',
+        dataType:"jsonp",
+        // jsonpCallback: 'cb',
+        data: {
+            // q: "卫衣"
+            q: "夹克"
+        },
+        success: function(data) {
+            console.log(data);
+        }
+    })
+</script>
+</html>
