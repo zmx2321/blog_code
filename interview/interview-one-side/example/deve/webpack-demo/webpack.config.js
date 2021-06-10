@@ -23,6 +23,34 @@ module.exports = {
         path: path.join(__dirname, 'dist')
     },
 
+    // 配置babel
+    // module是模块的意思
+    // 针对不同的模块做不同的解析
+    module: {
+        // 规则
+        rules: [
+            // 它的整体意思是
+            // 只要测试到时以.js结尾的，我们都去走babel-loader插件
+            // babel-loader只是babel提供给webpack的一个插件
+            // 真正做es6到es5转译的是babel/core这个核心去做的
+            // 所以我们需要做一个.babelrc的配置才行
+            {
+                // 对js定制规则 => 正则
+                // 只要是以js结尾的
+                // test表示用正则表达式验证一下
+                test: /\.js$/,
+                // 之前安装的babel-loader插件，主要给webpack用
+                loader: ['babel-loader'],
+                // 我们有哪些目录需要进行loader
+                // 我们手写的代码(src里面)都需要经过babel-loader进行转译
+                include: path.join(__dirname, "src"),
+                // 正则
+                // 但是node_modules都是第三方的插件，这个就没必要转译，因为安装的时候已经被转译了
+                exclude: /node_modules/
+            }
+        ]
+    },
+
     // 配置插件 - 是一个数组，可以配置多个插件
     plugins: [
         new HtmlWebpackPlugin({
@@ -37,6 +65,7 @@ module.exports = {
     devServer: {
         port: 3000,
         // 启动目录
-        contentBase: path.join(__dirname, 'dist')
+        contentBase: path.join(__dirname, 'dist'),
+        open: true,  // 自动打开浏览器
     }
 }
