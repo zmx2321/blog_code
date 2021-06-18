@@ -10,9 +10,87 @@
     </style>
 </head>
 <body>
-    
+    <input type="text" id="input1">
 </body>
 <script>
+    // 监听键盘输入
+    /* const input1 = document.getElementById('input1');
+    input1.addEventListener('keyup', function() {
+        console.log(input1.value);  // 每一次按键都会打印
+    }) */
 
+    /**
+     * 体验防抖
+     */
+    // 如果每次按键都走一次请求会非常糟糕
+    // 实现输入完停顿一段时间(比如半秒)，再做操作(打印或者请求)
+    // 这个机制(需求)就是防抖
+    // 需要用到定时器 => 实际上就是定时器的一种应用
+    /* const input1 = document.getElementById('input1');
+    let timer  = null;
+    input1.addEventListener('keyup', function() {
+        // 比如输入123,
+        // 输入1，此时timeer不存在，timer赋值定时器id(1)，并把方法加入异步队列，等待时机执行
+        // 马上输入2，此时timer存在，但异步队列中的方法还未执行(时机未到)，清除定时器(即1的定时任务)，赋值定时器id(2)，，并把方法加入异步队列，等待时机执行
+        // 马上输入3，同理
+        // 停止输入，即超过500毫秒，触发定时器任务，获取value值并打印
+        // 清空定时器
+        if(timer) {
+            clearTimeout(timer)
+        }
+        // 一直输入，只要中间间断不超过500毫秒，就不会打印
+        timer = setTimeout(()=> {
+            // 模拟触发change事件
+            console.log(input1.value);  
+
+            // 清空定时器
+            timer = null
+        }, 500)
+    }) */
+
+    /**
+     * 封装防抖
+     */
+    // debounce是对函数的封装，最终返回的应该也是一个函数
+    // 延迟时间默认500毫秒
+    const debounce = (fn, delay = 500)=> {
+        // timer是在闭包中的 => 下面的if(timer)
+        // 这样不会被外界轻易拿到 => 即不对外暴露
+        // 我们在外面使用不需要关心
+        // 同时也是在debounce的作用域中
+        // 闭包的使用场景：函数当做返回值或者参数传入
+        let timer = null;
+
+        // 函数作为返回值，这就形成闭包了
+        return function() {
+            // 这里面的timer需要在它定义的作用域往上寻找
+            if(timer) {
+                clearTimeout(timer)
+            }
+
+            timer = setTimeout(()=> {
+                // 触发change事件
+                // 第一个参数是改变this指向
+                // 第二个参数是获取所有的参数
+                // apply第二个参数开始，只接收数组
+                // fn函数在执行的时候，argument传进来
+                // debounce返回的函数可能会传进来一些参数
+                // 面试使用fn()也没问题
+                // fn()
+                fn.apply(this, arguments)  
+
+                // 清空定时器
+                timer = null
+            }, delay)
+        }
+    }
+
+    const input1 = document.getElementById('input1');
+    // 使用debounce生成一个函数
+    // 如果要是用之前fn里面的this，这里不能使用箭头函数
+    input1.addEventListener('keyup', debounce(e=> {
+        console.log(e.target)  // 如果不传arguments，在这里无法识别e，也就无法获取当前dom
+        console.log(input1.value);
+    }), 600)  // 不传默认500ms，传的话就覆盖
 </script>
 </html>
