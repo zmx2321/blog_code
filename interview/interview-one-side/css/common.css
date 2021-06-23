@@ -58,7 +58,7 @@ ul {
   padding: 15px;
   border-radius: 10px;
   overflow: auto;
-  height: 75vh;
+  max-height: 75vh;
 }
 
 li {

@@ -4,44 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DOM性能</title>
+    <title>如何减少DOM操作</title>
     <style type="text/css">
     </style>
 </head>
 <body>
     <div id="div1" class="container">
-        <p style="color: #f00;" class="tp">111</p>
+        <p>111</p>
         <p>222</p>
-        <p class="p3">333</p>
+        <p>333</p>
     </div>
 
     <ul id="list"></ul>
 </body>
 <script>
     /**
-     * DOM查询做缓存
+     * 缓存dom查询结果
      */
-    // 不缓存dom查询结果
-    for(let i=0; i<document.getElementsByTagName('p').length; i++) {
-        // 每次循环都会计算length，频繁进行dom查询
-        console.log("不缓存dom查询结果", document.getElementsByTagName('p')[i]);
-    }
+    const div1 = document.getElementById('div1')
+    const pList = div1.querySelectorAll('p')
+    // console.log(pList)
 
-    // 缓存dom查询结果
-    const pList = document.getElementsByTagName('p')
-    const length = pList.length
+    let length = pList.length
     for(let i=0; i<length; i++) {
         // 缓存length，只进行一次dom查询
         console.log("缓存dom查询结果", pList[i])
     }
 
-    // 问题？
-    // 为什么浏览器不缓存呢
-    // 因为js有可能操作dom
-    // 如果我们在每次循环p标签，都对该标签进行修改，浏览器就没办法保证缓存之后的正确性了
-
     /**
-     * 将频繁操作改为一次性操作
+     * 多次dom操作，合并到一次插入(代码片段)
      */
     const list = document.getElementById('list')
     // console.log(list)
@@ -58,7 +49,6 @@
     }
 
     // 都完成之后，再统一插入到 DOM 结构树中
-    // 即将文档片段插入到DOM结构树中
     list.appendChild(frag)
 </script>
 </html>
