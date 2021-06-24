@@ -25,6 +25,7 @@
     }
 
     .search_box ul {
+        display: none;
         width: 88.5%;
         margin-top: 5px;
         padding: 10px;
@@ -161,8 +162,22 @@
                     liList[item].remove()
                 }
             }
+
+            $('#todolist li').click((e)=> {
+                $('#input1').val(e.target.textContent)
+                console.log($('#input1').val())
+            })
         })
     }))
+
+    $('#input1').focus(()=> {
+        $("#todolist").show()
+    })
+    $('#input1').blur(()=> {
+        setTimeout(()=> {
+            $("#todolist").hide()
+        }, 1000)
+    })
 </script>
 <script src="https://www.baidu.com/sugrec?&prod=pc&wd=mac笔记本&cb=cbt"></script>
 </html>
