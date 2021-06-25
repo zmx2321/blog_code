@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>关于this的场景题</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    鼠标右击查看源码
+</body>
+<script>
+    const User = {
+        count: 1,
+        getCount: function() {
+            return this.count
+        }
+    }
+
+    // getCount作为一个对象的方法，里面的this指向这个对象本身
+    // 对象本身的count为1
+    // 用这种方法执行，相当于是当做user的一个api(属性)来执行
+    console.log(User.getCount())  // ? => 1
+
+    // 把User对象中的方法拿出来赋值成一个函数，然后运行
+    // 最初函数里面的this的值是不知道的，只有在执行的时候才知道(谁调用指向谁)
+    // 这里拿出来(赋值)作为一个独立的函数来执行，this就指向window
+    const func = User.getCount
+    console.log(func())  // undefined
+
+    // 即
+    function getCount1(){ 
+        return this.count
+    }
+    console.log(getCount1())  // ? => undefined
+
+    // 如何改变 getCount1 this指向，指向user
+    console.log(getCount1.bind(User)())
+    console.log(getCount1.call(User))
+    console.log(getCount1.apply(User))
+</script>
+</html>
