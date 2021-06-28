@@ -87,7 +87,7 @@ xialuo.sayHi();  // sayHi是当作对象的方法执行的
 // 对象的方法实际上都是在隐式原型上，
 // 实际上 xialuo.sayHi() 有些类似 xialuo.__proto__.sayHi.call(xialuo)
 
-// 执行隐私原型的方法，并把this指向实例
+// 执行隐式原型的方法，并把this指向实例
 xialuo.__proto__.sayHi.call(xialuo)
 </script>
 </html>
