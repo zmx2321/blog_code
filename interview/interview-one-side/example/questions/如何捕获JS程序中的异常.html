@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>如何捕获JS程序中的异常</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    鼠标右击查看源码
+</body>
+<script>
+    /**
+     * 使用try...catch...
+     */
+    // 手动捕获异常
+    try {
+        // todo
+    } catch(ex) {
+        console.error(ex)  // 手抖捕获catch
+    } finally {
+        // todo
+    }
+
+    /**
+     * 使用window.onerror
+     */
+    // 兜底方案
+    // 监听前端页面，比如页面上线了，要统计监听查看页面有没有js报错
+    // 但不可能每个地方都加try{}catch{},他只在高风险的地方添加
+    // 其他地方使用window.onerror,他会自动捕获页面上出现的一些问题
+    // 自动捕获异常
+    // message => 报错信息
+    // source => 源码
+    // lineNum => 行号
+    // colNum => 列号
+    // error => 错误栈
+    window.onerror = function(message, source, lineNum, colNum, error) {
+        // 1. 对跨域的js，如cdn，不会有详细的报错信息
+        // 2. 对于压缩的js，还要配合sourceMap反查到未压缩代码的行、列
+        // 压缩之后可能只有一行，他的行号可能永远只有一行或者两行
+    }
+</script>
+</html>

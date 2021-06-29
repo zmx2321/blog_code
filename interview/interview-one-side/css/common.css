@@ -85,3 +85,31 @@ li a:hover {
   transition: 0.3s linear;
 }
 
+/*====== 滚动条样式：谷歌浏览器下 start ======*/
+::-webkit-scrollbar{
+  width: 10px;
+  height: 10px;
+  background-color: #f5f7fa;
+}
+
+/*滚动条的轨道*/
+::-webkit-scrollbar-track{
+  /*box-shadow: inset 0 0 5px rgba(0,0,0,.3);*/
+  /* background-color: #f5f7fa; */
+  background-color: #bdbdbd;
+}
+
+/*滚动条的滑块按钮*/
+::-webkit-scrollbar-thumb{
+  border-radius: 10px;
+  /* background-color: #4a494a; */
+  background-color: #908c90;
+  /*box-shadow: inset 0 0 5px #000;*/
+}
+
+/*滚动条的上下两端的按钮*/
+::-webkit-scrollbar-button{
+  height: 0px;
+  background-color: #B0AEDA;
+}
+/*====== 滚动条样式：谷歌浏览器下 end ======*/

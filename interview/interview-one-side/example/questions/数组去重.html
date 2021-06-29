@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组去重</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    鼠标右击查看源码
+</body>
+<script>
+    let arr = [30, 10, 20, 30, 40, 10]
+
+    /**
+     * 传统方法，遍历
+     * 有序
+     */
+    const unique1 = arr=> {
+        let res = []
+
+        // 相当于遍历两次，效率比set低
+        arr.forEach(item=> {
+            // 判断当前元素在res里面是否存在
+            if(res.indexOf(item) < 0) {
+                // 如果当前项在res数组里面没有，就添加
+                res.push(item)
+            }
+        })
+
+        return res
+    }
+    let res1 = unique1(arr)
+    console.log("传统方法去重", res1)
+
+    /**
+     * ES6方法 Set
+     * 无序结构
+     */
+    const unique2 = arr=> {
+        // set可以接收数组来构建
+        let set = new Set(arr)
+        // console.log(set)  // 不是一个数组
+        // ...实际上是一个结构，表示提取里面的内容
+        return [...set]
+    }
+    let res2 = unique2(arr)
+    console.log("ES6方法去重", res2)
+</script>
+</html>
