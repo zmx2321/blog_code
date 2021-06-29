@@ -53,12 +53,13 @@
 
 ul {
   width: 20%;
-  margin: 100px auto;
+  min-width: 295px;
+  margin: 70px auto 0;
   border: solid 1px #777777;
   padding: 15px;
   border-radius: 10px;
   overflow: auto;
-  max-height: 75vh;
+  max-height: 72vh;
 }
 
 li {
