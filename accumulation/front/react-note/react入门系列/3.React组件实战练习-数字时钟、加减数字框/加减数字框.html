@@ -1,0 +1,48 @@
+<!doctype html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title></title> 
+    <script type="text/javascript" src='bower_components/react/react.js'></script>
+    <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
+    <script type="text/javascript" src='bower_components/babel/browser.js'></script>
+
+    <style>
+div{display:inline-block}
+    </style>
+</head>
+<body>
+<div id='app'></div>
+<script type="text/babel">
+	
+	class Node extends React.Component {
+		constructor(){
+			super();
+			this.state = {
+				number: 10
+			}
+		}
+		last(){
+			this.setState({
+				number : this.state.number == this.props.min?Number(this.props.min):(this.state.number - 1)
+			});
+		}
+		next(){
+			this.setState({
+				number : this.state.number == this.props.max?Number(this.props.max):(this.state.number + 1)
+			});
+		}
+		render(){
+			return (<div>
+						<input type='button' value='-' onClick={this.last.bind(this)}/>
+						<div>{this.state.number}</div>
+						<input type='button' value='+' onClick={this.next.bind(this)}/>
+					</div>)
+		}
+	}
+
+	ReactDOM.render(<Node min='2' max='12' />,app);
+
+</script>
+</body>
+</html>

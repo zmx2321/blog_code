@@ -1,0 +1,31 @@
+<!doctype html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title></title> 
+    <script type="text/javascript" src='bower_components/react/react.js'></script>
+    <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
+    <script type="text/javascript" src='bower_components/babel/browser.js'></script>
+
+
+</head>
+<body>
+<div id='app'></div>
+<script type="text/babel">
+	class Clock extends React.Component {
+		constructor(){
+			super()
+			//console.log(this.props)
+		}
+		render(){
+			//console.log(2)
+			//console.log(this.props)
+			return (<div>{this.props.time.toLocaleDateString()} {this.props.time.toLocaleTimeString()}</div>)
+		}
+	}
+	
+	ReactDOM.render(<Clock time={new Date()} />,app)
+
+</script>
+</body>
+</html>

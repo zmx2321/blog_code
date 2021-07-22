@@ -1,0 +1,30 @@
+<!doctype html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title></title> 
+</head>
+<body>
+<script type="text/javascript">
+	/*
+	function show(...val){
+		console.log(this,val);
+	};
+	show.bind('asda',1,2,3)();
+	*/
+
+	var a= 5;
+	var b = {
+		a:12,
+		show(){
+			//console.log(this)
+			setTimeout(function(){
+				alert(this.a)
+			}.bind(this),1000);
+		}
+
+	};
+	b.show();
+</script>
+</body>
+</html>

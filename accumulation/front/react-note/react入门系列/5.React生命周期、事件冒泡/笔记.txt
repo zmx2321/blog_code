@@ -1,0 +1,36 @@
+react - 生命周期
+简单来说 - react Component通过定了几个函数来控制各个阶段的动作。
+
+componentWillMount 组件挂载前（组件渲染前）
+1.找不到元素
+2.属性、状态允许使用
+
+componentDidMount 组件挂载后（组件渲染后）
+1.可以找到元素
+2.属性、状态允许使用
+
+componentWillUpdate 组件更新前 
+
+componentDidUpdate 组件更新后
+
+componentWillUnmount 组件卸载之前
+
+
+事件冒泡
+
+react - 
+//return false;
+//e.stopPropagation();
+//e.cancelBubble = true;
+//e.nativeEvent.cancelBubble = true;
+都不好使
+
+e <-react封装过的
+nativeEvent 原生的事件对象
+
+
+e.nativeEvent.stopImmediatePropagation()
+停止立即的传播
+
+
+

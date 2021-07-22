@@ -1,0 +1,43 @@
+<!doctype html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title></title> 
+    <script type="text/javascript" src='bower_components/react/react.js'></script>
+    <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
+    <script type="text/javascript" src='bower_components/babel/browser.js'></script>
+    <style>
+.div{width:200px;height:200px;background:red;}
+
+    </style>
+</head>
+<body>
+<div id='app'></div>
+<script type='text/babel'>
+class Title extends React.Component{
+	constructor(){
+		super();
+		this.state = {
+			show:'none'
+		}
+	}
+	render(){
+		return (<div>
+					<input type='button' value='切换' onClick={this.changed.bind(this)}/>
+					<br/>
+					<div className='div' style={{display:this.state.show}}></div>
+				</div>)
+	}
+	changed(){
+		this.setState({
+			show:this.state.show=='block'?'none':'block'
+		})
+	}
+}
+
+ReactDOM.render(<Title/>,app);
+
+
+</script>
+</body>
+</html>

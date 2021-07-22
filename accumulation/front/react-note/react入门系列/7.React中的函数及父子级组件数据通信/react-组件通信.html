@@ -1,0 +1,45 @@
+<!doctype html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title></title> 
+    <script type="text/javascript" src='bower_components/react/react.js'></script>
+    <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
+    <script type="text/javascript" src='bower_components/babel/browser.js'></script>
+</head>
+<body>
+<div id='app'></div>
+<script type="text/babel">
+	class Child extends React.Component{
+		render(){
+			return <div >我是子组件 => {this.props.setMsg}</div>
+		}
+	}
+	
+	class Parent extends React.Component{
+		constructor(){
+			super();
+			this.state={
+				msg:'我是父组件的数据'
+			}
+		}
+		show(){
+			this.setState({
+				msg:'我改变了'
+			})
+		}
+		render(){
+		
+			return (<div>
+				<div onClick={this.show.bind(this)}>我是父组件 => {this.state.msg}</div>
+				<Child setMsg={this.state.msg}/>
+			</div>)
+		}
+	};
+
+	ReactDOM.render(<Parent/>,app);
+
+
+</script>
+</body>
+</html>

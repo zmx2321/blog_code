@@ -1,0 +1,22 @@
+1.tab面板 选项卡
+
+上面的按钮
+下面的div
+自动选项卡
+
+tabJson = {
+	topValue:['aaa','bbb','ccc'],
+	bottomValue:['a的内容','b的内容','c的内容'],
+	timer:2000
+};
+下面的内容会随着上面的多少而定义
+
+组件嵌套
+
+2.百度jsonp 搜索 
+跨域
+
+https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=3&cb=leo
+
+
+

@@ -1,0 +1,55 @@
+<!doctype html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title></title> 
+    <script type="text/javascript" src='bower_components/react/react.js'></script>
+    <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
+    <script type="text/javascript" src='bower_components/babel/browser.js'></script>
+</head>
+<style>
+*{margin:0;padding:0;}
+.dragNode{width:200px;height:200px;background:red;position:absolute;}
+
+
+</style>
+<body>
+<div id='app'></div>
+<script type="text/babel">
+class Drag extends React.Component{
+	constructor(){
+		super();
+		this.state={
+			needX:0,
+			needY:0
+		};
+		this.disX = 0;
+		this.disY = 0;
+	}
+	fnDown(e){
+		this.disX = e.clientX - e.target.offsetLeft;
+		this.disY = e.clientY - e.target.offsetTop;
+
+		document.onmousemove = this.fnMove.bind(this);
+		document.onmouseup = this.fnUp.bind(this);
+		//console.log(this.disX,this.disY)
+	}
+	fnUp(){
+		document.onmousemove = null;
+		document.onmouseup = null;
+	}
+	fnMove(e){
+		this.setState({
+			needX:e.clientX - this.disX,
+			needY:e.clientY - this.disY
+		})
+	}
+	render(){
+		return (<div className='dragNode' style={{left:this.state.needX,top:this.state.needY,background:this.props.style.background,width:this.props.style.width,height:this.props.style.height}} onMouseDown={this.fnDown.bind(this)}></div>)
+	}
+}
+
+ReactDOM.render(<Drag style={{width:'100px',height:'50px',background:'green'}}/>,app);
+</script>
+</body>
+</html>

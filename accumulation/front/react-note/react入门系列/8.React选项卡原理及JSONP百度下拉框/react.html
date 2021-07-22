@@ -1,0 +1,45 @@
+<!doctype html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title></title> 
+    <script type="text/javascript" src='bower_components/react/react.js'></script>
+    <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
+    <script type="text/javascript" src='bower_components/babel/browser.js'></script>
+</head>
+<body>
+<div id='app'></div>
+<script type="text/babel">
+	class TopNode extends React.Component{
+
+
+		render(){
+			let oInput = [];
+			for(var i = 0;i < this.props.topValueArr.length;i++){
+				oInput.push(<input key={i} type='button' value={this.props.topValueArr[i]}/>)
+			}
+			return (<div>{oInput}</div>)
+		}
+	}
+	class BottomNode extends React.Component{
+		render(){
+			return (<div>我是下面的组件</div>)
+		}
+	}
+
+
+	class Tab extends React.Component{
+		render(){
+			//console.log(this.props.tabJson)
+			return (<div>
+				<TopNode topValueArr={this.props.tabJson.topValue}/>
+				<BottomNode json={this.props.tabJson}/>
+			</div>)
+		}
+	}
+
+	ReactDOM.render(<Tab tabJson={{'topValue':['中国','瑞士','新西兰'],bottomValue:['很强大，最棒','银行挺不错','环境还不错'],timer:2000}}/>,app);
+
+</script>
+</body>
+</html>

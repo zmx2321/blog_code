@@ -1,0 +1,72 @@
+ReactDOM.render(jsx（组件、内容），放到哪)
+
+面向对象 - 
+js 两种面向对象
+
+1.es6之前那种 函数 -new 函数 = 类
+类 - constructor
+原型 - prototype （所谓的方法）
+原型链 - __proto__
+
+2.es6=class
+constructor - 默认执行的函数
+不支持变量提升
+
+class 函数名称
+函数调用时 默认执行 constructor 函数
+constructor - 里面写一些初始的内容
+
+原型就是 和 constructor 同级的函数即可
+
+继承 extends 可以继承原型和私有属性
+如果子类想使用 this
+子类constructor 放入super 
+参数如果想使用 子类参数放入 constructor 和 super 中
+
+react 组件
+
+class 自定义名字 extends React.Component{
+	render(){
+		return (要渲染的内容)
+	}
+}
+
+组件的名字 首字母大写
+es6 类 +jsx 语言 =
+
+标签 属性 参数
+<div class='aaa'></div>
+
+标签上传的参数 如何在组件获取 
+props
+只能读 不能写
+
+
+js改变this指向
+1.call
+ -1.第一个参数可以改变函数的this
+ -2.从第一个参数之后的参数就是对应函数的行参
+ -3.函数会默认直接调用
+2.apply
+	-1.第一个参数可以改变函数的this
+	-2.第二个参数是一个数组对象，数组对象的内容就是对应函数的行参
+	-3.函数会默认直接调用
+3.bind
+ -1.第一个参数可以改变函数的this
+ -2.从第一个参数之后的参数就是对应函数的行参
+ -3.函数不会默认调用
+
+
+read only 只读
+只能读 不能写
+
+
+------------------------------------
+state - 状态可以改变
+数据可以渲染
+	json 改变数据的方式 不会进行渲染
+	setState view层进行渲染
+
+隐藏显示
+
+

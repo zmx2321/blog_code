@@ -1,0 +1,135 @@
+前端分为三大框架
+
+angular react vue
+原生js本身操作dom很消耗性能
+库和框架是一个意思么？
+库
+封装了js 思想还是在js上，高度的封装了原生js
+jquery/zepto
+框架
+本质上修改了思想 -解决了一些终端程序上的问题
+angular react vue
+
+angular 1.x mvc
+		2.x mvvm
+
+		我都给你限制了
+		$http -> ajax
+
+vue2	mvvm框架
+		不限制
+		推荐
+		vue-resource
+		axios
+		xmlhttp
+
+react   更专注于view层
+
+
+react
+	优势：
+	1.虚拟dom
+	2.性能性很高
+	3.解决一些终端的问题（pc、移动端问题）
+
+	劣势：
+	1.学习成本很高、学习曲线很陡
+	2.react本身能做的事并不多，想做大东西必须得用react插件（全家桶）
+
+vue2.x的迭代的时候
+	虚拟dom
+
+
+react
+上手难度高
+学习曲线陡
+
+理解作者思想 接受它的世界观
+接受它的中二设定
+自定义语法 - jsx
+
+js - string
+let a = '<div>hello react!</div>'
+
+jsx
+let a = <div>hello react!</div>
+
+1.书写格式 ：
+1个标签的书写格式
+	let a = <div>hello react!</div>
+多个标签的书写格式 - 外面必须包一层根元素
+*vue2.x 组件 根元素
+	let a = <div><div>sadasd</div><span>asdasd</span></div>
+
+	3.可以自由缩进
+	let a = <div>
+				<div>sadasd</div>
+				<span>asdasd</span>
+			</div>
+		允许加括号
+	let a = (<div>
+				<div>sadasd</div>
+				<span>asdasd</span>
+			</div>)
+
+	4.单标签规则 - 必须闭合
+		<img/>
+		<input/>
+		<br/>
+		<div></div>
+	5.class - className
+		<div className='aaa'></div>
+
+	6.jsx里面使用js代码{}
+		var a = 'hello react!';
+		let b = <div>{a}</div>
+
+react 开发模式
+	1.直接引入 - 简单（初学者喜欢的模式）
+	<script src='react.js'></script>
+	2.脚手架模式（基于webpack）
+
+
+中二设定
+react.js - 核心js
+react-dom.js - 虚拟dom
+babel ？ jsx
+
+react.js
+bower - js所有的框架库包管理器 
+
+bower - 依赖于node.js
+
+安装bower npm install bower -g
+
+bower info（信息）
+	  install（下载）
+
+react 2011-10-26T17:46:22.746Z    facebook
+vue 2013-12-07T06:09:48.297Z      中国的大神
+angular 2012-03-28T11:40:22.074Z  Google
+
+bower install react -》 默认下载最高版本 
+指定某个版本 
+#15.6.1 
+16.0.1 o
+
+18.0.1 x
+react-dom -> ReactDOM.render(
+	组件（内容、元素），
+	放到哪
+);
+
+jsx - 支持style - 里面使用json
+{{'background':'red'}}
+第一层是使用告诉jsx我要用js了
+第二层的是json的
+
+7.事件
+使用驼峰命名法 单词的首字母大写
+第一个单词之后的首字母大写
+onclick -> onClick
+onmouseover -> onMouseOver
+
+
+

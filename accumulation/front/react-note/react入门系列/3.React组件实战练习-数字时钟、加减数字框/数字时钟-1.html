@@ -1,0 +1,36 @@
+<!doctype html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title></title> 
+    <script type="text/javascript" src='bower_components/react/react.js'></script>
+    <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
+    <script type="text/javascript" src='bower_components/babel/browser.js'></script>
+
+
+</head>
+<body>
+<div id='app'></div>
+<script type="text/babel">
+	class Clock extends React.Component {
+		constructor(){
+			super()
+			this.state = {
+				time : new Date()
+			}
+			setInterval(()=>{
+				this.setState({
+					time: new Date()
+				})
+			},1000)
+		}
+		render(){
+			return (<div>{this.state.time.toLocaleDateString()} {this.state.time.toLocaleTimeString()}</div>)
+		}
+	}
+	
+	ReactDOM.render(<Clock />,app)
+
+</script>
+</body>
+</html>

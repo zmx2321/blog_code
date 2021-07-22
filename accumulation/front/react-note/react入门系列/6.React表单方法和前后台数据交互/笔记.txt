@@ -1,0 +1,26 @@
+表单:
+放在form里面的就是表单
+input
+受控表单/非受控表单
+受控 value=''  checkbox 
+defaultValue='' 
+defaultChecked=''
+
+
+---------------------------------
+交互
+并不限制你如何的去交互
+angular - $http
+vue - re....
+react - jquery/zepto/axios/fetch/ajax....
+
+虚拟dom 每一个内容都应该有自己的唯一标识
+key
+
+XHMLHttpRequest -
+jquery          -
+zepto           -
+axios           -
+fetch           -
+
+

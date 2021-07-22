@@ -1,0 +1,69 @@
+<!doctype html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title></title> 
+    <script type="text/javascript" src='bower_components/react/react.js'></script>
+    <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
+    <script type="text/javascript" src='bower_components/babel/browser.js'></script>
+</head>
+<body>
+<div id='app'></div>
+<script type='text/babel'>
+class Leo extends React.Component{
+	constructor(){
+		super();
+		this.state = {
+			msg:'hello react!'
+		}
+	}
+	componentWillMount(){
+		//console.log(document.querySelector('#div1'))
+		//console.log(this.props.l,this.state)
+		console.log('组件挂载前');
+	}
+	componentDidMount(){
+		//console.log(document.querySelector('#div1'))
+		//console.log(this.props.l,this.state)
+		console.log('组件挂载后');
+	}
+	componentWillUpdate(){
+		console.log('组件更新前');
+		//debugger;
+	}
+	componentDidUpdate(){
+		console.log('组件更新后');
+	}
+	show(e){
+		this.setState({
+			msg:Math.random()
+		});
+
+		e.nativeEvent.stopImmediatePropagation();
+		//e.nativeEvent.cancelBubble = true;
+		//console.log(e.nativeEvent)
+		//return false;
+		//e.stopPropagation();
+		//e.cancelBubble = true;
+	}
+	componentWillUnmount(){
+		console.log('组件卸载之前')
+	}
+	render(){
+		return (<div>
+				<input value="点击" onClick={this.show.bind(this)} type='button'/>
+				<div id='div1'>{this.state.msg}</div>
+			</div>)
+	}
+}
+ReactDOM.render(<Leo l='1'/>,app);
+
+
+document.onclick=function(){
+	//app.innerHTML = '';
+	ReactDOM.render(<h1>asdasd</h1>,app);
+}
+
+</script
+</body>
+</html>

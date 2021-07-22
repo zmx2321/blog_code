@@ -1,0 +1,41 @@
+<!doctype html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title></title> 
+    <script type="text/javascript" src='bower_components/react/react.js'></script>
+    <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
+    <script type="text/javascript" src='bower_components/babel/browser.js'></script>
+</head>
+<body>
+<div id='app'></div>
+<script type="text/babel">
+class InputChange extends React.Component{
+	constructor(){
+		super();
+		this.state = {
+			msg:''
+		}
+	}
+	change(e){
+		//console.log()
+		this.setState({
+			msg:e.target.value
+		})
+	}
+	render(){
+		return (<div>
+					<input type='text' onChange={this.change.bind(this)} id='inputNode' />
+					<div>{this.state.msg}</div>
+				</div>)
+	}
+}	
+
+ReactDOM.render(<InputChange/>,app);
+
+
+
+
+</script>
+</body>
+</html>

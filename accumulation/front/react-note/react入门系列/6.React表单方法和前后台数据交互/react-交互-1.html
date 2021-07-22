@@ -1,0 +1,43 @@
+<!doctype html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title></title> 
+    <script type="text/javascript" src='bower_components/react/react.js'></script>
+    <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
+    <script type="text/javascript" src='bower_components/babel/browser.js'></script>
+</head>
+<body>
+<div id='app'></div>
+<script type="text/babel">
+	class Leo extends React.Component{
+		constructor(){
+			super();
+			this.state = {
+				arr : [1]
+			}
+		}
+
+		componentWillMount(){
+			//console.log('开始获取数据')
+		}
+		render(){
+			let arrLi = [];
+			this.state.arr.forEach((val,index)=>{
+				arrLi.push(<li key={index}>{val}</li>)
+			});
+
+
+			return (<div>
+						<div style={{display:this.state.arr.length>0?'none':'block'}}>暂时没有数据...</div>
+						<ul>
+							{arrLi}
+						</ul>
+					</div>)
+		}
+	}
+
+	ReactDOM.render(<Leo/>,app)
+</script>
+</body>
+</html>

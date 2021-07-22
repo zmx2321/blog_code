@@ -1,0 +1,75 @@
+<!doctype html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title></title> 
+    <script type="text/javascript" src='bower_components/react/react.js'></script>
+    <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
+    <script type="text/javascript" src='bower_components/babel/browser.js'></script>
+</head>
+<body>
+<div id='app'></div>
+<script type="text/babel">
+	class Show extends React.Component{
+		constructor(){
+			super();
+			this.state={
+				msg:''
+			}
+		}
+		componentWillMount(){
+			this.thisShow();
+		}
+		componentDidUpdate(){
+			this.thisShow();
+		}
+		thisShow(){
+			if(Number(this.props.v)<Number(this.props.min)){
+				this.setState={
+					msg:'水结冰了'
+				}
+			}
+			else if(Number(this.props.v)>Number(this.props.max)){
+				this.setState={
+					msg:'水烧开了'
+				}
+			}
+			else{
+				this.setState={
+					msg:'水正在加热中'
+				}
+			}
+		}
+		render(){
+			return (<div>{this.setState.msg}</div>)
+		}
+	}
+
+	class Water extends React.Component{
+		constructor(){
+			super();
+			this.state={
+				Wd:-3
+			}
+		}
+		change(e){
+			this.setState({
+				Wd:e.target.value
+			})
+		}
+
+		render(){
+			return (<div>
+					<input type='number' onChange={this.change.bind(this)} defaultValue={this.state.Wd} />
+					<Show v={this.state.Wd} min={this.props.min} max={this.props.max}/>
+				</div>)
+		}
+	}
+	
+
+	ReactDOM.render(<Water min='0' max='80'/>,app);
+
+
+</script>
+</body>
+</html>

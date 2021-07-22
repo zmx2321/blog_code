@@ -1,0 +1,49 @@
+<!doctype html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title></title> 
+    <script type="text/javascript" src='bower_components/react/react.js'></script>
+    <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
+    <script type="text/javascript" src='bower_components/babel/browser.js'></script>
+</head>
+<body>
+<div id='app'></div>
+<script type='text/babel'>
+class Leo extends React.Component{
+	constructor(){
+		super();
+		this.state = {
+			msg:'hello react!'
+		}
+	}
+	componentWillMount(){
+		//console.log(document.querySelector('#div1'))
+		//console.log(this.props.l,this.state)
+		console.log('组件挂载前');
+	}
+	componentDidMount(){
+		//console.log(document.querySelector('#div1'))
+		//console.log(this.props.l,this.state)
+		console.log('组件挂载后');
+	}
+	componentWillUpdate(){
+		console.log('组件更新前');
+		debugger;
+	}
+	show(){
+		this.setState({
+			msg:Math.random()
+		})
+	}
+	render(){
+		return (<div>
+				<input value="点击" onClick={this.show.bind(this)} type='button'/>
+				<div id='div1'>{this.state.msg}</div>
+			</div>)
+	}
+}
+ReactDOM.render(<Leo l='1'/>,app);
+</script
+</body>
+</html>

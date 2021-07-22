@@ -1,0 +1,39 @@
+sublime -> mac command + shift + p
+		   win ctrl + shift + p
+
+		   install => install package
+
+		   右下角设置 babel -> javascript(babel)
+
+jsx -> {js语法}
+
+函数允许调用组件 组件也可以调用函数
+{函数名()}
+
+组件：深度重复调用
+
+组件嵌套
+
+随机 - Math.random();
+rgb(1-255,1-255,1-255);
+
+子组件拿父组件的数据 
+<Child msg={父组件的数据}/>
+this.props.msg
+
+默认情况下 父组件从新渲染 会统一同步
+不想同步 就存成一个state
+
+
+<Child fn={父组件的一个函数.bind(this)};
+子组件里面执行函数
+this.props.fn(传入子组件的数据)
+
+
+组件-> Water min=0 max=0 高于多少度 水就烧开了
+
+
+
+
+
+

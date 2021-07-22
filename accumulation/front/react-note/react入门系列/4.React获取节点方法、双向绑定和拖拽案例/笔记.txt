@@ -1,0 +1,27 @@
+做一个 vue ng 双向绑定
+input <-> 一旦改变内容 - 触发一个函数 - 函数改变state的msg （setState）
+<span></span>
+
+//react = 获取元素的内容
+
+获取元素起码有三种方法
+
+获取非本身元素
+1) <input ref='leo'/>
+获取：this.refs.leo
+
+获取本身事件源
+2）e.target
+
+原生的获取方法
+3)
+query
+byid
+byclass
+bytagname
+byname
+
+react - vue、ng不同的一点 react不限制你的使用方式
+
+
+拖拽

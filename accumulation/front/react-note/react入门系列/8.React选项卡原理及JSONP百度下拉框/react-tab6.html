@@ -1,0 +1,89 @@
+<!doctype html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title></title> 
+    <script type="text/javascript" src='bower_components/react/react.js'></script>
+    <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
+    <script type="text/javascript" src='bower_components/babel/browser.js'></script>
+</head>
+<body>
+<style>
+	.myDiv{width:200px;height:200px;border:1px solid black;}
+	input.active{background:red}
+</style>
+<div id='app'></div>
+<script type="text/babel">
+	class TopNode extends React.Component{
+		show(e){
+			this.props.ChildFn(e.target.getAttribute('data-myIndex'));
+		}
+		render(){
+			let aInput = [];
+			for(var i = 0;i < this.props.topValueArr.length;i++){
+				aInput.push(<input onClick={this.show.bind(this)} key={i} className={i==this.props.myIndex?'active':''} type='button' value={this.props.topValueArr[i]} data-myIndex={i}/>)
+			}
+			return (<div>{aInput}</div>)
+		}
+	}
+	class BottomNode extends React.Component{
+		render(){
+			let aDiv = [];
+			for(var i = 0;i < this.props.json.topValue.length;i++){
+				//console.log(this.props.json.bottomValue[i])
+				aDiv.push(<div className='myDiv' key={i} style={{display:i==this.props.myIndex?'block':'none'}}>{this.props.json.bottomValue[i]}</div>)
+			}
+			return (<div>{aDiv}</div>)
+		}
+	}
+
+
+	class Tab extends React.Component{
+		constructor(){
+			super();
+			this.state={
+				index:0,
+				timer:null
+			};
+		}
+		change(v){
+			//alert(1);
+			//console.log(v)
+			this.setState({
+				index:v
+			});
+		}
+		componentDidMount(){
+			this.AutoPlay();
+		}
+		AutoPlay(){
+			clearInterval(this.timer);
+			this.timer=setInterval(()=>{
+				let index = this.state.index;
+				index++;
+				index == this.props.tabJson.topValue.length && (index=0)
+				this.setState({
+					index:index
+				});
+			},this.props.tabJson.timer);
+		}
+		MouseOverFn(){
+			clearInterval(this.timer);
+		}
+		MouseOutFn(){
+			this.AutoPlay();
+		}
+		render(){
+			//console.log(this.props.tabJson)
+			return (<div onMouseOver={this.MouseOverFn.bind(this)} onMouseOut={this.MouseOutFn.bind(this)}>
+				<TopNode topValueArr={this.props.tabJson.topValue} myIndex={this.state.index} ChildFn={this.change.bind(this)}/>
+				<BottomNode json={this.props.tabJson} myIndex={this.state.index}/>
+			</div>)
+		}
+	}
+
+	ReactDOM.render(<Tab tabJson={{'topValue':['中国','瑞士','新西兰'],bottomValue:['很强大，最棒','银行挺不错','环境还不错'],timer:300}}/>,app);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title></title> 
+    <script type="text/javascript" src='bower_components/react/react.js'></script>
+    <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
+    <script type="text/javascript" src='bower_components/babel/browser.js'></script>
+</head>
+<body>
+<div id='app'></div>
+<script type="text/babel">
+	var x = 0;
+	function c(){
+		return <span>我是函数c</span>
+	}
+
+	class Leo extends React.Component{
+		render(){
+			return <span>我是组件leo</span>
+		}
+	}
+
+	function a(v){
+		//console.log(v,n)
+		//return <span>{x}</span>
+		if(v>3){
+			return <span>{c()}</span>
+		}
+		else{
+			return <Leo/>
+		}
+	};
+
+	let b = <div>{a(4)}</div>
+	ReactDOM.render(b,app);
+
+</script>
+</body>
+</html>

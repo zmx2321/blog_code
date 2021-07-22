@@ -1,0 +1,51 @@
+<!doctype html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title></title> 
+    <script type="text/javascript" src='bower_components/react/react.js'></script>
+    <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
+    <script type="text/javascript" src='bower_components/babel/browser.js'></script>
+</head>
+<body>
+<style>
+</style>
+<div id='app'></div>
+<script>
+	function leo(json){
+		//console.log(json.s)
+		ul.innerHTML='';
+		for(var i = 0;i < json.s.length;i++){
+			var oLi = document.createElement('li');
+			oLi.innerHTML = json.s[i];
+			ul.appendChild(oLi);
+		};
+
+	}
+</script>
+<script type="text/babel">
+
+
+	class Search extends React.Component{
+		change(e){
+			let oS = document.createElement('script');
+			oS.src='https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+e.target.value+'&cb=leo';
+			document.head.appendChild(oS);
+			oS.remove();
+		}
+		render(){
+
+
+			return (<div>
+				<input type='text' onChange={this.change.bind(this)}/>
+				<ul id='ul'>
+				</ul>
+			</div>)
+		}
+	}
+
+	ReactDOM.render(<Search/>,app);
+
+</script>
+</body>
+</html>

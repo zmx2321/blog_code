@@ -1,0 +1,144 @@
+react有两种使用方法
+1.（初级）引入
+2.webpack 如何去配置咱们的react
+
+webpack 是基于node 
+必须有node才能使用webpack
+webpack就是node里面的一个包
+
+如何使用webpack 去配置 react
+webpack —— 模块加载器 
+包管理器-npm cnpm bower yarn
+
+如何使用：
+https://npm.taobao.org/package/webpack
+
+官方网站：
+https://webpack.js.org/
+
+使用webpack 之前 安装两个命令环境
+cnpm(npm) i(install) webpack -g
+cnpm(npm) i(install) webpack-dev-server -g
+
+验证
+
+webpack -v
+webpack-dev-server -v  
+
+------------------------------------------
+webpack组成
+	a).入口、出口
+	b).loader(加载器、转换器)
+	c).plugins（插件）
+
+------------------------------------------
+
+需要一个配置文件 webpack.config.js 配置webpack的一个具体内容
+
+module.exports={
+	entry:'./index.js', //入口文件 自己写的文件
+	output:{
+		filename:'bundle.js' //出口文件 打包好的文件
+	}
+}
+
+------------------------------------------
+运行webpack 在webpack.config.js 文件里面
+	webpack 打包一次
+	webpack -w (watch) 持续监听，并且打包
+	webpack -p 压缩打包
+	webpack -pw 持续监听并且压缩打包
+
+------------------------------------------------------
+自动支持es6的模块语法
+
+引入
+import {nnnnn,b as kkkk} from './a'
+console.log(nnnnn,kkkk);
+
+导出
+
+const a=12;
+const b=5;
+
+export{a as nnnnn,b};
+
+对象的导入导出
+
+导入
+import json from './a'
+console.log(json.a,json.b);
+
+导出
+export default{
+	a:5,
+	b:3
+}
+
+小练习
+
+
+-------------------------------
+devDependencies - 开发所需要的模块
+
+--save-dev -D
+install i css-loader style-loader
+
+配置
+module:{
+	rules:[{
+		test:/\.css$/,
+		use:['style-loader','css-loader']
+	}]
+}
+--------------------------------
+react - JSX语法进行在webpack支持
+--------------------------------
+
+react
+react-dom
+babel o
+
+配置babel:
+babel-core
+babel-loader
+babel-preset-es2015
+
+隐藏文件
+Command+shift+.
+显示文件夹隐藏文件
+
+预设
+	.babelrc
+
+--------------------------------
+配置react
+--------------------------------
+
+react
+react-dom
+
+babel-preset-react
+react-hot-loader
+
+
+module.exports={
+	entry:'./index.js',
+	output:{
+		filename:'bundle.js'
+	},
+	module:{
+		rules:[{
+			test:/\.css$/,
+			use:['style-loader','css-loader']
+		},
+		{
+			test:/\.js$/,
+			use:['react-hot-loader','babel-loader'],
+			exclude:/node_modules/
+		}
+		]
+	}
+}
+
+

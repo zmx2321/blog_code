@@ -1,0 +1,34 @@
+<!doctype html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title></title> 
+    <script type="text/javascript" src='bower_components/react/react.js'></script>
+    <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
+    <script type="text/javascript" src='bower_components/babel/browser.js'></script>
+    <style>
+    	.leo{
+    		color:red;
+    	}
+    </style>
+</head>
+<body>
+<div id='app'></div>
+<script type="text/babel">
+
+	
+	let a = (<div>
+				<img/>
+				<input/>
+				<h1 className='leo'>hello react!</h1>
+				<span>kkkk</span>
+			</div>);
+	ReactDOM.render(
+		a,
+		document.getElementById('app')
+	)
+
+
+</script>
+</body>
+</html>
