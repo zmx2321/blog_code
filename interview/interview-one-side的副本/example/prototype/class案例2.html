@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>class案例2</title>
+</head>
+<body>
+    鼠标右击查看源码
+</body>
+<script>
+// 父类
+class People {
+    constructor(name) {
+        this.name = name
+    }
+    eat() {
+        console.log(`${this.name} eat something`)
+    }
+}
+
+// 子类
+class Student extends People {
+    constructor(name, number) {
+        super(name)
+        this.number = number
+    }
+    sayHi() {
+        console.log(`姓名 ${this.name} 学号 ${this.number}`)
+    }
+}
+
+// 子类
+class Teacher extends People {
+    constructor(name, major) {
+        super(name)
+        this.major = major
+    }
+    teach() {
+        console.log(`${this.name} 教授 ${this.major}`)
+    }
+}
+
+// 实例
+const xialuo = new Student('夏洛', 100)
+console.log(xialuo.name)
+console.log(xialuo.number)
+xialuo.sayHi()
+xialuo.eat()
+
+// 实例
+const wanglaoshi = new Teacher('王老师', '语文')
+console.log(wanglaoshi.name)
+console.log(wanglaoshi.major)
+wanglaoshi.teach()
+wanglaoshi.eat()
+
+// 深入解析
+console.log(typeof Student)
+console.log(typeof People)
+
+// 原型
+console.log(xialuo.__proto__)  // 隐式原型
+console.log(Student.prototype)  // 显示原型
+// 实例的隐式原型指向对应class的显示原型
+console.log(xialuo.__proto__ === Student.prototype)
+
+// 原型链
+console.log(Student.prototype.__proto__);
+console.log(People.prototype);
+// 父类的显示原型 === 子类的显示原型的隐式原型
+console.log(People.prototype === Student.prototype.__proto__);
+
+// 判断是否为自身属性
+console.log(xialuo.hasOwnProperty('name'));  // true
+console.log(xialuo.hasOwnProperty('sayHi'));  // false
+
+// 坑
+console.log(xialuo.__proto__.sayHi)  // 可以打印出方法
+// 这种的话就是当作xialuo这个对象的隐式原型的方法执行的
+// xialuo.__proto__.name这些值是没有的
+xialuo.__proto__.sayHi()  // 执行的时候里面的值 undefind
+
+xialuo.sayHi();  // sayHi是当作对象的方法执行的
+// 那么this就是xialuo这个对象/实例,
+// 对象的方法实际上都是在隐式原型上，
+// 实际上 xialuo.sayHi() 有些类似 xialuo.__proto__.sayHi.call(xialuo)
+
+// 执行隐式原型的方法，并把this指向实例
+xialuo.__proto__.sayHi.call(xialuo)
+</script>
+</html>

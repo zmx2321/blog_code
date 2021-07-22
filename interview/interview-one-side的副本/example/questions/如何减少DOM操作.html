@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>如何减少DOM操作</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    <div id="div1" class="container">
+        <p>111</p>
+        <p>222</p>
+        <p>333</p>
+    </div>
+
+    <ul id="list"></ul>
+</body>
+<script>
+    /**
+     * 缓存dom查询结果
+     */
+    const div1 = document.getElementById('div1')
+    const pList = div1.querySelectorAll('p')
+    // console.log(pList)
+
+    let length = pList.length
+    for(let i=0; i<length; i++) {
+        // 缓存length，只进行一次dom查询
+        console.log("缓存dom查询结果", pList[i])
+    }
+
+    /**
+     * 多次dom操作，合并到一次插入(代码片段)
+     */
+    const list = document.getElementById('list')
+    // console.log(list)
+
+    // 创建一个文档片段，此时还没有插入到 DOM 结构中
+    const frag = document.createDocumentFragment();
+
+    // 执行插入
+    for(let i=0; i<10; i++) {
+        const li = document.createElement('li')
+        li.innerHTML = "List item " + i
+        // list.appendChild(li)  // 这样就会频繁操作dom
+        frag.appendChild(li)  // 先在文档片段中插入
+    }
+
+    // 都完成之后，再统一插入到 DOM 结构树中
+    list.appendChild(frag)
+</script>
+</html>

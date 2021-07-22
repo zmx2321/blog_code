@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组基本操作</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    鼠标右击查看源码
+</body>
+<script>
+    // 定义数组
+    const arr = [10, 20, 30, 40]
+
+    /**
+     * 面试题
+     */
+    // pop
+    // 刨除数组最后一项并返回
+    // 会改变原数组
+    const popRes = arr.pop()
+    console.log("pop", popRes, arr)  // 40  // [10, 20, 30]
+
+    // shift
+    // 刨除数组第一项并返回
+    // 会改变原数组
+    const shiftRes = arr.shift()
+    console.log("shift", shiftRes, arr)  // 10  // [20, 30, 40]
+
+    // push
+    // 往后追加
+    // 返回 length
+    // 会改变原数组
+    const pushRes = arr.push(50)
+    console.log("push", pushRes, arr)  // 5  // [10, 20, 30, 40, 50]
+
+    // unshift
+    // 往前追加
+    // 返回 length
+    // 会改变原数组
+    const unshiftRes = arr.unshift(5)
+    console.log("unshift", unshiftRes, arr)  // 5  // [5, 10, 20, 30, 40]
+
+    /**
+     * 扩展 - 纯函数
+     * 
+     * 纯函数在react中应用广泛
+     * 纯函数的要求
+     * 1. 不改变源数组（没有副作用）
+     * 2. 有返回值，且函数的返回结果只依赖于它的参数
+     */
+    // concat
+    // 追加数组
+    const arr1 = arr.concat([50, 60, 70])
+    // [5, 20, 30, 50, 50, 60, 70]
+    console.log("纯函数-concat", arr1, arr);  // 原数组不变
+
+    // map
+    // 遍历
+    const arr2 = arr.map(num => num * 10)
+    // [50, 200, 300, 500]
+    console.log("纯函数-map", arr2, arr);  // 原数组不变
+
+    // filter
+    // 过滤数组
+    const arr3 = arr.filter(num => num > 25)
+    // [30, 50]
+    console.log("纯函数-filter", arr3, arr);  // 原数组不变
+
+    // slice
+    // 截取数组 => 不传参数类似于深拷贝
+    const arr4 = arr.slice()
+    // [5, 20, 30, 50]
+    console.log("纯函数-slice", arr4, arr);  // 原数组不变
+
+    /**
+     *  扩展 - 非纯函数
+     */
+    // push pop shift unshift 示例见上
+    // 不会改变原来数组的值，也不会返回值
+    // forEach
+    // some 
+    // every
+    // reduce
+</script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>如何获取多个数字中的最大值</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    鼠标右击查看源码
+</body>
+<script>
+    // 自己写一个方法
+    function max() {
+        // arguments是类数组对象(缺少很多数组的方法)
+        // call表示让一个对象调用另一个对象的方法
+        // slice表示从一个数组中切割，返回新的数组，不修改切割的数组
+        // 本质就是arguments这个对象使用了数组的slice这个方法，得到了参数构成的数组
+        // 即获取max里面所有的参数，并将他们转换成数组
+        const nums = Array.prototype.slice.call(arguments)  // 变为数组
+        let max = 0
+        nums.forEach(n=> {
+            if(n > max) {
+                max = n
+            }
+        })
+        return max
+    }
+    console.log(max(10, 20, 50))
+
+    // 使用api
+    let maxNum = Math.max(10, 20, 50)
+    let minNum = Math.min(10, 20, 50)
+    console.log("使用Math api获取最值", maxNum, minNum)
+</script>
+</html>

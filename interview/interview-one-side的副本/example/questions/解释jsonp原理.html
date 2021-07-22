@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>解释jsonp原理</title>
+    <style type="text/css">
+    .search_box {
+        margin: 40px;
+        width: 256px;
+        max-height: 300px;
+    }
+
+    .search_box input {
+        width: 90%;
+        padding: 6px 8px;
+        margin: 0;
+        border-radius: 6px;
+        border: solid 1px #8c8686;
+    }
+
+    .search_box input:active {
+        border-color: aqua;
+    }
+
+    .search_box ul {
+        display: none;
+        width: 88.5%;
+        margin-top: 5px;
+        padding: 10px;
+        border: solid 1px #8c8686;
+        border-radius: 6px;
+    }
+
+    .search_box ul li {
+        width: 100%;
+        height: 22px;
+        line-height: 22px;
+        list-style: none;
+        border-bottom: solid 1px #8c8686;
+        cursor: pointer;
+        transition: 0.2s linear;
+        padding: 3px 0px;
+        font-size: 12px;
+    }
+
+    .search_box ul li:hover {
+        background: #c7c7c7;
+        transition: 0.2s linear;
+    }
+    </style>
+</head>
+<body>
+    这里的演示都是用百度的搜索接口
+    <br />
+    <div class="search_box">
+        <input type="text" id="input1">
+        <ul id="todolist"></ul>
+    </div>
+</body>
+<script src="../../js/lib/jquery1.8.3.min.js"></script>
+<script>
+    /**
+     * jsonp原理
+     * 定义一个全局函数
+     * 用script去访问一段js
+     * 全局函数名对应js地址的callback
+     */
+    // JSONP的callback是cbt，见下面src的cb
+    window.cbt = function(data) {
+        // 这是我们跨域得到的信息
+        console.log("访问script的src获取数据", data)
+    }
+
+    /**
+     * 使用jsonp实现简易的百度搜索
+     * 使用防抖
+     */
+    // ajax请求
+    const reqAns = (words, fn)=> {
+        $.ajax({
+            url: "https://www.baidu.com/sugrec",
+            type: 'GET',
+            dataType:"jsonp",
+            data: {
+                prod: "pc",
+                wd: words,
+            },
+            success(data) {
+                // console.log("ajax请求", data);
+
+                let res = data.g
+
+                fn(res)
+            }
+        })
+    }
+
+    // 防抖
+    const debounce = (fn, delay = 500)=> {
+        let timer = null;
+
+        return function() {
+            if(timer) {
+                clearTimeout(timer)
+            }
+
+            timer = setTimeout(()=> {
+                fn.apply(this, arguments)  
+
+                timer = null
+            }, delay)
+        }
+    }
+
+    // 去除所有空格 在api上添加
+    String.prototype.NoSpace = function () {
+        return this.replace(/\s+/g, "");
+    };
+
+    // 使用防抖，优化体验
+    $('#input1').keyup(debounce(function(e) {
+        // 使用箭头函数，this指向为window
+        // console.log(e.target)
+        // console.log($(this).val())
+
+        let words = $(this).val()
+
+        // 参数名可以和封装的传参不一样
+        reqAns(words, res=> {
+            // console.log("使用防抖获取的数据", res)
+            let str = ""
+
+            if(!res) {
+                $('#todolist').html("")
+                return
+            }
+
+            res.forEach(item=> {
+                str += `
+                    <li>${item.q}<li>
+                `
+            })
+            // 去除所有空格
+            str = str.NoSpace()
+            console.log("str", str)
+
+            $('#todolist').html(str)
+
+            let liList = $('#todolist li')
+            // console.log(liList)
+
+            // 由于结果数据里面有空行，空行可能是方法，可能是空的dom，也可能是undefind
+            for(item in liList) {
+                // console.log(liList[item].nodeName)
+
+                // 判断节点属性为li，并且它里面没有内容
+                // remove不能删方法
+                if(liList[item].nodeName == "LI" && !liList[item].textContent) {
+                    // 删除节点
+                    liList[item].remove()
+                }
+            }
+
+            $('#todolist li').click((e)=> {
+                $('#input1').val(e.target.textContent)
+                console.log($('#input1').val())
+            })
+        })
+    }))
+
+    $('#input1').focus(()=> {
+        $("#todolist").show()
+    })
+    $('#input1').blur(()=> {
+        setTimeout(()=> {
+            $("#todolist").hide()
+        }, 1000)
+    })
+</script>
+<script src="https://www.baidu.com/sugrec?&prod=pc&wd=mac笔记本&cb=cbt"></script>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>async和await</title>
+</head>
+<body>
+    鼠标右击查看源码
+</body>
+<script>
+function loadImg(src) {
+    const p = new Promise(
+        (resolve, reject) => {
+            const img = document.createElement('img')
+            img.onload = () => {
+                resolve(img)
+            }
+            img.onerror = () => {
+                const err = new Error(`图片加载失败 ${src}`)
+                reject(err)
+            }
+            img.src = src
+        }
+    )
+    return p
+}
+
+// 如果不写分号，后面有括号，他会当做一个函数执行，所以这里不写分号，下面匿名函数会报错
+const url1 = 'https://img.mukewang.com/5a9fc8070001a82402060220-140-140.jpg'
+const url2 = 'https://img3.mukewang.com/5a9fc8070001a82402060220-100-100.jpg'
+
+// 匿名函数
+// 如果前面不加分号，后面要加!(非)，表示和前面隔开
+!(async ()=> {
+    // 同步写法，实现异步代码
+
+    // 执行await函数必须使用async包裹
+    const img1 = await loadImg(url1);  // loadImg不是async，是promise对象
+    console.log(img1.height, img1.width)
+
+    const img2 = await loadImg(url2);
+    console.log(img2.height, img2.width)
+})()
+
+const loadImg1 = async ()=> {
+    const img1 = await loadImg(url1);
+    
+    return img1
+}
+
+const loadImg2 = async ()=> {
+    const img2 = await loadImg(url2);
+    
+    return img2
+}
+
+!(async ()=> {
+    // 执行await函数必须使用async包裹
+    const img1 = await loadImg1();  // loadImg1是async函数，不是promise对象
+    console.log(img1.height, img1.width)
+
+    const img2 = await loadImg2();
+    console.log(img2.height, img2.width)
+})()
+</script>
+</html>

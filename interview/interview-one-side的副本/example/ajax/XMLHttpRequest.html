@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>XMLHttpRequest</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    鼠标右击查看源码
+</body>
+<script>
+    // 初始化一个实例
+    const xhr = new XMLHttpRequest()
+
+    /**
+     * get请求
+     */
+    // open方法最后一个true表示异步
+    // open方法相当就是一个准备数据的方法
+    // 如果请求时间长，用同步会卡顿
+    // 不过一般是使用异步
+    xhr.open("GET", "./json/api.json", false)
+    // xhr.open("GET", "https://jsonplaceholder.typicode.com/posts", false)
+    // 类似 img.onload = function(){}
+    // 当XMLHttpRequest实例状态改变的时候触发这个函数
+    // 在这个函数里面去接收数据
+    xhr.onreadystatechange = function() {
+        // 这里的函数异步执行
+        // console.log(xhr);
+
+        // 1：请求已经建立，但是还没有发送，还没有调用 send()。 
+        // 2：请求已发送，正在处理中（通常现在可以从响应中获取内容头）。 
+        // 3：请求在处理中；通常响应中已有部分数据可用了，没有全部完成。 
+        // 4：响应已完成；您可以获取并使用服务器的响应了
+        if(xhr.readyState === 4) {
+            // 状态码
+            if(xhr.status === 200) {
+                // console.log(xhr.responseText)
+                let objData = JSON.parse(xhr.responseText)
+                console.log("GET", objData);
+            }
+        }
+    }
+
+    // 因为是get请求，不需要发送任何数据，就写null
+    // onreadystatechange这个钩子如果不去send，他是不会变的
+    // 每send一次，xhr实例都会发生变化，所以异步回调里面要做判断
+    xhr.send(null)
+
+    /**
+     * post请求
+     */
+    // 网络请求不能卡顿，所以用异步 - 如果请求时间长，用同步会卡顿
+    xhr.open("POST", "https://jsonplaceholder.typicode.com/posts", true)
+    // xhr.open("POST", "./json/login.json", true)
+    xhr.onreadystatechange = function() {
+        if(xhr.readyState === 4) {
+            // 状态码
+            if(xhr.status === 200 || xhr.status === 201) {
+                // console.log(xhr.responseText)
+
+                let objData = JSON.parse(xhr.responseText)
+                console.log("POST", objData);
+            }
+        }
+    }
+
+    const postData = {
+        username: "张三",
+        password: "123456"
+    }
+
+    // 把它弄成字符串发送出去
+    // 直接发送json是不对的，工具里面可以是因为它里面做了处理
+    xhr.send(JSON.stringify(postData))
+</script>
+</html>

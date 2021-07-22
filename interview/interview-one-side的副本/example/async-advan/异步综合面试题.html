@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>异步综合面试题</title>
+</head>
+<body>
+</body>
+<script>
+    // script start
+    // async1 start
+    // async2
+    // promise1
+    // script end
+    // async1 end
+    // promise2
+    // setTimeout
+
+    async function async1() {
+        console.log('async1 start')  // 2  同步
+        await async2()  // 先执行async2,再执行await
+
+        // 执行await,await后面的都是回调 - 微任务
+        // 同步代码执行过程中，微任务会被放到micro task queue里面等待时机
+        console.log('async1 end')  // 6  第一个微任务
+    }
+    async function async2 () {
+        console.log('async2')  // 3  同步
+    }
+
+    console.log('script start')  // 1  同步
+
+    // 宏任务
+    // 同步代码执行过程中，宏任务会被放到Callback Queue里面等待时机
+    setTimeout(function() {
+        console.log('setTimeout');  // 8  最后执行宏任务
+    }, 0)
+
+    async1()
+
+    // 初始化promise时，传入的函数会立刻被执行
+    new Promise(function(resolve) {
+        console.log('promise1')  // 4  同步
+        resolve()  // 变成了一个resolved状态下的promise
+        // 即then会被触发
+        // 这里的then是异步，是一个微任务
+    }).then(function() {
+        console.log('promise2')  // 7  第二个微任务
+    })
+
+    console.log('script end');  // 5  同步  ->  同步代码执行完毕 => 调用者(call stack)被清空
+    // 同步代码执行完毕之后 => 微任务队列执行 => 尝试触发渲染DOM => 触发事件循环机制 => 宏任务队列执行
+</script>
+</html>

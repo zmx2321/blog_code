@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组基本操作</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    鼠标右击查看源码
+</body>
+<script>
+    // 定义数组
+    let arr = [10, 20, 30, 40]
+
+    /**
+     * slice
+     */
+    // 不传参数类似于深拷贝
+    // 是一个纯函数
+    // 不改变源数组（没有副作用）
+    // 有返回值，且函数的返回结果只依赖于它的参数
+    let arr1 = arr.slice()
+    console.log("不传参，类似深拷贝", arr1);  // [10, 20, 30, 40]
+
+    // 从下标1开始截取，截取到下标3
+    // arr.slice(startIndex, endIndex)
+    let arr2 = arr.slice(1, 3)
+    console.log("传参，开始和结束索引", arr2);  // [20, 30]
+
+    // 如果不写结束索引，表示截取到最后
+    // 从下标为1的索引开始截，截到最后
+    let arr3 = arr.slice(1)
+    console.log("只传一个参数，从某个索引截到最后", arr3);  // [20, 30, 40]
+
+    // 从末尾开始截，截最后两个
+    let arr4 = arr.slice(-2)
+    console.log("从末尾开始截，截最后两个", arr4);  // [30, 40]
+
+    /**
+     *  splice
+     */
+    // 第一个参数表示开始的下标
+    // 第二个参数表示长度
+    // 后面的参数是替换的内容
+    // 前面的两个参数表示需要被替换的区域
+    // 后面的参数表示当前区域要被替换的内容
+    // splice(startIndex, length, 替换的内容)
+    // 相当于剪切，找到数组需要被剪切的范围，然后粘贴
+    let spliceRes1 = arr.splice(1, 2, 'a', 'b', 'c')
+    console.log("splice用法，相当于剪切粘贴", spliceRes1, arr)  // [20, 30]  // [10, "a", "b", "c", 40]
+
+    // 如果后面参数不填，相当于删除中间部分
+    arr = [10, 20, 30, 40]  // 因为上面的数组已经被修改了，这里重新定义
+    let spliceRes2 = arr.splice(1, 2)
+    console.log("只传两个参数，相当于删除", spliceRes2, arr)  // [20, 30]  // [10, 40]
+
+    // 如果不需要移除，从某个位置添加若干元素
+    arr = [10, 20, 30, 40]  // 因为上面的数组已经被修改了，这里重新定义
+    let spliceRes3 = arr.splice(1, 0, 666, 2333, 555)
+    console.log("不需要移除，从某个位置添加若干元素", spliceRes3, arr)  // []  // [10, 666, 2333, 555, 20, 30, 40]
+</script>
+</html>

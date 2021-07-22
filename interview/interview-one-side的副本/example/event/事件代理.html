@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件代理</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    <!-- 
+        如果要给每个a标签监听事件
+        不可能给每个a标签都设定一个id去监听
+        这时候可以把监听放在div1上
+        通过冒泡机制去监听所有a标签去响应事件
+        这就是事件代理
+     -->
+    <div id="div1">
+        <a href="#">a1</a><br>
+        <a href="#">a2</a><br>
+        <a href="#">a3</a><br>
+        <a href="#">a4</a><br>
+        <button>加载更多...</button>
+    </div>
+</body>
+<script>
+    // 通用的绑定函数
+    let bindEvent = (elem, type, fn)=> {
+        elem.addEventListener(type, fn)
+    }
+
+    // 事件代理示例
+    const div1 = document.getElementById('div1');
+    bindEvent(div1, 'click', event=> {
+        // 每次点击div1下的标签，都会冒泡到div1上来
+        // 点击button的时候也会冒泡到div1上来
+        // a标签还有一个默认行为就是点击可能会跳转链接
+        event.preventDefault()  // 阻止默认行为
+        let target = event.target  // 判断当前触发元素
+        console.log("当前触发元素", target, target.nodeName);
+
+        if(target.nodeName === 'A') {
+            alert(target.innerHTML)
+        }
+    })
+</script>
+</html>

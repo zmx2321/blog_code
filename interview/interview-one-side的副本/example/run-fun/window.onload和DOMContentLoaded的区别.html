@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>window.onload和DOMContentLoaded的区别</title>
+    <style>
+        .container {
+            border: 1px solid #ccc;
+        }
+
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <p>一段文字 1</p>
+    <p>一段文字 2</p>
+    <p>一段文字 3</p>
+    <img
+        id="img1"
+        src="https://img3.mukewang.com/5a9fc8070001a82402060220-100-100.jpg"
+    />
+    <img
+        id="img2"
+        src="https://img3.mukewang.com/5a9fc8070001a82402060220-100-100.jpg"
+    />
+</body>
+<script>
+const img1 = document.getElementById('img1')
+const img2 = document.getElementById('img2')
+img1.onload = function () {
+    console.log('img1 loaded')
+}
+img2.onload = function () {
+    console.log('img2 loaded')
+}
+
+window.addEventListener('load', function () {
+    console.log('window loaded')
+})
+
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('dom content loaded')
+})
+</script>
+</html>

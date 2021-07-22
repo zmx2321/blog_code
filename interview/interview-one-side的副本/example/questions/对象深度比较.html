@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>对象深度比较</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    鼠标右击查看源码
+</body>
+<script>
+    const obj1 = {a:10, b:{x:100, y:200}}
+    const obj2 = {a:10, b:{x:100, y:200}}
+    // console.log(obj1, obj2);  // false
+
+    // 判断是否是对象或数组
+    const isObj = obj=> {
+        return typeof obj === 'object' && obj !== null
+    }
+
+    // 实现对象深度比较
+    const isEqual = (obj1, obj2)=> {
+        // console.log(obj1, obj2)
+
+        // 判断参数是否是对象
+        // 也在递归的时候用
+        // isEqual(100, 100)
+        if(!isObj(obj1) || !isObj(obj2)) {
+            // 参与equal的一般不是函数，一般是数据
+            // 不是对象就是值类型，可以直接比较
+            return obj1 === obj2
+        }
+
+        // 如果两个对象相等(obj1 === obj1)
+        if(obj1 === obj2) {
+            return true
+        }
+
+        // 两个都是引用类型(对象或数组)，且两者地址不同
+        // 深度比较全相等
+        // 步骤：
+        /**
+         * 1. 先取出obj1和obj2的keys，比较个数，个数不一样直接false
+         * 2. 个数相等，以obj1为基准，和obj2依次递归比较
+         * 3. 全部遍历完，没有遇到false，就是全相等
+         */
+        // 取出keys
+        // 如果是数组，可以获取它的索引下标
+        const obj1Keys = Object.keys(obj1)
+        const obj2Keys = Object.keys(obj2)
+
+        // 个数不相等
+        if(obj1Keys.length !== obj2Keys.length) {
+            return false
+        }
+
+        // 个数相等，以obj1为基准，和obj2依次递归比较
+        // for in 对象数组都适用
+        for(let key in obj1) {
+            // 比较当前key的value => 递归
+            // 拿到obj1里面的值，和obj2里面的值，进入该方法
+            // 该方法里面有值的比较
+            // isEqual(100, 100)
+            // 拿到值比较的布尔值
+            // 遇到对象，再进行遍历，再到值的比较
+            const res = isEqual(obj1[key], obj2[key])
+
+            // 有值不相等
+            if(!res) {
+                return false
+            }
+        }
+
+        // 遍历完没有遇到false，就是全相等
+        return true
+    }
+
+    // 结果
+    console.log("实现对象深度比较", isEqual(obj1, obj2))  // true
+</script>
+</html>

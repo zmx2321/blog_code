@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>手写深拷贝</title>
+</head>
+<body>
+    鼠标右击查看源码
+</body>
+<script>
+/**
+ * 深拷贝
+ * obj => 要拷贝的对象
+ */
+const deepClone = (obj = {})=> {
+  // obj是null，或者不是对象或数组，直接返回
+  if(typeof obj !== 'object' || obj == null ) {
+    // 递归里面，如果是值，直接返回
+    return obj;
+  }
+
+  // 递归中如果遇到对象里面的值是对象或者数组，走下面的逻辑
+  // 初始化返回结果
+  let result;
+  // 判断是否是数组
+  if(obj instanceof Array) {
+    result = []
+  } else {
+    result = {}
+  }
+
+  // 无论对象还是数组，都可以使用for in遍历
+  for(let key in obj) {
+    // 判断这个key是不是这个对象自身所拥有的属性
+    // 保证key不是原型的属性
+    if(obj.hasOwnProperty(key)) {
+      // 递归(重点)
+      // obj[key]表示值
+      // 递归是为了防止对象中有深层次的东西，因为你不知道要拷贝的对象中有多少层
+      result[key] = deepClone(obj[key]);
+    }
+  }
+
+  // 返回结果
+  return result
+}
+
+let obj1 = {
+  age: 20,
+  name: "xxx",
+  address: {
+    city: "beijing"
+  },
+  arr: ["a", "b", "c"]
+}
+
+let obj3 = deepClone(obj1);
+console.log(obj3)
+</script>
+</html>

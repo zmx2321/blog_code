@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+<title>JS-Web-API-存储</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/common.css"/>
+</head>
+
+<body>
+    鼠标右击查看源码
+</body>
+<script>
+    /**
+     * cookie
+     */
+    // cookie以分号分割，以键值对的形式存储
+    // cookie只能赋值一个
+    document.cookie = "a=100;b=200"  // 设置cookie
+    console.log("cookie", document.cookie)  // 获取cookie a=100
+    document.cookie = "b=200"
+    console.log("cookie", document.cookie)  // a=100;b=200
+    // 同一个key会覆盖,不同key会追加
+    document.cookie = "b=300"
+    console.log("cookie", document.cookie)  // a=100;b=300
+    
+    /**
+     * localStorage和sessionStorage
+     */
+    // 存储的都是字符串的形式
+    localStorage.setItem('a', 100)  // 设置localStorage
+    console.log('localStorage', localStorage.getItem('a'));  // 获取localStorage
+
+    sessionStorage.setItem('a', 200)  // 设置sessionStorage
+    console.log('sessionStorage', sessionStorage.getItem('a'));  // 获取sessionStorage
+</script>
+</html>

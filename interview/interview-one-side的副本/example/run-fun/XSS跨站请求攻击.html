@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>XSS跨站请求攻击演示</title>
+    <style>
+    </style>
+</head>
+<script>
+    // 先设置cookie做模拟
+    document.cookie="a=100";
+    document.cookie="b=200";
+    document.cookie="userid=xxx";
+    console.log(document.cookie)
+</script>
+<body>
+    <p>一段文字1</p>
+    <p>一段文字2</p>
+    <p>一段文字3</p>
+    <script>alert("获取cookie信息：" + document.cookie);</script>
+    <!-- 使用特殊字符就不会被获取 -->
+    <!-- &lt;script&gt;alert(document.cookie);&lt;/script&gt; -->
+</body>
+</html>

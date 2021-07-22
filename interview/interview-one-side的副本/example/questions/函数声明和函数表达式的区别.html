@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数声明和函数表达式的区别</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    鼠标右击查看源码
+</body>
+<script>
+    /**
+     * 函数声明
+     */
+    const res = sum(10, 20)
+    console.log(res)
+
+    // 函数声明会在代码执行之前预加载，有些类似变量提升，但函数已经可以用了
+    // 会先把这个函数初始化上，再执行代码
+    function sum(x, y) {
+        return x + y
+    }
+
+    /**
+     * 函数表达式
+     */
+    const res1 = sum1(10, 20)
+    // Cannot access 'sum1' before initialization
+    console.log(res1)  // 使用函数表达式这里会报错
+
+    // 用let或者const不会命中变量提升
+    // 这里没有做变量提升，所以上面的sum1实际上就是未被定义
+    // 所以报错信息是，初始化前无法访问"sum1"
+    const sum1 = function(x, y) {
+        return x + y
+    }
+
+    const res2 = sum2(10, 20)
+    // sum2 is not a function
+    console.log(res1)  // 这里的报错信息不一样
+
+    // 使用var会命中变量提升
+    // 他会提升到最上面，实际上 sum2 === undefined
+    // 所以上面的报错信息是sum2不是一个函数
+    var sum2 = function(x, y) {
+        return x + y
+    }
+</script>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>通用的事件绑定函数</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    <div id="div1" class="container">
+        <button id="btn1">事件绑定示例1</button>
+    </div>
+
+    <div id="div2">
+        <a href="#">a1</a><br>
+        <a href="#">a2</a><br>
+        <a href="#">a3</a><br>
+        <a href="#">a4</a><br>
+        <button>加载更多...</button>
+    </div>
+</body>
+<script>
+    // 通用的绑定函数
+    // 既能支持普通的监听
+    // 又能支持代理的监听
+    // 在代理中不需要在自己的业务逻辑中判断触发的元素
+    // selector表示筛选出需要触发的标签
+    // 并且需要this永远指向触发的元素
+    let bindEvent = (elem, type, selector, fn)=> {
+        // 需要做判断，如果没有传selector，即不是代理
+        // x == null  =>  x === null || x === undefind
+        // 如果fn为null表示传了三个参数，需要把对应关系转换一下
+        if(fn == null) {
+            fn = selector
+            selector = null
+        }
+
+        // 绑定
+        elem.addEventListener(type, event=> {
+            // 不管有没有代理，都需要target
+            const target = event.target  // 我们当前触发的元素
+            console.log("当前触发的元素", target)
+
+            if(selector) {
+                console.log("代理绑定");
+
+                // 存在selector表示他是代理绑定
+                // 使用matches表示，这个dom元素(我们当前触发的元素)，是否符合于这个css选择器
+                if(target.matches(selector)) {
+                    // 将fn的this指向改成触发的元素
+                    // call第一个参数是this指向，后面的参数表示fn的参数
+                    // call会直接执行
+                    fn.call(target, event)
+                }
+            } else {
+                console.log("普通绑定");
+
+                // 不存在selector表示他是普通绑定
+                // 需要this指向当前触发的元素，即target
+                // event表示执行的函数的参数
+                // 我们需要使用event对象做一些操作
+                // call后面第二个参数开始，就可以当作函数的形参
+                fn.call(target, event)
+            }
+        })
+    }
+
+    // 普通绑定
+    const btn1 = document.getElementById('btn1')
+    // 这里不能使用箭头函数，因为箭头函数没有this指向
+    // 也可以说箭头函数里面的this指向当前方法块所在的环境(上级作用域)
+    // 即箭头函数里面的this永远指向它的父级(即上级作用域)
+    bindEvent(btn1, 'click', function (event) {
+        // console.log(event.target) // 获取触发的元素
+        event.preventDefault() // 阻止默认行为
+        // 如果使用箭头函数，这里的this指向window
+        alert(this.innerHTML)  // this指向触发元素
+
+        // 如果使用箭头函数
+        // alert(btn1.innerHTML)
+    })
+
+    // 代理绑定
+    const div2 = document.getElementById('div2')
+    // 表示只允许a标签触发
+    bindEvent(div2, 'click', 'a', function (event) {
+        event.preventDefault()  // 阻止默认行为
+        alert(this.innerHTML)
+
+        // 如果使用箭头函数
+        // alert(div2.innerHTML)
+    })
+</script>
+</html>
