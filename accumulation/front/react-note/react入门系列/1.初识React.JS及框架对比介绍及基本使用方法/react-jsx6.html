@@ -2,7 +2,7 @@
 <html> 
 <head> 
     <meta charset="utf-8"> 
-    <title></title> 
+    <title>jsx支持style</title> 
     <script type="text/javascript" src='bower_components/react/react.js'></script>
     <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
     <script type="text/javascript" src='bower_components/babel/browser.js'></script>
@@ -19,7 +19,8 @@
 	var imgSrc = 'https://www.baidu.com/img/bd_logo1.png';
 	//{'background':'green'}
 
-
+	// style中第一层括号表示告诉jsx我要用js代码了，第二层括号表示json
+  	// jsx支持style - 里面使用json
 	let a = (<div>
 				<img src={imgSrc}/>
 				<input/>
