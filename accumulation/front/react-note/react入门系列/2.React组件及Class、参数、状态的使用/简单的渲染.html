@@ -2,7 +2,7 @@
 <html> 
 <head> 
     <meta charset="utf-8"> 
-    <title></title> 
+    <title>简单的渲染</title> 
     <script type="text/javascript" src='bower_components/react/react.js'></script>
     <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
     <script type="text/javascript" src='bower_components/babel/browser.js'></script>
@@ -10,6 +10,17 @@
 <body>
 <div id='app'></div>
 <script type="text/babel">
+// 第一个参数 - 组件 （内容、元素）
+// 第二个参数 - 位置 （放到哪）
+
+// 必须有一个根元素
+// 允许加括号
+// 单标签必须闭合
+// 必须使用className
+// 换行无影响
+// style使用两个大括号，第一个大括号表示jsx
+// 事件名使用驼峰
+
 	let DOM = <div>
 				<h1>hello react!</h1>
 				<span>hehe</span>
