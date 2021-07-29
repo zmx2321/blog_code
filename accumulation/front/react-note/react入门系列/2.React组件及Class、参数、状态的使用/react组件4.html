@@ -1,0 +1,62 @@
+<!doctype html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title></title> 
+    <script type="text/javascript" src='bower_components/react/react.js'></script>
+    <script type="text/javascript" src='bower_components/react/react-dom.js'></script>
+    <script type="text/javascript" src='bower_components/babel/browser.js'></script>
+</head>
+<body>
+<div id='app'></div>
+<script type='text/babel'>
+class Leo extends React.Component{
+	constructor(){
+		super();
+		// 状态肯定是在初始的时候使用
+		// 就是要在构造函数里面添加
+		// 定义私有属性，要用this
+		// es6语法中，子类继承父类，如果不使用super，则无法使用this
+		this.state = {
+			msg:'hello react!!!'
+		}
+	}
+	render(){
+		//console.log(this);
+		//console.log(this);
+		return (<div>
+					<input type='button' value='改变' onClick={this.show.bind(this)}/>
+					<br/>
+					<span>{this.state.msg}</span>
+					<h1>asdasd</h1>
+				</div>)
+	}
+	show(){
+		// 数据分可渲染数据和不可渲染数据
+		// state表示状态，使用this.state会改变数据，但不会进行渲染
+		// 要使用他自带的方法才可以进行渲染
+		// 使用setState view层进行渲染
+		// setState是React.Component中的一个原型（方法），由于继承关系，leo可以继承React.Component的私有属性和原型
+		// 改变私有属性
+		this.setState({
+			msg:'change!'
+		});
+		//this.state.msg = 'change!';
+		//console.log(this.state)
+		//alert(1)
+		//console.log(this);
+		// props是只读的，只能用state改变，state表示状态
+		//this.props.a=15;
+	}
+
+}
+
+ReactDOM.render(<Leo/>,app)
+
+//new Leo('leo',18).show('m');
+//console.log(typeof new Leo)
+
+
+</script>
+</body>
+</html>

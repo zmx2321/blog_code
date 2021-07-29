@@ -11,36 +11,27 @@
 <div id='app'></div>
 <script type='text/babel'>
 class Leo extends React.Component{
-	constructor(){
-		super();
-		this.state = {
-			msg:'hello react!!!'
-		}
-	}
 	render(){
 		//console.log(this);
 		//console.log(this);
+		// 只能用bind，apply和call会直接调用
 		return (<div>
 					<input type='button' value='改变' onClick={this.show.bind(this)}/>
 					<br/>
-					<span>{this.state.msg}</span>
+					<span>{this.props.a}{this.props.b}</span>
 					<h1>asdasd</h1>
 				</div>)
 	}
 	show(){
-		this.setState({
-			msg:'change!'
-		});
-		//this.state.msg = 'change!';
-		//console.log(this.state)
 		//alert(1)
 		//console.log(this);
-		//this.props.a=15;
+		// props是只读的，所以还是会报错
+		this.props.a=15;
 	}
 
 }
 
-ReactDOM.render(<Leo/>,app)
+ReactDOM.render(<Leo a='12' b='9'/>,app)
 
 //new Leo('leo',18).show('m');
 //console.log(typeof new Leo)

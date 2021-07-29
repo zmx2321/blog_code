@@ -11,14 +11,19 @@
 <div id='app'></div>
 <script>
 
-
+// 实际上就是一个函数 function Leo(){}，但es6里面的class没有变量提升
+// 里面封装类一些方法，实例化这个类之后，优先执行constructor函数
+// 所以一些私有属性一般写在constructor里面
+// 私有属性表示不被外界所污染，只有在当前对象才被用到
 class Leo {
 	constructor(name,age){
 		this.name = name
 		//	this.a = 10;
 		//console.log(name,age)
 	}
+	// 原型
 	show(x){
+		// 获取私有属性，由对象传参
 		console.log(this.name)
 	}
 };

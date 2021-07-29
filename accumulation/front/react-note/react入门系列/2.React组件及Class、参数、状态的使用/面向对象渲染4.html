@@ -28,11 +28,28 @@ class Leo {
 };
 
 class Small extends Leo{
-	constructor(xxx){
+	// 只继承父类一个参数，就任意写一个字符，比如xxx
+	// 如果要继承父类所有参数
+	// constructor(xxx){
+	constructor(...val){
+		// super也是一个函数
+		// 不用super就无法使用this
+		// 在子类的构造函数中，只有使用super之后才能使用this
+		// super函数还有其他功能（继承父类的参数）
+		// 子类只继承原型和私有属性，如果在对象中使用参数，则无法获取
+		// super里面的参数实际上就是父类构造函数的参数，按顺序
+		// super加上参数之后，可以获取实例化的对象的参数
+		// 继承父类第一个参数
+		// super(xxx);
+		// 继承父类所有参数
 		super(...val);
+
+		// 重新定义私有属性
 		this.aaa = 20;
 	}
 }
+
+// new的是子类，子类如果没有参数，要在super里面传参
 new Small('big','hehe').show();
 
 //new Leo('leo',18).show('m');
