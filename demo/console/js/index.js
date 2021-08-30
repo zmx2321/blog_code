@@ -1,4 +1,4 @@
-// 加载龙的图片
+// 加载龙的图片 0
 let img = new Image()
 img.src = "./img/dragon.jpg"
 // console.log(img, img.width, img.height)
