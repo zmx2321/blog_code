@@ -1,7 +1,7 @@
 .DS_Store
 node_modules/
 dist/
-vue_empty/
+vue_empty_auto/
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
