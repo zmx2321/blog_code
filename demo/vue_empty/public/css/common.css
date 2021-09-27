@@ -1,0 +1,59 @@
+/**
+    common css
+*/
+/* ==========================================================================
+   function
+ ============================================================================ */
+/* 清除浮动 */
+.f-cb:after,.f-cbli li:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
+/* inline-block */
+.f-ib li{display:inline-block;*display:inline;*zoom:1;}
+/* 浮动 */
+.f-fl{float:left;}
+.f-fr{float:right;}
+/* 显示/隐藏 */
+.f-dn{display:none;}
+.f-db{display:block;}
+/* relative */
+.f-pr{position:relative;}
+/* 溢出隐藏 */
+.f-oh{overflow:hidden;}
+/* font-size */
+.f-fs1{font-size:12px;}
+.f-fs2{font-size:14px;}
+/* font-weight */
+.f-fwn{font-weight:normal;}
+.f-fwb{font-weight:bold;}
+/* text-align */
+.f-tal{text-align:left;}
+.f-tac{text-align:center;}
+.f-tar{text-align:right;}
+/* justify */
+.f-taj{text-align:justify;text-justify:inter-ideograph;}
+/* 垂直居中 */
+.f-vam,.f-vama *{vertical-align:middle;}
+/* 字间距 */
+.f-ti2{text-indent:2em;}
+/* 行高 */
+.f-lhn{line-height:normal;}
+/* 下划线 */
+.f-tdu,.f-tdu:hover{text-decoration:underline;}
+.f-tdn,.f-tdn:hover{text-decoration:none;}
+/* 超出部分省略号 */
+.f-toe{overflow:hidden;word-wrap:normal;white-space:nowrap;text-overflow:ellipsis;}
+/* 鼠标样式 */
+.f-csp{cursor:pointer;}
+.f-csd{cursor:default;}
+.f-csh{cursor:help;}
+.f-csm{cursor:move;}
+/* 文本不能被选择 */
+.f-usn{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
+/* 边框圆角 */
+.bdr_radiu{border-radius: 4px;}
+
+/* ==========================================================================
+   layout
+ ============================================================================ */
+.main_cont{
+    padding: 8px 20px 0 20px;
+}
