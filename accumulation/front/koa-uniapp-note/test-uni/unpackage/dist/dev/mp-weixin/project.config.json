@@ -1,0 +1,48 @@
+{
+  "description": "项目配置文件。",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": false
+  },
+  "compileType": "miniprogram",
+  "libVersion": "",
+  "appid": "wx39c2e1bdcec1bf39",
+  "projectname": "hello",
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": 0,
+      "list": [
+        {
+          "name": "index",
+          "query": "interval=4000&autoplay=false",
+          "id": 0,
+          "pathName": "pages/index"
+        },
+        {
+          "name": "test",
+          "id": 1,
+          "pathName": "pages/home/home"
+        },
+        {
+          "name": "index",
+          "id": 2,
+          "pathName": "pages/index"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "indexed-list-item": "/components/uni-indexed-list/uni-indexed-list-item"
+  }
+}

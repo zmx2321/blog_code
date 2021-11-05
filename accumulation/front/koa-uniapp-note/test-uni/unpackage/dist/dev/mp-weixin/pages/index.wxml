@@ -1,0 +1,1 @@
+<view class="content data-v-2a183b29"><image class="logo data-v-2a183b29" src="/static/logo.png"></image><view class="text-area data-v-2a183b29"><text class="title data-v-2a183b29">{{title+"000"}}</text><navigator url="/pages/test/test" open-type="switchTab" class="data-v-2a183b29"><button type="default" class="data-v-2a183b29">跳转到新页面</button></navigator></view></view>

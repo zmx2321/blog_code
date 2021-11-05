@@ -1,0 +1,271 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 头条小程序组件内不能引入字体 */
+page {
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	background-color: #efeff4;
+	min-height: 100%;
+	height: auto;
+}
+view {
+	font-size: 14px;
+	line-height: inherit;
+}
+.example {
+	padding: 0 15px 15px;
+}
+.example-info {
+	padding: 15px;
+	color: #3b4144;
+	background: #ffffff;
+}
+.example-body {
+
+	display: flex;
+
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding: 0;
+	font-size: 14px;
+	background-color: #ffffff;
+}
+.example {
+	padding: 0 15px;
+}
+.example-info {
+
+	display: block;
+
+	padding: 15px;
+	color: #3b4144;
+	background-color: #ffffff;
+	font-size: 14px;
+	line-height: 20px;
+}
+.example-info-text {
+	font-size: 14px;
+	line-height: 20px;
+	color: #3b4144;
+}
+.example-body {
+	flex-direction: column;
+	padding: 15px;
+	background-color: #ffffff;
+}
+.word-btn-white {
+	font-size: 18px;
+	color: #FFFFFF;
+}
+.word-btn {
+
+	display: flex;
+
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	border-radius: 6px;
+	height: 48px;
+	margin: 15px;
+	background-color: #007AFF;
+}
+.word-btn--hover {
+	background-color: #4ca2ff;
+}
+.swiper-box {
+	height: 200px;
+}
+.swiper-item {
+
+	display: flex;
+
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #999;
+	color: #fff;
+}
+.image {
+	width: 750rpx;
+}
+ .image ._img {
+	-webkit-user-drag: none;
+	-khtml-user-drag: none;
+	-moz-user-drag: none;
+	-o-user-drag: none;
+	user-drag: none;
+}
+@media screen and (min-width: 500px) {
+.uni-swiper-dot-box {
+		width: 400px;
+		margin: 0 auto;
+		margin-top: 8px;
+}
+.image {
+		width: 100%;
+}
+}
+.uni-bg-red {
+	background-color: #ff5a5f;
+}
+.uni-bg-green {
+	background-color: #09bb07;
+}
+.uni-bg-blue {
+	background-color: #007aff;
+}
+.example-body {
+
+	display: flex;
+
+	flex-direction: row;
+	padding: 20rpx;
+}
+.example-body-item {
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin: 15rpx;
+	padding: 15rpx;
+	height: 60rpx;
+
+	display: flex;
+	padding: 0 15rpx;
+
+	flex: 1;
+	border-color: #e5e5e5;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 5px;
+}
+.example-body-item-text {
+	font-size: 28rpx;
+	color: #333;
+}
+.example-body-dots {
+	width: 16rpx;
+	height: 16rpx;
+	border-radius: 50px;
+	background-color: #333333;
+	margin-left: 10rpx;
+}
+.active {
+	border-style: solid;
+	border-color: #007aff;
+	border-width: 1px;
+}
+

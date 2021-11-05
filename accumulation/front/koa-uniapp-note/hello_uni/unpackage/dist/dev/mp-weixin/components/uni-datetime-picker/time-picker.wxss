@@ -1,0 +1,120 @@
+
+.uni-datetime-picker.data-v-37dd7752 {
+
+	/* width: 100%; */
+}
+.uni-datetime-picker-view.data-v-37dd7752 {
+	height: 130px;
+	width: 270px;
+
+	cursor: pointer;
+}
+.uni-datetime-picker-item.data-v-37dd7752 {
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-size: 14px;
+}
+.uni-datetime-picker-btn.data-v-37dd7752 {
+	margin-top: 60px;
+
+	display: flex;
+	cursor: pointer;
+
+	flex-direction: row;
+	justify-content: space-between;
+}
+.uni-datetime-picker-btn-text.data-v-37dd7752 {
+	font-size: 14px;
+	color: #007AFF;
+}
+.uni-datetime-picker-btn-group.data-v-37dd7752 {
+
+	display: flex;
+
+	flex-direction: row;
+}
+.uni-datetime-picker-cancel.data-v-37dd7752 {
+	margin-right: 30px;
+}
+.uni-datetime-picker-mask.data-v-37dd7752 {
+	position: fixed;
+	bottom: 0px;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	background-color: rgba(0, 0, 0, 0.4);
+	transition-duration: 0.3s;
+	z-index: 998;
+}
+.uni-datetime-picker-popup.data-v-37dd7752 {
+	border-radius: 8px;
+	padding: 30px;
+	width: 270px;
+
+
+
+
+
+
+	background-color: #fff;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	        transform: translate(-50%, -50%);
+	transition-duration: 0.3s;
+	z-index: 999;
+}
+.fix-nvue-height.data-v-37dd7752 {
+}
+.uni-datetime-picker-time.data-v-37dd7752 {
+	color: grey;
+}
+.uni-datetime-picker-column.data-v-37dd7752 {
+	height: 50px;
+}
+.uni-datetime-picker-timebox.data-v-37dd7752 {
+	border: 1px solid #E5E5E5;
+	border-radius: 5px;
+	padding: 7px 10px;
+
+	box-sizing: border-box;
+	cursor: pointer;
+}
+.uni-datetime-picker-timebox-pointer.data-v-37dd7752 {
+
+	cursor: pointer;
+}
+.uni-datetime-picker-disabled.data-v-37dd7752 {
+	opacity: 0.4;
+}
+.uni-datetime-picker-text.data-v-37dd7752 {
+	font-size: 14px;
+}
+.uni-datetime-picker-sign.data-v-37dd7752 {
+	position: absolute;
+	top: 53px;
+	/* 减掉 10px 的元素高度，兼容nvue */
+	color: #999;
+}
+.sign-left.data-v-37dd7752 {
+	left: 86px;
+}
+.sign-right.data-v-37dd7752 {
+	right: 86px;
+}
+.sign-center.data-v-37dd7752 {
+	left: 135px;
+}
+.uni-datetime-picker__container-box.data-v-37dd7752 {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 40px;
+}
+.time-hide-second.data-v-37dd7752 {
+	width: 180px;
+}
+

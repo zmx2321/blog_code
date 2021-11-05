@@ -1,0 +1,214 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 头条小程序组件内不能引入字体 */
+page {
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	background-color: #efeff4;
+	min-height: 100%;
+	height: auto;
+}
+view {
+	font-size: 14px;
+	line-height: inherit;
+}
+.example {
+	padding: 0 15px 15px;
+}
+.example-info {
+	padding: 15px;
+	color: #3b4144;
+	background: #ffffff;
+}
+.example-body {
+
+	display: flex;
+
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding: 0;
+	font-size: 14px;
+	background-color: #ffffff;
+}
+.example {
+	padding: 0 15px;
+}
+.example-info {
+
+	display: block;
+
+	padding: 15px;
+	color: #3b4144;
+	background-color: #ffffff;
+	font-size: 14px;
+	line-height: 20px;
+}
+.example-info-text {
+	font-size: 14px;
+	line-height: 20px;
+	color: #3b4144;
+}
+.example-body {
+	flex-direction: column;
+	padding: 15px;
+	background-color: #ffffff;
+}
+.word-btn-white {
+	font-size: 18px;
+	color: #FFFFFF;
+}
+.word-btn {
+
+	display: flex;
+
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	border-radius: 6px;
+	height: 48px;
+	margin: 15px;
+	background-color: #007AFF;
+}
+.word-btn--hover {
+	background-color: #4ca2ff;
+}
+page {
+	height: 120%;
+}
+.uni-nav-bar-text {
+	font-size: 14px;
+}
+.city {
+
+	display: flex;
+
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	margin-left: 4px;
+}
+.input-view {
+
+	display: flex;
+
+	flex-direction: row;
+	flex: 1;
+	background-color: #f8f8f8;
+	height: 30px;
+	border-radius: 15px;
+	padding: 0 15px;
+	flex-wrap: nowrap;
+	margin: 7px 0;
+	line-height: 30px;
+}
+.input-uni-icon {
+	line-height: 30px;
+}
+.nav-bar-input {
+	height: 30px;
+	line-height: 30px;
+
+
+
+	padding: 0 5px;
+	font-size: 14px;
+	background-color: #f8f8f8;
+}
+.example-body {
+
+	display: block;
+
+	padding: 0;
+}
+

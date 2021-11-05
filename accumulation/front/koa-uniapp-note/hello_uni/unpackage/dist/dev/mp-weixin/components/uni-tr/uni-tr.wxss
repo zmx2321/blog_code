@@ -1,0 +1,28 @@
+
+.uni-table-tr.data-v-65220fe4 {
+
+	display: table-row;
+	transition: all 0.3s;
+	box-sizing: border-box;
+}
+.checkbox.data-v-65220fe4 {
+	padding: 0 8px;
+	width: 26px;
+	padding-left: 12px;
+
+	display: table-cell;
+	vertical-align: middle;
+
+	color: #333;
+	font-weight: 500;
+	border-bottom: 1px #ebeef5 solid;
+	font-size: 14px;
+}
+.tr-table--border.data-v-65220fe4 {
+	border-right: 1px #ebeef5 solid;
+}
+
+
+
+
+

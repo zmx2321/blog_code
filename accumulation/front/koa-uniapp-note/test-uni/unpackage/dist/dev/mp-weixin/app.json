@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/test/test",
+    "pages/home/home",
+    "pages/index",
+    "pages/tesst/tesst",
+    "pages/ddd/ddd",
+    "pages/API/index/index",
+    "pages/component/index/index",
+    "pages/component/child/child"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "app",
+    "navigationBarBackgroundColor": "#F00",
+    "backgroundColor": "#000"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/test/test",
+        "text": "test"
+      },
+      {
+        "pagePath": "pages/tesst/tesst",
+        "text": "test1"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

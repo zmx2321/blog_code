@@ -1,0 +1,40 @@
+
+.uni-popup.data-v-7da806a4 {
+	position: fixed;
+
+	z-index: 99;
+}
+.uni-popup.top.data-v-7da806a4,
+.uni-popup.left.data-v-7da806a4,
+.uni-popup.right.data-v-7da806a4 {
+
+
+
+
+	top: 0;
+}
+.uni-popup .uni-popup__wrapper.data-v-7da806a4 {
+
+	display: block;
+
+	position: relative;
+	/* iphonex 等安全区设置，底部安全区适配 */
+}
+.uni-popup .uni-popup__wrapper.left.data-v-7da806a4,
+.uni-popup .uni-popup__wrapper.right.data-v-7da806a4 {
+
+
+
+
+	padding-top: 0;
+
+	flex: 1;
+}
+.fixforpc-z-index.data-v-7da806a4 {
+
+	z-index: 999;
+}
+.fixforpc-top.data-v-7da806a4 {
+	top: 0;
+}
+

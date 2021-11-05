@@ -1,0 +1,17 @@
+<template>
+	<div>
+		<text class="hello">hello111</text>
+	</div>
+</template>
+
+<script>
+	export default {
+		
+	}
+</script>
+
+<style>
+.hello {
+	margin-top: 300rpx;
+}
+</style>

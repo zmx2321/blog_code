@@ -1,0 +1,87 @@
+
+.uni-calendar-item__weeks-box.data-v-859b2a6a {
+	flex: 1;
+
+	display: flex;
+
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 3px 0;
+}
+.uni-calendar-item__weeks-box-text.data-v-859b2a6a {
+	font-size: 12px;
+}
+.uni-calendar-item__weeks-lunar-text.data-v-859b2a6a {
+	font-size: 12px;
+	color: #333;
+}
+.uni-calendar-item__weeks-box-item.data-v-859b2a6a {
+	position: relative;
+
+	display: flex;
+
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 40px;
+	height: 40px;
+}
+.uni-calendar-item__weeks-box-circle.data-v-859b2a6a {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 8px;
+	height: 8px;
+	border-radius: 8px;
+	background-color: #dd524d;
+}
+.uni-calendar-item__weeks-box .uni-calendar-item--disable.data-v-859b2a6a {
+	color: #c0c0c0;
+	cursor: default;
+}
+.uni-calendar-item__weeks-box .uni-calendar-item--isDay-text.data-v-859b2a6a {
+	color: #007aff;
+}
+.uni-calendar-item--isDay.data-v-859b2a6a {
+	background-color: #007aff;
+	opacity: 0.8;
+	color: #fff;
+}
+.uni-calendar-item--extra.data-v-859b2a6a {
+	color: #dd524d;
+	opacity: 0.8;
+}
+.uni-calendar-item__weeks-box .uni-calendar-item--checked.data-v-859b2a6a {
+	background-color: #007aff;
+	box-sizing: border-box;
+	border: 6px solid #f2f6fc;
+	color: #fff;
+	opacity: 0.8;
+}
+.uni-calendar-item--multiple .uni-calendar-item--checked-range-text.data-v-859b2a6a {
+	color: #333;
+}
+.uni-calendar-item--multiple.data-v-859b2a6a {
+	background-color: #f2f6fc;
+	opacity: 0.8;
+}
+.uni-calendar-item--multiple .uni-calendar-item--before-checked.data-v-859b2a6a {
+	background-color: #409eff;
+	color: #fff !important;
+	box-sizing: border-box;
+	border: 6px solid #f2f6fc;
+}
+.uni-calendar-item--multiple .uni-calendar-item--after-checked.data-v-859b2a6a {
+	background-color: #409eff;
+	color: #fff !important;
+	box-sizing: border-box;
+	border: 6px solid #f2f6fc;
+}
+.uni-calendar-item--before-checked-x.data-v-859b2a6a {
+	background-color: #f2f6fc;
+}
+.uni-calendar-item--after-checked-x.data-v-859b2a6a {
+	background-color: #f2f6fc;
+}
+
