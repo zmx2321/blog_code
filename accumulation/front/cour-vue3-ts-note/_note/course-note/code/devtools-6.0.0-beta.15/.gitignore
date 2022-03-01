@@ -12,3 +12,5 @@ yarn-error.log
 
 /packages/*/lib
 .amo.env.json
+
+package-lock.json
