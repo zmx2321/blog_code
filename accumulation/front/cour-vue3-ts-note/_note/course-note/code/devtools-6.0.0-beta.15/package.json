@@ -1,0 +1,82 @@
+{
+  "name": "vue-devtools",
+  "version": "6.0.0-beta.15",
+  "description": "devtools for Vue.js!",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:vue2": "concurrently \"cd packages/shell-dev-vue2 && yarn dev\" \"cd packages/shell-host && yarn dev\"",
+    "dev:vue3": "concurrently \"cd packages/shell-dev-vue3 && yarn dev\" \"cd packages/shell-host && yarn dev\"",
+    "dev:chrome": "cd packages/shell-chrome && webpack --watch",
+    "dev:chrome:prod": "cd packages/shell-chrome && cross-env NODE_ENV=production webpack --watch",
+    "build": "lerna run build",
+    "build:watch": "lerna run build --scope @vue-devtools/app-backend* --scope @vue-devtools/shared-* --scope @vue/devtools-api && lerna run build:watch --stream --no-sort --concurrency 99",
+    "lint": "eslint --ext .js,.ts,.vue .",
+    "run:firefox": "web-ext run -s packages/shell-chrome -a dist -i src",
+    "zip": "npm run zip:chrome && npm run zip:firefox",
+    "zip:chrome": "cd packages && zip -r -FS ../dist/chrome.zip shell-chrome -x *src/* -x *webpack.config.js -x *node_modules/*",
+    "zip:firefox": "web-ext build -s packages/shell-chrome -a dist -i src --overwrite-dest",
+    "sign:firefox": "node ./sign-firefox.js",
+    "release": "npm run test && node release.js && npm run build && npm run zip && npm run pub",
+    "release:beta": "cross-env RELEASE_CHANNEL=beta npm run release && npm run sign:firefox",
+    "pub": "npm run pub:electron && npm run pub:api",
+    "pub:electron": "cd packages/shell-electron && npm publish --tag beta",
+    "pub:api": "cd packages/api && npm publish",
+    "test": "npm run lint && npm run test:types:front",
+    "test:types:front": "tsc --noEmit",
+    "test:e2e": "cross-env PORT=4040 start-server-and-test dev:shell http://localhost:4040 test:e2e:run",
+    "test:e2e:run": "cypress run --config baseUrl=http://localhost:4040",
+    "test:open": "cypress open --config baseUrl=http://localhost:8100",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vuejs/vue-devtools.git"
+  },
+  "author": "Evan You",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vuejs/vue-devtools/issues"
+  },
+  "homepage": "https://github.com/vuejs/vue-devtools#readme",
+  "devDependencies": {
+    "@tailwindcss/postcss7-compat": "^2.0.4",
+    "@types/chrome": "^0.0.139",
+    "@typescript-eslint/eslint-plugin": "^4.23.0",
+    "@typescript-eslint/parser": "^4.23.0",
+    "@vue/eslint-config-standard": "^6.0.0",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "autoprefixer": "^9.1.5",
+    "concurrently": "^5.1.0",
+    "cross-env": "^5.2.0",
+    "cypress": "^3.1.0",
+    "eslint": "^7.26.0",
+    "eslint-plugin-cypress": "^2.0.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "eslint-plugin-vue": "^6.0.0",
+    "execa": "^4.0.3",
+    "inquirer": "^6.2.0",
+    "lerna": "^4.0.0",
+    "postcss-nested": "^4.2.1",
+    "rimraf": "^3.0.2",
+    "semver": "^5.5.1",
+    "start-server-and-test": "^1.7.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "vitepress": "^0.15.5",
+    "vue-loader": "^15.9.0",
+    "webpack-dev-server": "^4.0.0-beta.0"
+  },
+  "resolutions": {
+    "cypress": "=3.4.1"
+  },
+  "engines": {
+    "node": ">=8.10"
+  }
+}
