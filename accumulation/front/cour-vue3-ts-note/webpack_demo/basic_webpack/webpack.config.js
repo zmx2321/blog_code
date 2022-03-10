@@ -29,7 +29,7 @@ module.exports = {
                     "css-loader",
                 ]
             },
-            // 测试less
+            // 匹配less
             {
                 test: /\.less$/,
                 // 先将less编译成css、再解析css，最后插入css
@@ -38,7 +38,32 @@ module.exports = {
                     "css-loader",
                     "less-loader",
                 ]
-            }
+            },
+            // 匹配图片
+            {
+              test: /\.(jpe?g|png|gif|svg)$/,
+              use: 'file-loader'
+            },
+            /* {
+                test: /\.(jpe?g|png|gif|svg)$/,
+                type: "asset",
+                generator: {
+                  filename: "img/[name]_[hash:6][ext]"
+                },
+                parser: {
+                  dataUrlCondition: {
+                    maxSize: 100 * 1024
+                  }
+                }
+            }, */
+            /* {
+                test: /\.(eot|ttf|woff2?)$/,
+                type: "asset/resource",
+                generator: {
+                    filename: "font/[name]_[hash:6][ext]"
+                }
+            } */
         ]
-    }
+    },
+    // mode: 'development'
 }
