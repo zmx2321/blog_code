@@ -1,4 +1,12 @@
 const path = require('path')
+// CleanWbpackPlugin是一个类
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+// 引入html-webpack-plugin插件
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+// 在index.html模板中，可能会有 <%变量 %>，这个是EJS模块填充数据的方式
+const { DefinePlugin } = require('webpack')
+// 拷贝文件
+const { CopyWebpackPlugin } = require('copy-webpack-plugin')
 
 module.exports = {
     entry: "./src/main.js",  // 入口
@@ -7,7 +15,7 @@ module.exports = {
         // path: './build',  // 需要写绝对路径，这么写会报错
         // __dirname获取当前文件所在路径
         path: path.resolve(__dirname, './build'),
-        filename: 'bundle.js'  // 出口文件名称,默认是main.js
+        filename: 'js/bundle.js'  // 出口文件名称,默认是main.js
     },
     // 模块
     module: {
@@ -40,30 +48,89 @@ module.exports = {
                 ]
             },
             // 匹配图片
-            {
-              test: /\.(jpe?g|png|gif|svg)$/,
-              use: 'file-loader'
-            },
             /* {
+                test: /\.(jpe?g|png|gif|svg)$/,
+                // 会生成两张图片，css-loader 6.0.0以上版本。对引入背景图片的url解析方式不一样，导致生成了两个图片（一个正常由file-loader解析生成，一个仅由css-loader解析引入）
+                // 将css-loader版本由6降到5就行了
+                // 官方推荐使用asset module 资源模块替换loader
+                use: 'file-loader', 
+            }, */
+            // url-loader作用和file-loader作用相似，但可以将较小的文件转换成base64的uri
+            /* {
+              test: /\.(jpe?g|png|gif|svg)$/,
+              use: {
+                loader: "url-loader",
+                options: {
+                  // outputPath: "img",
+                  name: "img/[name]_[hash:6].[ext]",
+                  limit: 100 * 1024
+                }
+              }
+            }, */
+            // 直接使用资源模块类型（asset module type）
+            // asset => url-loader+配置资源体积限制实现 => 在导出一个data uri和发送一个单独文件直接自动选择
+            {
                 test: /\.(jpe?g|png|gif|svg)$/,
                 type: "asset",
                 generator: {
-                  filename: "img/[name]_[hash:6][ext]"
+                    // [name]获取文件名称，[ext]表示扩展名
+                    filename: "img/[name]_[hash:6][ext]"
                 },
+                // asset类型需要做以下配置
                 parser: {
-                  dataUrlCondition: {
-                    maxSize: 100 * 1024
-                  }
+                    dataUrlCondition: {
+                        // 100kb*1024
+                        maxSize: 100 * 1024
+                    }
                 }
-            }, */
-            /* {
+            },
+            // 字体 - 一般不转base64
+            // 直接使用资源模块类型（asset module type）
+            // asset/resource => file-loader => 发送一个单独的文件并导出url
+            {
                 test: /\.(eot|ttf|woff2?)$/,
                 type: "asset/resource",
                 generator: {
                     filename: "font/[name]_[hash:6][ext]"
                 }
-            } */
+            }
         ]
     },
+    // 插件
+    plugins: [
+        // 删除dist
+        new CleanWebpackPlugin(),
+        // 打包index.html
+        // new HtmlWebpackPlugin()  // 默认
+        new HtmlWebpackPlugin({
+            title: 'Output Management',
+            //  如果模板里面有baseurl，需要定义
+            // template: './public/index.html'  // 传入自定义模板
+        }),
+        // 创建全局常量
+        /* new DefinePlugin({
+            // 当前文件夹
+            BASE_URL: "./"  // 这里的BASE_URL可用在传入的自定义模板中，类似于vuecli中的public
+        }) */
+        // 拷贝文件
+        // new CopyWebpackPlugin({
+        //     // 匹配规则
+        //     patterns: [
+        //         {
+        //             // 从哪里开始复制
+        //             from: 'public',
+        //             // 复制到哪个文件夹
+        //             // to: './',  // 可以不写，当前目录
+        //             globOptions: {
+        //                 // 忽略当前文件夹下所有index.html
+        //                 ignore: [
+        //                     '**/index.html'
+        //                 ]
+        //             }
+        //         }
+        //     ]
+        // })
+    ],
     // mode: 'development'
+    // mode: 'production'
 }

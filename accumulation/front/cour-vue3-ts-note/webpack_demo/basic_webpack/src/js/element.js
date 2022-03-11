@@ -4,7 +4,7 @@ import "../css/title.less";
 
 const divEl = document.createElement("div");
 divEl.className = "title";
-divEl.innerHTML = "你好啊,李银河";
+divEl.innerHTML = "hello";
 
 document.body.appendChild(divEl);
 
@@ -15,14 +15,13 @@ bgDivEl.className = "image-bg";
 document.body.appendChild(bgDivEl);
 
 // 设置img元素的src
-/* import zzhnImage from '../img/zznh.png';
-import "../font/iconfont.css";
+import zzhnImage from '../img/zznh.png';
 const imgEl = document.createElement('img');
 imgEl.src = zzhnImage;
-document.body.appendChild(imgEl); */
+document.body.appendChild(imgEl);
 
 // i元素
-/* const iEl = document.createElement('i');
+import "../font/iconfont.css";  // 引入依赖图
+const iEl = document.createElement('i');
 iEl.className = "iconfont icon-ashbin";
-
-document.body.appendChild(iEl); */
+document.body.appendChild(iEl);
