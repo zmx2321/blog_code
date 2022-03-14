@@ -131,6 +131,7 @@ module.exports = {
         //     ]
         // })
     ],
-    // mode: 'development'
+    mode: 'development',
+    devtool: 'source-map'  // 生成代码的时候，也会生成对应的map文件，浏览器控制台能显示报错的位置
     // mode: 'production'
 }
