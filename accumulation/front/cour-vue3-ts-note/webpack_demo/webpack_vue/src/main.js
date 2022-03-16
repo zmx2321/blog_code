@@ -1,8 +1,12 @@
-import { sum } from "./js/math";  // ES Module的导出
-const { priceFormat } = require('./js/format')  // CommonJS的导出
+import { createApp } from 'vue'  // 将vue当成是一个模块直接去引入
 
-import "./js/element";
-
-// 浏览器无法直接运行
-console.log(sum(20, 30))
-console.log(priceFormat())  // 浏览器不能识别CommonJS，用webpack打包，浏览器就可以识别了
+// vue代码
+const app = createApp({
+    template: "<h2>vue3  132546</h2>",
+    data() {
+        return {
+            title: "hello"
+        }
+    },
+})
+app.mount('#app')

@@ -14,7 +14,7 @@ module.exports = {
     output: {
         // path: './build',  // 需要写绝对路径，这么写会报错
         // __dirname获取当前文件所在路径
-        path: path.resolve(__dirname, './build'),
+        path: path.resolve(__dirname, './dist'),
         filename: 'js/bundle.js'  // 出口文件名称,默认是main.js
     },
     // 模块
@@ -130,15 +130,15 @@ module.exports = {
         // 打包index.html
         // new HtmlWebpackPlugin()  // 默认
         new HtmlWebpackPlugin({
-            title: 'Output Management',
+            title: 'vueTemplate',
             //  如果模板里面有baseurl，需要定义
-            // template: './public/index.html'  // 传入自定义模板
+            template: './public/index.html'  // 传入自定义模板
         }),
         // 创建全局常量
-        /* new DefinePlugin({
+        new DefinePlugin({
             // 当前文件夹
-            BASE_URL: "./"  // 这里的BASE_URL可用在传入的自定义模板中，类似于vuecli中的public
-        }) */
+            BASE_URL: "'./'",  // 这里的BASE_URL可用在传入的自定义模板中，类似于vuecli中的public
+        }),
         // 拷贝文件
         // new CopyWebpackPlugin({
         //     // 匹配规则
