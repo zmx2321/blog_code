@@ -1,7 +1,7 @@
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { DefinePlugin } = require("webpack");
+const { DefinePlugin } = require("webpack");  // 在index.html模板中，可能会有 <%变量 %>，这个是EJS模块填充数据的方式
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader/dist/index');
 
