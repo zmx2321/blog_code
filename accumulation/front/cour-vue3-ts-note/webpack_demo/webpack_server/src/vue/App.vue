@@ -1,11 +1,11 @@
 <template>
-  <h2>我是Vue渲染出来的1111</h2>
+  <h2>我是Vue渲染出来的</h2>
   <h2>{{title}}</h2>
   <hello-world></hello-world>
 </template>
 
 <script>
-  import HelloWorld from './HelloWorld.vue';
+  import HelloWorld from './HelloWorld';
 
   export default {
     components: {
@@ -13,8 +13,8 @@
     },
     data() {
       return {
-        title: "Hello World",
-        message: "哈哈哈"
+        title: "Hello World, hahahaah ",
+        message: "hehehe"
       }
     },
     methods: {
