@@ -19,7 +19,7 @@ module.exports = {
     // contentbase代表html页面所在的相对目录，如果我们不配置项，devServer默认html所在的目录就是项目的根目录
     contentBase: "./public",  // 如果有资源没有在webpack中加载到（不在webpack的依赖图中），就会从public中加载
     hot: true,  // 模块热替换（HMR）  并不是浏览器刷新，而是局部改变局部刷新  不开启的时候，保存源代码，会刷新整个页面
-    host: "0.0.0.0",
+    host: "0.0.0.0",  // 
     port: 7777,
     open: true,
     // compress: true,
