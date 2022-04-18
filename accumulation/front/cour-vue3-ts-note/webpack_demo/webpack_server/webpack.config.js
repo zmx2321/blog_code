@@ -34,19 +34,27 @@ module.exports = {
     // compress: true,  // 压缩，表示是否为静态资源开启gzip，默认false 
     // devServer本身是一个服务器，相当于服务器向另外一台服务器发送请求，之后再由我们的服务返回数据到deServer服务，就不会有跨域问题了，即代理
     proxy: {
+      // "/api": "http://localhost:8888",  // 如果以这种方式做代理，资源会请求不到，如果请求的接口是 /api/user，代理会请求到 http://localhost:8888/api/user，这个/api实际上是多余的，需要重写路径
+      // 将api代理到target里面
       "/api": {
         target: "http://localhost:8888",
+        // 重写（正则）
         pathRewrite: {
+          // 以/api为开头的这段字符串重写为空字符串
           "^/api": ""
         },
-        secure: false,
-        changeOrigin: true
+        secure: false,  // 默认不接收转发到https的服务器上，如果希望支持https，需要设置成false
+        changeOrigin: true  // 他表示是否更新代理后请求的headers中的host地址，false的话不发送，如果后端需要验证header上的源是否匹配的话，就会拒绝链接，防止爬虫
       }
     }
   },
   resolve: {
+    // 解析的文件类型有默认值的，所以在引入的时候可以不加js
+    // webpack是根据根据extensions查找对应的文件的
     extensions: [".js", ".json", ".mjs", ".vue", ".ts", ".jsx", ".tsx"],
+    // 设置别名
     alias: {
+      // 将@设置为项目根目录下的src文件夹
       "@": path.resolve(__dirname, "./src"),
       "js": path.resolve(__dirname, "./src/js")
     }
