@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>使用递归思想将对象所有null转化成空字符串</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    鼠标右击查看源码
+</body>
+<script>
+let obj = {
+    a: null,
+    b: "",
+    b1: undefined,
+    c: 1,
+    d: ['1', '2', null],
+    e: {
+        e1: null,
+        e2: undefined,
+        e3: 1,
+        e4: '123',
+        e5: false,
+        e6: {
+        e61: [1, 2, 4, undefined, null, 3],
+        e62: null,
+        e63: undefined,
+        e64: {
+            e641: null,
+            e642: "123",
+            e643: true
+        }
+        }
+    }
+}
+
+let setObj = obj=> {
+    // 判断是否是对象或数组
+    const isObj = obj=> {
+    return typeof obj === 'object' && obj !== null
+    }
+
+    // 遍历
+    for(let key in obj) {
+        if(obj[key] == null) {
+            obj[key] = ''
+        }
+        // 对象或者数组
+        if(isObj(obj[key])) {
+            this.setObj(obj[key])
+        }
+    }
+
+    return obj
+}
+
+let res = setObj(obj)
+console.log(res)
+</script>
+</html>
