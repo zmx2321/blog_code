@@ -11,7 +11,7 @@
  * @param {number} target
  * @return {number[]}
  */
-let twoSum = function(nums, target) {
+ const twoSum = function(nums, target) {
     for (let i = 0; i < nums.length; i++) {
         let dif = target - nums[i];
         // j = i + 1 的目的是减少重复计算和避免两个元素下标相同
