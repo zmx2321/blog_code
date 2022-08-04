@@ -34,35 +34,35 @@
 				list: [
 					{
 						id: 1,
-						src: 'http://127.0.0.1:9999/video/1-1.mp4'
+						src: 'http://127.0.0.1:6080/json/video/1-1.mp4'
 					},
 					{
 						id: 2,
-						src: 'http://127.0.0.1:9999/video/1-2.mp4'
+						src: 'http://127.0.0.1:6080/json/video/1-2.mp4'
 					},
 					{
 						id: 3,
-						src: 'http://127.0.0.1:9999/video/1-3.mp4'
+						src: 'http://127.0.0.1:6080/json/video/1-3.mp4'
 					},
 					{
 						id: 4,
-						src: 'http://127.0.0.1:9999/video/1-4.mp4'
+						src: 'http://127.0.0.1:6080/json/video/1-4.mp4'
 					},
 					{
 						id: 5,
-						src: 'http://127.0.0.1:9999/video/1-5.mp4'
+						src: 'http://127.0.0.1:6080/json/video/1-5.mp4'
 					},
 					{
 						id: 6,
-						src: 'http://127.0.0.1:9999/video/1-6.mp4'
+						src: 'http://127.0.0.1:6080/json/video/1-6.mp4'
 					},
 					{
 						id: 7,
-						src: 'http://127.0.0.1:9999/video/1-7.mp4'
+						src: 'http://127.0.0.1:6080/json/video/1-7.mp4'
 					},
 					{
 						id: 8,
-						src: 'http://127.0.0.1:9999/video/1-8.mp4'
+						src: 'http://127.0.0.1:6080/json/video/1-8.mp4'
 					},
 					{
 						id: 9,

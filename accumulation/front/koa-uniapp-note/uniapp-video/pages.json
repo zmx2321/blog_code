@@ -27,11 +27,9 @@
 		"list": [
 			{
 				"pagePath": "pages/index/index"
-				// "text": "index"
 			},
 			{
 				"pagePath": "pages/follow/follow"
-				// "text": "follow"
 			}
 		]
 	},
