@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>算法示例1</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    鼠标右击查看源码
+</body>
+<script>
+/**
+ * 目的:
+ * let a = {}
+ * console.log(a.x) -> 1
+ * console.log(a.x) -> 2
+ * console.log(a.x) -> 3
+ */
+
+let a = {}
+
+/**
+ * Object函数的内置方法
+ * Object.defineProperties() 方法直接在一个对象上定义新的属性或修改多个现有属性，并返回该对象。
+ * Object.defineProperties(obj, props);
+ * 参数
+ * obj：要定义或修改属性的对象
+ * props：要新增或修改的属性对象集合
+ * props的格式是：{ property: property_descriptor_obj }
+ * 返回值
+ * 被传递给函数的对象
+ */
+
+// 1. Object.defineProperties
+Object.defineProperties(a, {
+    'x': {
+        get: function() {
+            return this.b++
+        },
+        set: function(val) {
+            this.b = val
+        }
+    }
+})
+a.x = 1
+console.log("Object.defineProperties")
+console.log(a.x)
+console.log(a.x)
+console.log(a.x)
+
+/**
+ * new Proxy()表示生成一个Proxy实例，target参数表示所要拦截的目标对象
+ * Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写
+ * 作为构造函数，Proxy接受两个参数:
+ * 第一个参数是所要代理的目标对象（上例是一个空对象），即如果没有Proxy的介入，操作原来要访问的就是这个对象；
+ * 第二个参数是一个配置对象，对于每一个被代理的操作，需要提供一个对应的处理函数，该函数将拦截对应的操作。
+ * 如果handler没有设置任何拦截，那就等同于直接通向原对象。
+ */
+
+// 2. Proxy
+a = new Proxy(a, {
+    get: function(target, key) {
+        if(key === 'x') {
+            return (target.key = (target.key || 0) + 1)
+        }
+    }
+})
+console.log('Proxy')
+console.log(a.x)
+console.log(a.x)
+console.log(a.x)
+
+/* // 3. valueOf
+a = {}
+
+a.x = 0
+a.valueOf = function() {
+    return this.x++
+}
+console.log('valueOf')
+console.log(a.x)
+console.log(a.x)
+console.log(a.x) */
+</script>
+</html>
