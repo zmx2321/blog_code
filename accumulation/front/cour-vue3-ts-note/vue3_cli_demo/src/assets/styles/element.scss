@@ -1,0 +1,14 @@
+/* 只需要重写你需要的即可 */
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    'primary': (
+      'base': green
+    )
+  )
+);
+@use 'element-plus/theme-chalk/src/index.scss' as *;
+
+.el-overlay {
+  backdrop-filter: blur(2px);
+  background-color: rgba(0, 0, 0, 0.1);
+}
