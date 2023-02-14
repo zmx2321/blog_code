@@ -1,5 +1,9 @@
 <template>
-  <section class="tset">222</section>
+  <section class="tset">
+    <slot>
+      <i>我是默认的i元素</i>
+    </slot>
+  </section>
 </template>
 
 <script>
