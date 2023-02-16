@@ -1,9 +1,10 @@
 <template>
   <div>
+    <!-- <p>作用域插槽</p> -->
     <template v-for="(item, index) in names" :key="item">
       <slot :item="item" :index="index"></slot>
 
-      <slot name="why"></slot>
+      <!-- <slot name="aaa"></slot> -->
     </template>
   </div>
 </template>
@@ -12,7 +13,7 @@
   export default {
     props: {
       names: {
-        type: Array,
+        type: String,
         default: () => []
       }
     }
