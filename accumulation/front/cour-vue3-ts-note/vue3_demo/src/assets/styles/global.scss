@@ -1,0 +1,59 @@
+.tr {
+  text-align: right;
+}
+
+.tl {
+  text-align: left;
+}
+
+.tc {
+  text-align: center;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.text-hidden {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.relative {
+  position: relative;
+}
+.z-top {
+  z-index: 9999;
+}
+.pointer {
+  cursor: pointer;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.b {
+  border: 1px solid #e6e6e6;
+}
+
+.bb {
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.bl {
+  border-left: 1px solid #e6e6e6;
+}
+
+.br {
+  border-right: 1px solid #e6e6e6;
+}
+
+.bt {
+  border-top: 1px solid #e6e6e6;
+}

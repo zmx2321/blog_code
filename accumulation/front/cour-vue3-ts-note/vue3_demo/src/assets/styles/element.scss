@@ -1,0 +1,14 @@
+@use 'element-plus/theme-chalk/src/index.scss' as *;
+
+.el-overlay {
+  backdrop-filter: blur(2px);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.aside-menu {
+  .el-menu-item.is-active {
+    background-color: var(--el-color-primary) !important;
+  }
+}
+.aside-menu.el-menu {
+  border-right: none;
+}
