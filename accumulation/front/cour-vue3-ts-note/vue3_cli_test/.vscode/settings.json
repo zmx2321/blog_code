@@ -1,0 +1,32 @@
+{
+  "editor.formatOnSave": true, // #每次保存的时候自动格式化*
+  "editor.formatOnPaste": true, // #每次粘贴的时候自动格式化*
+  "editor.codeActionsOnSave": {
+    // #每次保存的时候将代码按eslint格式进行修复*
+    "source.fixAll.eslint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[vue]": {
+    "editor.defaultFormatter": "octref.vetur"
+  },
+  "eslint.format.enable": true,
+  "eslint.validate": ["javascript", "javascriptreact", "html", "vue", "typescript", "typescriptreact"],
+  "prettier.jsxSingleQuote": true,
+  "prettier.semi": false, //  #去掉代码结尾的分号*
+  "prettier.singleQuote": true, //  #使用带引号替代双引号*
+  "prettier.requireConfig": true,
+  "javascript.preferences.quoteStyle": "single",
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true, //  #让函数(名)和后面的括号之间加个空格*
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "html.format.endWithNewline": true,
+  "vetur.format.defaultFormatter.js": "vscode-typescript", // #让vue中的js按编辑器自带的ts格式进行格式化*
+  "vetur.format.defaultFormatter.html": "js-beautify-html",
+  "vetur.format.defaultFormatterOptions": {
+    "js-beautify-html": {
+      "wrap_line_length": 120,
+      "wrap_attributes": "force-aligned", // 第一个属性不折行，后续所有属性和第一个对齐折行*
+      "end_with_newline": false
+    }
+  },
+  "cSpell.words": ["scrollbar", "wrapper"]
+}
