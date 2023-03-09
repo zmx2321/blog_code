@@ -1,10 +1,16 @@
 <template>
   <router-view></router-view>
 </template>
-<script setup>
-import { onMounted } from 'vue'
-onMounted(() => {
-  console.log()
-})
-</script>
-<style scoped></style>
+<script setup></script>
+<style scoped>
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+#app {
+  height: 100%;
+  width: 100%;
+}
+</style>

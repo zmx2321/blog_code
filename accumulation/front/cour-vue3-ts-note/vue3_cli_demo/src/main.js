@@ -1,22 +1,19 @@
 import { createApp } from 'vue'
-import router from './router'
-import { createPinia } from 'pinia'
-import App from './App.vue'
-import components from '@/components/index.js'
-import ElementPlus from 'element-plus'
-import VForm3 from 'vform3-builds'
-import './assets/styles/index.scss'
-import 'vform3-builds/dist/designer.style.css'
-import './assets/iconfont.js'
 
+import App from './App.vue'
+
+import { createPinia } from 'pinia'
+import router from './router'
 import '@/router/filter.js'
 
-// 引入事件总线库
-import emitter from '@/utils/eventbus'
+import './assets/styles/index.scss'
+import './utils/iconfont.js'
+
+import components from '@/components/index.js'
+
+import MyPlugins from './plugins/index.js'
 
 const app = createApp(App)
 const pinia = createPinia()
 
-app.config.globalProperties.$emitter = emitter // 定义全局事件总线
-
-app.use(pinia).use(components).use(router).use(ElementPlus).use(VForm3).mount('#app')
+app.use(pinia).use(router).use(MyPlugins).use(components).mount('#app')

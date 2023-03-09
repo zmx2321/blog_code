@@ -1,30 +1,40 @@
 <template>
   <el-aside
     class="aside"
-    :class="settingStore.showPageSearch && 'z-top'"
+    style="box-shadow: 3px 0px 10px 0px rgba(183, 183, 183, 0.52); z-index: 1"
+    :class="settingsStore.showPageSearch && 'z-top'"
     :style="{
-      width: settingStore.getAsideWidth + 'px',
-      backgroundColor: settingStore.getThemeColor.bgColor,
-      color: settingStore.getThemeColor.color
+      width: settingsStore.getAsideWidth + 'px',
+      backgroundColor: settingsStore.getThemeColor.bgColor,
+      color: settingsStore.getThemeColor.color
     }">
-    <AppLogo></AppLogo>
-    <el-scrollbar>
-      <!-- <Menu></Menu> -->
-      <p v-for="item in 20" :key="item" class="scrollbar-demo-item">{{}}</p>
+    <el-scrollbar :style="{ height: settingsStore.getAsideMenuScrollbarHeight }" class="relative">
+      <el-menu
+        class="aside-menu"
+        :collapse="settingsStore.isCollapseMenu"
+        background-color="#ffffff00"
+        :default-openeds="[defaultOpenSubMenu]"
+        :text-color="settingsStore.getThemeColor.menuTextColor">
+        <RecursionMenu :data="router.options.routes" />
+      </el-menu>
     </el-scrollbar>
   </el-aside>
 </template>
 <script setup>
-import { ref, toRefs, reactive } from 'vue'
-import Menu from '../menu/index.vue'
+import { useRouter, useRoute } from 'vue-router'
 import AppLogo from '../app-logo/index.vue'
-
+import RecursionMenu from '@/layout/aside/RecursionMenu.vue'
 import { useSettingsStore } from '@/store/settings.js'
-const settingStore = useSettingsStore()
+const router = useRouter()
+const route = useRoute()
+
+let pathInfos = route.path.split('/')
+const defaultOpenSubMenu = router.options.routes.filter((item) => item.path.includes(pathInfos[1]))[0].path
+
+const settingsStore = useSettingsStore()
 </script>
 <style lang="scss" scoped>
 .aside {
-  height: 100vh;
-  transition: width 0.2s;
+  transition: width 0.3s;
 }
 </style>

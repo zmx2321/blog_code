@@ -16,7 +16,7 @@ for (const key in files) {
 
 // store.commit('tabs/COMMIT_ROUTES', configRouters)
 
-const constantRoutes = [...configRouters]
+export const constantRoutes = [...configRouters]
 
 const router = createRouter({
   history: createWebHistory(),

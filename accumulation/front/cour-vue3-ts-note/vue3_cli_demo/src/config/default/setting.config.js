@@ -3,7 +3,7 @@
  */
 const setting = {
   //标题 （包括初次加载雪花屏的标题 页面的标题 浏览器的标题）
-  title: '能源管控',
+  title: '能源管理平台',
   //标题分隔符
   titleSeparator: ' - ',
   //标题是否反转 如果为false:"page - title"，如果为ture:"title - page"
