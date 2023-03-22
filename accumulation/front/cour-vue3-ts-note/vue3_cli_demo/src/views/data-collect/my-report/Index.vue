@@ -113,7 +113,6 @@
 // 引入vue3功能模块
 import { ref, toRefs, toRef, reactive, computed, defineProps /* getCurrentInstance */ } from 'vue'
 import { useRouter } from 'vue-router'
-import { ElMessage } from 'element-plus'
 // 组件
 import TablePage from '@/components/global/tablePage/index.vue'
 import Pagination from '@/components/global/tablePage/Pagination.vue'
@@ -276,23 +275,6 @@ const fixMed = (row) => {
 // 启用
 const openMed = (row) => {
   console.log('启用', row)
-
-  // ElMessage
-  http('getMyReportList', params).then((res) => {
-    // console.log('删除操作', row)
-    // getTableData(setProxy(queryParams.value))
-    ElMessage.success('操作成功')
-    getTableData(setProxy(queryParams.value))
-  })
-
-  // // 信息提示窗
-  // openInfo('确认删除此表单？删除后无法恢复。', () => {
-  //   // console.log('删除操作', row)
-  //   /* http('getMyReportList', params).then((res) => {
-  //     console.log('删除操作', row)
-  //     getTableData(setProxy(queryParams.value))
-  //   }) */
-  // })
 }
 // 删除
 const deleteMed = (row) => {
