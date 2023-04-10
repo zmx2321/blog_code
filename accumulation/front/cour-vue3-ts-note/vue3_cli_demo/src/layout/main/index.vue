@@ -28,7 +28,8 @@ watch(
 </script>
 <style lang="scss" scoped>
 .main-content {
-  max-width: calc(100vw - 40px - 50px);
+  // max-width: calc(100vw - 40px - 50px);
+  max-width: calc(100vw - 40px - 50px - 210px);
   overflow-x: auto;
   background-color: #fff;
   padding: 20px;

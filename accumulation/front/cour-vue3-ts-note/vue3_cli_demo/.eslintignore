@@ -1,5 +1,6 @@
 /public/
 /dist/
+/lib/
 /node_modules/
 package.json
 .eslintrc.js

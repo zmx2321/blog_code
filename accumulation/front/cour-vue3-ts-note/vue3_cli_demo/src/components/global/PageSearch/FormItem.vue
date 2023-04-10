@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { ref, toRefs, toRef, reactive, computed, defineProps } from 'vue'
+import { ref, toRefs, toRef, reactive, computed } from 'vue'
 
 const props = defineProps({
   itemOptions: {
@@ -71,5 +71,4 @@ const changeName = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

@@ -34,16 +34,14 @@
 
     <!-- 表格 -->
     <div class="table_content">
-      <keep-alive>
-        <slot name="tableContent"></slot>
-      </keep-alive>
+      <slot name="tableContent"></slot>
     </div>
   </section>
 </template>
 
 <script setup>
 // 引入vue3功能模块
-import { ref, defineProps } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 // 工具
@@ -128,6 +126,9 @@ const rightBtnFun1 = () => {
 }
 
 .table_wrap {
+  width: 100%;
+  overflow: hidden;
+
   ul {
     li {
       display: inline-block;

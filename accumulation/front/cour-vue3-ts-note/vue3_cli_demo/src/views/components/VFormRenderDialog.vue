@@ -1,12 +1,12 @@
 <template>
-  <el-dialog title="表单设计" width="1280" v-model="showDialog">
+  <el-dialog class="my_dialog" title="表单设计" width="1280" v-model="showDialog">
     <div class="vform-design-wrap">
       <v-form-render :form-json="formJson" :form-data="formData" :option-data="optionData" ref="vFormRenderRef"></v-form-render>
     </div>
   </el-dialog>
 </template>
 <script setup>
-import { ref, toRefs, reactive, defineExpose } from 'vue'
+import { ref, toRefs, reactive } from 'vue'
 import { ElMessage } from 'element-plus'
 import FormJson from './form.json'
 

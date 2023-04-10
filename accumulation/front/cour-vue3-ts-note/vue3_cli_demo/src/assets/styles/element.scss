@@ -24,7 +24,7 @@
 
 // 表格页面公共样式
 .table_wrap {
-  width: 99%;
+  // overflow: hidden;
   ul {
     li {
       display: inline-block;
@@ -42,12 +42,30 @@
 
   .el-dropdown-link {
     position: relative;
-    top: 4.5px;
+    top: 5.5px;
     margin-left: 12px;
     font-weight: 500;
     cursor: pointer;
     color: var(--el-color-primary);
     display: flex;
     align-items: center;
+    outline: none;
+  }
+}
+
+.el-overlay-dialog {
+  height: 100vh;
+  overflow: hidden;
+
+  .el-dialog {
+    &.my_dialog {
+      top: -8vh;
+      max-height: 85vh;
+
+      .el-dialog__body {
+        max-height: 70vh;
+        overflow: auto;
+      }
+    }
   }
 }

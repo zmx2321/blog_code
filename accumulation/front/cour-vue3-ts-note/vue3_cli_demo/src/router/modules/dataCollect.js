@@ -33,6 +33,7 @@ export default [
         name: 'collectionProgress',
         meta: {
           hidden: true,
+          activeMenuPath: '/collect/my-report',
           title: '收集进度'
         },
         component: () => import('@/views/data-collect/my-report/CollectionProgress.vue')
@@ -56,13 +57,23 @@ export default [
       },
       {
         path: '/collect/need-filled/fill-in-page',
-        name: '/fill-in-page',
+        name: 'fill-in-page',
         meta: {
           activeMenuPath: '/collect/need-filled',
           hidden: true,
           title: '填报页'
         },
         component: () => import('@/views/data-collect/FillInPage.vue')
+      },
+      {
+        path: '/collect/need-filled/RelatingReport',
+        name: 'RelatingReport',
+        meta: {
+          activeMenuPath: '/collect/need-filled',
+          hidden: true,
+          title: '关联表'
+        },
+        component: () => import('@/views/data-collect/RelatingReport.vue')
       },
       {
         path: '/collect/audit-report',
@@ -72,7 +83,27 @@ export default [
           keepAlive: true
         },
         component: () => import('@/views/data-collect/AuditReport.vue')
+      },
+      {
+        path: '/collect/test-tb-page',
+        name: 'TestTbPage',
+        meta: {
+          title: '测试表格封装',
+          keepAlive: true,
+          hidden: true
+        },
+        component: () => import('@/views/data-collect/TestTbPage.vue')
       }
+      /* {
+        path: '/collect/my-report1',
+        name: 'MyReport',
+        meta: {
+          title: '我的报表1',
+          keepAlive: true,
+          hidden: false
+        },
+        component: () => import('@/views/data-collect/my-report/Index.vue')
+      } */
     ]
   }
 ]

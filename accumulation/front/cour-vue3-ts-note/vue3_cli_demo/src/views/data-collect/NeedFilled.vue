@@ -1,73 +1,102 @@
 <template>
-  <section class="my_report">
-    <table-page :title="'待填报报表'" @searchHolder="searchHolder" @resetFrom="resetFrom" @rightBtnFun1="createReport">
-      <!-- 查询表单 -->
-      <template #pageSearch="slotProps">
-        <page-search :formData="slotProps.formData" :formOptions="formOptions" />
-      </template>
+  <table-page :title="'待填报报表'" @searchHolder="searchHolder" @resetFrom="resetFrom" @rightBtnFun1="createReport">
+    <!-- 查询表单 -->
+    <template #pageSearch="slotProps">
+      <page-search :formData="slotProps.formData" :formOptions="formOptions" />
+    </template>
 
-      <!-- 表格 -->
-      <template #tableContent>
-        <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-          <el-tab-pane label="全部" name="0,1,2,3,4"></el-tab-pane>
-          <el-tab-pane label="待提交" name="0"></el-tab-pane>
-          <el-tab-pane label="审核中" name="3"></el-tab-pane>
-          <el-tab-pane label="已完成" name="1,2,4"></el-tab-pane>
-        </el-tabs>
-        <el-table :data="tableData" style="width: 100%">
-          <!-- <el-table-column prop="name" label="报表名称" fixed /> -->
-          <el-table-column prop="name" label="报表名称" fixed>
-            <template #default="scope">
-              <el-button link type="primary" @click="reportNameClick(scope.row)">{{ scope.row.name }}</el-button>
-            </template>
-          </el-table-column>
-          <el-table-column prop="distributeTime" label="下发日期" fixed />
-          <el-table-column prop="orgName" label="收集单位" fixed />
-          <el-table-column prop="username" label="收集用户" width="180" fixed />
-          <el-table-column prop="auditorStatus" label="状态" width="180">
-            <template #default="scope">
-              <i v-if="scope.row.auditorStatus == 0" class="circle_blue"></i>
-              <i v-if="scope.row.auditorStatus == 1" class="circle_red"></i>
-              <i v-if="scope.row.auditorStatus == 2" class="circle_green"></i>
-              <i v-if="scope.row.auditorStatus == 3" class="circle_yellow"></i>
-              <i v-if="scope.row.auditorStatus == 4" class="circle_red"></i>
-              <span v-if="scope.row.auditorStatus == 0">待提交</span>
-              <span v-if="scope.row.auditorStatus == 1">审核失败</span>
-              <span v-if="scope.row.auditorStatus == 2">审核成功</span>
-              <span v-if="scope.row.auditorStatus == 3">审核中</span>
-              <span v-if="scope.row.auditorStatus == 4">撤回审核</span>
-              <!-- <span v-if="scope.row.auditorStatus == 5">已截止</span> -->
-            </template>
-          </el-table-column>
-          <el-table-column prop="endTime" label="截至日期" width="240" />
-          <el-table-column label="操作" width="180">
-            <template #default="scope">
-              <el-button link type="primary" @click="fillInNow(scope.row)">立即填写</el-button>
-              <!-- <el-button link >创建关联收集表</el-button> -->
-            </template>
-          </el-table-column>
-        </el-table>
-        <el-pagination
-          v-model:current-page="queryParams.page"
-          v-model:page-size="queryParams.size"
-          background
-          layout="prev, pager, next"
-          :page-sizes="[100, 200, 300, 400]"
-          :total="totalPage"
-          class="fr mt12"
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange" />
-      </template>
-    </table-page>
+    <!-- 表格 -->
+    <template #tableContent>
+      <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+        <el-tab-pane label="全部" name="0,1,2,3,4,5"></el-tab-pane>
+        <el-tab-pane label="待提交" name="0,1"></el-tab-pane>
+        <el-tab-pane label="审核中" name="3"></el-tab-pane>
+        <!-- <el-tab-pane label="已完成" name="1,2,4"></el-tab-pane> -->
+      </el-tabs>
+      <el-table border stripe :data="tableData" tooltip-effect="dark">
+        <!-- <el-table-column prop="name" label="报表名称" fixed /> -->
+        <el-table-column prop="name" label="报表名称" fixed min-width="160" show-overflow-tooltip>
+          <template #default="scope">
+            <div class="text-hidden color-primary pointer" link type="primary" @click="reportNameClick(scope.row)">
+              {{ scope.row.name }}
+            </div>
+            <!-- <el-tooltip :content="scope.row.name">
+              <div class="text-hidden color-primary pointer" @click="reportNameClick(scope.row)">{{ scope.row.name }}</div>
+            </el-tooltip> -->
+          </template>
+        </el-table-column>
+        <el-table-column prop="distributeTime" label="下发日期" min-width="180" />
+        <el-table-column prop="orgName" label="收集单位" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="username" label="收集用户" min-width="100" />
+        <el-table-column prop="auditorStatus" label="状态" min-width="100">
+          <template #default="scope">
+            <i v-if="scope.row.isExpired == 5" class="circle_red"></i>
+            <i v-else-if="scope.row.auditorStatus == 0" class="circle_blue"></i>
+            <i v-else-if="scope.row.auditorStatus == 1" class="circle_red"></i>
+            <i v-else-if="scope.row.auditorStatus == 2" class="circle_green"></i>
+            <i v-else-if="scope.row.auditorStatus == 3" class="circle_green"></i>
+            <i v-else-if="scope.row.auditorStatus == 4" class="circle_yellow"></i>
+            <!-- <i v-if="scope.row.isExpired == 5" class="circle_red"></i> -->
+            {{ statusTxt(scope.row) }}
+            <!-- <span v-if="scope.row.auditorStatus == 0">待提交</span>
+            <span v-if="scope.row.auditorStatus == 1">审核退回</span>
+            <span v-if="scope.row.auditorStatus == 2">已提交</span>
+            <span v-if="scope.row.auditorStatus == 3">审核中</span>
+            <span v-if="scope.row.auditorStatus == 4">取消填报</span>
+            <span v-if="scope.row.isExpired == 5">已截至</span> -->
+            <!-- <span v-if="scope.row.auditorStatus == 5">已截止</span> -->
+          </template>
+        </el-table-column>
+        <el-table-column prop="endTime" label="截止日期" min-width="180" />
+        <el-table-column label="操作" fixed="right" min-width="170">
+          <template #default="scope">
+            <el-button
+              :disabled="scope.row.auditorStatus == 0 && scope.row.isExpired == 5"
+              v-if="scope.row.auditorStatus == 0"
+              link
+              type="primary"
+              @click="fillInNow(scope.row)">
+              立即填写
+            </el-button>
+            <el-button
+              v-if="scope.row.auditorStatus == 1 || scope.row.auditorStatus == 2 || scope.row.auditorStatus == 3"
+              link
+              type="primary"
+              @click="reportNameClick(scope.row)">
+              查看详情
+            </el-button>
+            <el-button
+              :disabled="scope.row.auditorStatus == 4 || scope.row.isExpired == 5"
+              v-if="scope.row.auditorStatus == 1 || scope.row.auditorStatus == 4"
+              link
+              type="primary"
+              @click="fillInNow(scope.row)">
+              重新填写
+            </el-button>
+            <!-- <el-button link >创建关联收集表</el-button> -->
+          </template>
+        </el-table-column>
+      </el-table>
+      <el-pagination
+        v-model:current-page="queryParams.page"
+        v-model:page-size="queryParams.size"
+        background
+        layout="sizes,prev, pager, next"
+        :page-sizes="[15, 30, 50, 100]"
+        :total="totalPage"
+        class="fr mt12"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange" />
+    </template>
+  </table-page>
 
-    <!-- vfrom弹窗 -->
-    <VFormRenderForDetailDialog ref="RefVFormRenderForDetailDialog"></VFormRenderForDetailDialog>
-  </section>
+  <!-- vfrom弹窗 -->
+  <VFormRenderForDetailDialog ref="RefVFormRenderForDetailDialog"></VFormRenderForDetailDialog>
 </template>
 
 <script setup>
 // 引入vue3功能模块
-import { ref, toRefs, toRef, reactive, computed, defineProps } from 'vue'
+import { ref, toRefs, toRef, reactive, computed, onActivated } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 // 表格页面公共页面
 import TablePage from '@/components/global/tablePage/index.vue'
@@ -82,7 +111,6 @@ const instance = getCurrentInstance()
 // 初始化工具
 const router = useRouter()
 const route = useRoute()
-console.log(route)
 
 const RefVFormRenderForDetailDialog = ref(null) // 表单设置弹窗
 /**
@@ -99,17 +127,17 @@ const formOptions = ref([
 ])
 // 表单参数
 let queryParams = ref({
-  page: 0,
-  size: 10,
-  auditorStatus: '0,1,2,3,4'
+  page: 1,
+  size: 15,
+  auditorStatus: '0,1,2,3,4,5'
 })
 
 // 表单初始化
 const resetFrom = () => {
   queryParams.value = {
-    page: 0,
-    size: 10,
-    auditorStatus: '0,1,2,3,4'
+    page: 1,
+    size: 15,
+    auditorStatus: '0,1,2,3,4,5'
   }
 
   getTableData(setProxy(queryParams.value))
@@ -120,11 +148,34 @@ instance?.proxy?.emitter.on('refreshAuditTable', () => {
 })
 // 获取子组件查询方法
 const searchHolder = (val) => {
-  // console.log(val, queryParams.value)
+  queryParams.value = setProxy(queryParams.value)
 
-  queryParams.value = Object.assign(val, queryParams.value)
+  for (let item in val) {
+    console.log(val[item])
+    queryParams.value[item] = val[item]
+  }
 
   getTableData(setProxy(queryParams.value))
+}
+const statusTxt = (row) => {
+  if (row.isExpired == 5) {
+    return '已截止'
+  }
+  if (row.auditorStatus == 0) {
+    return '待提交'
+  }
+  if (row.auditorStatus == 1) {
+    return '审核退回'
+  }
+  if (row.auditorStatus == 2) {
+    return '已提交'
+  }
+  if (row.auditorStatus == 3) {
+    return '审核中'
+  }
+  if (row.auditorStatus == 4) {
+    return '取消填报'
+  }
 }
 // 创建报表
 const createReport = () => {
@@ -136,23 +187,32 @@ const createReport = () => {
  */
 // 点击表单详情
 const reportNameClick = (row) => {
+  console.log(row)
+  row.reportName = row.name
   RefVFormRenderForDetailDialog.value.show(row)
 }
 
 // 初始化表格数据
 let tableData = ref([])
 let totalPage = ref(0)
-let activeName = ref('1,2,3,4')
+let activeName = ref('0,1')
 
 // 获取表格数据
 const getTableData = (params) => {
-  http('getMyForm', params).then((res) => {
-    tableData.value = res
-    totalPage.value = res.length
+  const query = {
+    ...params,
+    page: params.page - 1
+  }
+  http('getMyForm', query).then((res) => {
+    /* tableData.value = res
+    totalPage.value = res.length */
+    tableData.value = res.content
+    totalPage.value = res.totalElements
   })
 }
 const handleSizeChange = (val) => {
   queryParams.value.size = val
+  getTableData(setProxy(queryParams.value))
 }
 const handleCurrentChange = (val) => {
   // console.log(val)
@@ -177,7 +237,7 @@ const handleClick = (tab) => {
 // 立即填写
 const fillInNow = (row) => {
   console.log('立即填写', row)
-
+  localStorage.setItem('formDataId', row.formDataId)
   router.push({
     path: '/collect/need-filled/fill-in-page',
     query: {
@@ -194,10 +254,15 @@ const distributeNow = (row) => {
  * 初始化
  */
 const initPage = () => {
+  queryParams.value.auditorStatus = activeName.value
   getTableData(setProxy(queryParams.value))
   // handleClick('')
 }
-initPage()
+onActivated(() => {
+  initPage()
+})
+// console.log(222)
+// initPage()
 </script>
 
 <style lang="scss" scoped>

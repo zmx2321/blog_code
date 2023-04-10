@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-import { ref, toRefs, toRef, reactive, computed, defineProps } from 'vue'
+import { ref, toRefs, toRef, reactive, computed } from 'vue'
 import FormItem from './FormItem.vue'
 
 const props = defineProps({

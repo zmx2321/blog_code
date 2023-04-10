@@ -57,8 +57,12 @@ export default ({ mode }) => {
         } */
       }
     },
+
     build: {
       sourcemap: false, // 是否生成源map
+      commonjsOptions: {
+        include: /node_modules|lib/
+      },
       chunkSizeWarningLimit: 1500, // 触发chunk警告大小
       rollupOptions: {
         output: {

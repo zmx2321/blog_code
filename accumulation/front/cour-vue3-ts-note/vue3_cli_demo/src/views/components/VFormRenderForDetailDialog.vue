@@ -1,12 +1,13 @@
 <template>
-  <el-dialog :title="reportName" width="1280" v-model="showDialog">
+  <el-dialog class="my_dialog" :title="reportName" width="1280" v-model="showDialog">
     <div class="vform-design-wrap relative">
-      <v-form-render :form-json="formJson" :form-data="formData" :option-data="optionData" ref="vFormRenderRef"></v-form-render>
+      <v-form-render :form-json="formJson" :form-data="formData" :option-data="optionData" ref="vFormRenderRef" v-if="showDialog"></v-form-render>
+      <div style="position: absolute; left: 0; right: 0; top: 0; bottom: 0"></div>
     </div>
   </el-dialog>
 </template>
 <script setup>
-import { ref, toRefs, reactive, defineExpose, nextTick } from 'vue'
+import { ref, toRefs, reactive, nextTick } from 'vue'
 import { ElMessage } from 'element-plus'
 import { http } from '@/api/index.js'
 import { openInfo, deepClone, setProxy } from '@/utils/tools'
@@ -47,13 +48,17 @@ function show(row) {
   reportName.value = row.reportName
 
   http('detail', { formDataId: row.formDataId }).then((res) => {
-    vFormRenderRef.value.setFormJson(JSON.parse(res.formConfigDto.content))
-    vFormRenderRef.value.disableForm()
-    if (res.formDataDto.formValue) {
+    nextTick(() => {
+      vFormRenderRef.value.setFormJson(JSON.parse(res.formConfigDto.content))
+      if (res.formDataDto.formValue) {
+        nextTick(() => {
+          vFormRenderRef.value.setFormData(JSON.parse(res.formDataDto.formValue))
+        })
+      }
       nextTick(() => {
-        vFormRenderRef.value.setFormData(JSON.parse(res.formDataDto.formValue))
+        vFormRenderRef.value.disableForm()
       })
-    }
+    })
   })
 }
 
@@ -66,7 +71,6 @@ defineExpose({ show })
   padding: 20px;
   margin: 20px;
   overflow-y: scroll;
-  max-height: 800px;
   :deep .float-right.external-link {
     display: none;
   }

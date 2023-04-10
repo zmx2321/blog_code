@@ -12,7 +12,14 @@
         <RecursionMenu :data="item.children" :isSubMenu="true"></RecursionMenu>
       </el-sub-menu>
       <template v-else>
-        <el-menu-item :index="item.path" class="pointer" @click="handleLink(item)" :key="item.path" :default-active="activeMenuPath">
+        <el-menu-item
+          :index="item.path"
+          class="pointer"
+          @click="handleLink(item)"
+          :key="item.path"
+          :default-active="activeMenuPath"
+          v-if="getAuth(item)">
+          <!-- v-if="item.path !== '/collect/my-report' || getAuth()" -->
           <template #title>
             <SvgIcon
               :name="item.path === activeMenuPath ? 'menu-point-hl' : 'menu-point'"
@@ -36,13 +43,20 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
 import { isExternal } from '@/utils/validate'
-import { defineProps, computed } from 'vue'
+import { getStorage } from '@/utils/storage.js'
+import { computed } from 'vue'
+const needAdmin = true
+
 const props = defineProps({
   data: Array,
   isSubMenu: Boolean
 })
 const route = useRoute()
 const router = useRouter()
+
+const getAuth = (item) => {
+  return !needAdmin || getStorage('userInfo').roles.includes('admin') || item.path !== '/collect/my-report'
+}
 
 const activeMenuPath = computed(() => {
   const { meta, path } = route

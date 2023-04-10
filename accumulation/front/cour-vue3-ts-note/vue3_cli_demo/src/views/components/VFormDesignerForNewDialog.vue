@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="表单设计" width="1280" v-model="showDialog" :close-on-click-modal="false" :close-on-press-escape="false">
+  <el-dialog title="表单设计" v-model="showDialog" :close-on-click-modal="false" :close-on-press-escape="false" fullscreen>
     <div class="vform-design-wrap">
       <v-form-designer :banned-widgets="bannedWidgets" :designer-config="designerConfig" ref="VFormDesignerRef"></v-form-designer>
     </div>
@@ -16,7 +16,7 @@
   <set-form-dialog ref="setFormDialogRef" />
 </template>
 <script setup>
-import { ref, toRefs, reactive, defineExpose } from 'vue'
+import { ref, toRefs, reactive, nextTick } from 'vue'
 import { http } from '@/api/index.js'
 import { ElMessage } from 'element-plus'
 
@@ -32,6 +32,7 @@ let showDialog = ref(false)
 const VFormDesignerRef = ref(null)
 const setFormDialogRef = ref(null)
 let formJson = {}
+let currentStatus = '创建'
 let formData = {
   config: '',
   row: {}
@@ -49,8 +50,11 @@ function saveFormJson() {
     instance?.proxy?.emitter.emit('refreshReportTable')
   }) */
 
+  // if (currentStatus === '创建') {
   formJson = VFormDesignerRef.value.getFormJson()
   formData.config = JSON.stringify(formJson)
+  // }
+
   // console.log(formData)
   // if (formData.formConfig) {
   // }
@@ -59,42 +63,51 @@ function saveFormJson() {
   //     content: JSON.stringify(formJson)
   //   }
   // }
+
+  console.log('formData数据', formData)
+
   showDialog.value = false
   setFormDialogRef.value.openCreateReportDialog(formData)
 }
 // 显示弹框
-function show(row) {
-  if (row) {
-    formData.row = setProxy(row)
-    // console.log(formData)
+function show(reportId) {
+  currentStatus = '新增'
+  formData.currentStatus = currentStatus
 
-    // console.log(row)
-    // activateValue = [row.activateStart.split(' ')[0], row.activateEnd.split(' ')[0]]
-    /* formData = {
-      formConfig: {},
-      report: {
-        audit: row.audit == null ? '1' : row.audit, // 审批标识 0关闭，1启用   必填
-        reportName: row.reportName, // 表单名称
-        tableName: row.tableName, // 数据库名称
-        enabled: true // 开启状态 - 页面上没有 - 默认true
-      },
-      reportSchedule: {
-        distributeType: row.distributeType == null ? '1' : row.distributeType, // 分发类型 1:定时分发 ,2:只分发一次 - 必填
-        collectObjType: row.collectObjType == null ? '2' : row.collectObjType, // 收集对象类型1, "组织"  2, "个人" - 必填  树只选人
-        frequency: row.frequency, // 执行频率 0 未设置 1:年,2:月,3:日 - 必填  distributeType = 1时必填
-        distributeTime: row.distributeTime, // 分发时间 - distributeType = 1时必填
-        endTimeMode: row.endTimeMode, // 截止日期 , 填写结束模式 1下发后X天，2具体截止时间 必填
-        endTimeInt: row.endTimeInt, // endTimeMode=1时必填    下发后X天内可填写
-        endTimeStr: row.endTimeStr, // endTimeMode=2时必填  具体结束时间
-        activateStart: row.activateStart.split(' ')[0],
-        activateEnd: row.activateEnd.split(' ')[0]
+  showDialog.value = true
+
+  if (reportId) {
+    console.log('编辑')
+    currentStatus = '编辑'
+
+    formData.currentStatus = currentStatus
+
+    http('queryByReportId', { reportId }).then((res) => {
+      console.log(res)
+
+      if (res.isError) {
+        ElMessage.warning(res.message)
+        return
       }
-    } */
-    // console.log(formData)
+
+      // formData.config = res.formConfigDto.content
+      formData.row = {
+        ...res.reportDto,
+        ...res.reportScheduleDto
+      }
+
+      nextTick(() => {
+        VFormDesignerRef.value.setFormJson(JSON.parse(res.formConfigDto.content))
+      })
+    })
+    return
   }
   // console.log(params)
   // formData = params
-  showDialog.value = true
+
+  nextTick(() => {
+    VFormDesignerRef.value.clearDesigner()
+  })
 }
 // 导出方法
 defineExpose({ show })

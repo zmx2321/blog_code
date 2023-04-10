@@ -33,17 +33,23 @@
           :check-strictly="true"
           @check="getChecked"></el-tree>
       </div>
-      <div slot="footer" class="dialog-footer">
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="$emit('closeModal')">取消</el-button>
+          <el-button :loading="submitting" type="primary" @click="saveModel()">分发</el-button>
+        </span>
+      </template>
+      <!-- <div slot="footer" class="dialog-footer">
         <el-button @click="$emit('closeModal')">取消</el-button>
         <el-button :loading="submitting" type="primary" @click="saveModel()">分发</el-button>
-      </div>
+      </div> -->
     </el-dialog>
   </div>
 </template>
 
 <script setup>
 // 引入vue3功能模块
-import { ref, toRefs, toRef, reactive, computed, defineProps } from 'vue'
+import { ref, toRefs, toRef, reactive, computed } from 'vue'
 
 // 父组件参数
 const props = defineProps({

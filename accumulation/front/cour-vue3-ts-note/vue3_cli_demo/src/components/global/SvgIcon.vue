@@ -1,13 +1,11 @@
 <template>
-  <svg :class="svgClass"
-       v-bind="$attrs"
-       :style="{ color: color }">
+  <svg :class="svgClass" v-bind="$attrs" :style="{ color: color }">
     <use :xlink:href="iconName"></use>
   </svg>
 </template>
 
 <script setup>
-import { computed, defineProps } from 'vue'
+import { computed } from 'vue'
 const props = defineProps({
   name: {
     type: String,

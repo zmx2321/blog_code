@@ -2,11 +2,17 @@ import { isEmpty } from '@/utils/validate.js'
 import { setting } from '@/config/index.js'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
+/**
+ * 递归
+ * @param {*} children 需要递归的数组
+ * @param {*} key 递归的字段
+ * @returns 返回拍平的数组
+ */
 export const recursion = (children, key) => {
   const arr = []
   if (!children) return
   children.forEach((item) => {
-    if (isEmpty(item[key])) {
+    if (!isEmpty(item[key])) {
       item.children = recursion(item[key])
     }
     arr.push(item)
@@ -14,6 +20,11 @@ export const recursion = (children, key) => {
   return arr
 }
 
+/**
+ * 获取页面标题
+ * @param {*} pageTitle 传入的标题名称
+ * @returns 返回页面标题
+ */
 export function getPageTitle(pageTitle) {
   const { title, titleReverse, titleSeparator } = setting
 
@@ -24,7 +35,11 @@ export function getPageTitle(pageTitle) {
   return newTitles.join(titleSeparator)
 }
 
-// 深拷贝
+/**
+ * 深拷贝
+ * @param {*} obj 需要深拷贝的字段
+ * @returns 返回深拷贝
+ */
 export const deepClone = (obj = {}) => {
   // obj是null，或者不是对象或数组，直接返回
   if (typeof obj !== 'object' || obj == null) {
@@ -57,7 +72,7 @@ export const deepClone = (obj = {}) => {
   // 返回结果
   return result
 }
-
+// TODO: 建议用其他方式
 // 信息提示窗
 export const openInfo = (msg, next) => {
   ElMessageBox.confirm(msg, '提示', {
@@ -68,10 +83,10 @@ export const openInfo = (msg, next) => {
     .then(() => {
       next()
 
-      ElMessage({
+      /* ElMessage({
         type: 'success',
         message: '操作成功'
-      })
+      }) */
     })
     .catch(() => {
       /* ElMessage({
@@ -80,7 +95,29 @@ export const openInfo = (msg, next) => {
       }) */
     })
 }
-
+// TODO: 建议用其他方式
 export const setProxy = (proxyObj) => {
   return JSON.parse(JSON.stringify(proxyObj))
+}
+
+// 函数防抖
+export const debounce = (fn, wait) => {
+  // console.log('debounce', fn, wait)
+  var timer = null
+
+  return function () {
+    var context = this,
+      args = arguments
+
+    // 如果此时存在定时器的话，则取消之前的定时器重新记时
+    if (timer) {
+      clearTimeout(timer)
+      timer = null
+    }
+
+    // 设置定时器，使事件间隔指定事件后执行
+    timer = setTimeout(() => {
+      fn.apply(context, args)
+    }, wait)
+  }
 }

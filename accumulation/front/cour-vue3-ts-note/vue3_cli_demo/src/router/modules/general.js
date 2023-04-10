@@ -6,5 +6,12 @@ export default [
       hidden: true
     },
     redirect: '/collect'
+  },
+  {
+    path: '/guide-page',
+    meta: {
+      hidden: true
+    },
+    redirect: '/collect'
   }
 ]

@@ -1,22 +1,16 @@
 <template>
-  <div id="tabs-bar-container"
-       class="tabs-bar-container">
-    <el-tabs v-model="tabActive"
-             type="card"
-             class="tabs-content"
-             @tab-click="handleTabClick"
-             @tab-remove="handleTabRemove">
-      <el-tab-pane v-for="item in tagsStore.getVisitedRoutes"
-                   :key="item.path"
-                   :label="item.meta.title"
-                   :name="item.path"
-                   :closable="!isAffix(item)"></el-tab-pane>
+  <div id="tabs-bar-container" class="tabs-bar-container">
+    <el-tabs v-model="tabActive" type="card" class="tabs-content" @tab-click="handleTabClick" @tab-remove="handleTabRemove">
+      <el-tab-pane
+        v-for="item in tagsStore.getVisitedRoutes"
+        :key="item.path"
+        :label="item.meta.title"
+        :name="item.path"
+        :closable="!isAffix(item)"></el-tab-pane>
     </el-tabs>
     <el-dropdown @command="handleCommand">
       <span style="cursor: pointer">
-        <SvgIcon name="tagsbar-menu"
-                 color="#9a9a9a"
-                 class="ft24 pointer animate menu-icon"></SvgIcon>
+        <SvgIcon name="tagsbar-menu" color="#9a9a9a" class="ft24 pointer animate menu-icon"></SvgIcon>
       </span>
       <template #dropdown>
         <el-dropdown-menu class="tabs-more">
@@ -51,8 +45,8 @@
 </template>
 <script setup>
 import { ref, toRefs, reactive, watch } from 'vue'
-import { useRoutesStore } from "@/store/routes.js";
-import { useTagsStore } from "@/store/tags.js";
+import { useRoutesStore } from '@/store/routes.js'
+import { useTagsStore } from '@/store/tags.js'
 import { useRouter, useRoute } from 'vue-router'
 const tagsStore = useTagsStore()
 const routesStore = useRoutesStore()
@@ -62,23 +56,19 @@ const route = useRoute()
 let tabActive = ref('')
 let affixtabs = ref([])
 
-function handleTabClick (tab) {
+function handleTabClick(tab) {
   const subRoute = tagsStore.getVisitedRoutes.filter((item, index) => {
     if (tab.index == index) return item
   })[0]
   if (route.path !== subRoute.path) {
-    router.push({
-      fullPath: subRoute.fullPath,
-      path: subRoute.path,
-      name: subRoute.name,
-      meta: { ...subRoute.meta },
-    })
+    console.log(subRoute.fullPath)
+    router.push(subRoute.fullPath)
   } else {
     return false
   }
 }
 
-async function handleTabRemove (tabActive) {
+async function handleTabRemove(tabActive) {
   let view
   tagsStore.getVisitedRoutes.forEach((item, index) => {
     if (tabActive == item.path) {
@@ -91,24 +81,25 @@ async function handleTabRemove (tabActive) {
   }
 }
 
-function isActive (route) {
+function isActive(route) {
   return route.path === route.path
 }
 
-function isAffix (tag) {
+function isAffix(tag) {
   return tag.meta && tag.meta.affix
 }
 
-function filterAffixtabs (routes, basePath = '/') {
+function filterAffixtabs(routes, basePath = '/') {
   let tabs = []
   routes.forEach((route) => {
     if (route.meta && route.meta.affix) {
+      const tagFullPath = path.resolve(basePath, route.fullPath)
       const tagPath = path.resolve(basePath, route.path)
       tabs.push({
-        fullPath: tagPath,
+        fullPath: tagFullPath,
         path: tagPath,
         name: route.name,
-        meta: { ...route.meta },
+        meta: { ...route.meta }
       })
     }
     if (route.children) {
@@ -121,7 +112,7 @@ function filterAffixtabs (routes, basePath = '/') {
   return tabs
 }
 
-function inittabs () {
+function inittabs() {
   affixtabs.value = filterAffixtabs(routesStore.routes)
   for (const tag of affixtabs.value) {
     if (tag.name) {
@@ -130,15 +121,14 @@ function inittabs () {
   }
 }
 
-function addtabs () {
+function addtabs() {
   if (route.name) {
     tagsStore.addVisitedRoute(route)
   }
   return false
 }
 
-
-function handleCommand (command) {
+function handleCommand(command) {
   switch (command) {
     case 'refreshRoute':
       refreshRoute()
@@ -157,28 +147,28 @@ function handleCommand (command) {
       break
   }
 }
-async function refreshRoute () {
+async function refreshRoute() {
   // this.$baseEventBus.$emit('reloadrouter-view')
 }
-async function closeSelectedTag (view) {
+async function closeSelectedTag(view) {
   const { visitedRoutes } = await tagsStore.delRoute(view)
   if (isActive(view)) {
     toLastTag(visitedRoutes, view)
   }
 }
-async function closeOtherstabs () {
+async function closeOtherstabs() {
   const view = await toThisTag()
   await tagsStore.delOthersRoutes(view)
 }
-async function closeLefttabs () {
+async function closeLefttabs() {
   const view = await toThisTag()
   await tagsStore.delLeftRoutes(view)
 }
-async function closeRighttabs () {
+async function closeRighttabs() {
   const view = await toThisTag()
   await tagsStore.delRightRoutes(view)
 }
-async function closeAlltabs () {
+async function closeAlltabs() {
   const view = await toThisTag()
   const { visitedRoutes } = await tagsStore.delAllRoutes()
   if (affixtabs.value.some((tag) => tag.path === view.path)) {
@@ -186,7 +176,7 @@ async function closeAlltabs () {
   }
   toLastTag(visitedRoutes, view)
 }
-function toLastTag (visitedRoutes, view) {
+function toLastTag(visitedRoutes, view) {
   const latestView = visitedRoutes.slice(-1)[0]
   if (latestView) {
     router.push(latestView)
@@ -195,9 +185,9 @@ function toLastTag (visitedRoutes, view) {
   }
 }
 
-async function toThisTag () {
+async function toThisTag() {
   const view = tagsStore.getVisitedRoutes.filter((item, index) => {
-    if (item.path === route.fullPath) {
+    if (item.path === route.path) {
       return item
     }
   })[0]
@@ -210,7 +200,6 @@ watch(
   (newValue) => {
     inittabs()
     addtabs()
-
     tagsStore.getVisitedRoutes.forEach((item, index) => {
       if (item.path === route.path) {
         tabActive.value = item.path

@@ -24,6 +24,10 @@
   white-space: nowrap;
 }
 
+.color-primary {
+  color: var(--el-color-primary);
+}
+
 .relative {
   position: relative;
 }

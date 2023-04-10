@@ -57,7 +57,7 @@
 
 <script setup>
 // 引入vue3功能模块
-import { ref, toRefs, toRef, reactive, computed, defineProps } from 'vue'
+import { ref, toRefs, toRef, reactive, computed } from 'vue'
 // 引入工具库
 import { openInfo, deepClone, setProxy } from '@/utils/tools'
 // 接口
@@ -149,11 +149,29 @@ const loadNode = async (node, resolve) => {
   }
 }
 
-const handleCheckChange = (val) => {
-  if (val.type === 2) {
+const handleCheckChange = (val, selected) => {
+  // console.log(collectObjList.value)
+  // collectObjList.value = []
+  /* if (val.type === 2) {
     collectObjList.value.push(val.id)
-    // console.log(collectObjList.value)
+    console.log(collectObjList.value)
     emit('setCollectObjList', collectObjList.value)
+  } */
+  let collectList = []
+  if (val.type === 2) {
+    let index = collectObjList.value.findIndex((item) => item.id === val.id)
+    if (index < 0 && selected) {
+      collectObjList.value.push(val)
+    } else if (index >= 0 && !selected) {
+      collectObjList.value.splice(index, 1)
+    }
+
+    collectObjList.value.forEach((item) => {
+      collectList.push(item.id)
+    })
+
+    emit('setCollectObjList', collectList)
+    // console.log(collectList)
   }
 }
 

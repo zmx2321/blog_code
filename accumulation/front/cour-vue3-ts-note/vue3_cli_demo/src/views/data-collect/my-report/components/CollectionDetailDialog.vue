@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="dialogVisible" title="表单设置" width="50%" lock-scroll :close-on-click-modal="false">
+  <el-dialog v-model="dialogVisible" class="my_dialog" title="表单设置" width="50%" lock-scroll :close-on-click-modal="false">
     收集进度详情
     <!-- <template #footer>
       <span class="dialog-footer">
@@ -12,7 +12,7 @@
 
 <script setup>
 // vue3工具
-import { ref, toRefs, toRef, reactive, computed, defineProps, defineExpose } from 'vue'
+import { ref, toRefs, toRef, reactive, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const props = defineProps({

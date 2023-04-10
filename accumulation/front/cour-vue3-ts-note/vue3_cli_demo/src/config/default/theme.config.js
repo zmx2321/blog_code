@@ -9,7 +9,7 @@ export default {
   // 显示全屏按钮
   showFullScreen: false,
   // 显示搜索
-  showSearch: false,
+  showSearch: true,
   // 显示主题更改
   showTheme: false,
   // 页面头部高度

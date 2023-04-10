@@ -1,11 +1,11 @@
 <template>
-  <el-dialog title="表单设计" width="1280" v-model="showDialog">
+  <el-dialog class="my_dialog" :title="reportName" width="1280" v-model="showDialog">
     <div class="vform-design-wrap relative">
       <v-form-render :form-json="formJson" :form-data="formData" :option-data="optionData" ref="vFormRenderRef"></v-form-render>
       <div style="position: absolute; left: 0; right: 0; top: 0; bottom: 0"></div>
     </div>
 
-    <el-form style="margin-top: 40px">
+    <el-form style="margin-top: 40px" label-position="top">
       <el-form-item label="审批意见">
         <el-input v-model="auditInfo.auditRemark" placeholder="如果通过可不填，不通过则必填"></el-input>
         <div style="color: red" v-if="showErrorText">请输入审批意见</div>
@@ -21,7 +21,7 @@
   </el-dialog>
 </template>
 <script setup>
-import { ref, toRefs, reactive, defineExpose, nextTick } from 'vue'
+import { ref, toRefs, reactive, nextTick } from 'vue'
 import { ElMessage } from 'element-plus'
 import { http } from '@/api/index.js'
 import { openInfo, deepClone, setProxy } from '@/utils/tools'
@@ -29,6 +29,7 @@ import { getCurrentInstance } from 'vue'
 const instance = getCurrentInstance()
 const showErrorText = ref(false)
 const vFormRenderRef = ref(null)
+const reportName = ref('')
 const formJson = reactive({
   widgetList: [],
   formConfig: {
@@ -66,23 +67,36 @@ let auditInfo = ref({
 // 显示弹框
 function show(row) {
   showDialog.value = true
+  reportName.value = row.reportName
   auditInfo.value = {
     formDataId: row.formDataId,
     checkIds: row.checkIds,
     fromId: row.fromId,
     reportId: row.reportId,
     receiver: row.receiver,
-    auditRemark: ''
+    auditRemark: '',
+    distributeId: row.distributeId
   }
 
   http('detail', { formDataId: row.formDataId }).then((res) => {
-    vFormRenderRef.value.setFormJson(JSON.parse(res.formConfigDto.content))
-    vFormRenderRef.value.disableForm()
-    if (res.formDataDto.formValue) {
+    nextTick(() => {
+      vFormRenderRef.value.setFormJson(JSON.parse(res.formConfigDto.content))
+      if (res.formDataDto.formValue) {
+        nextTick(() => {
+          vFormRenderRef.value.setFormData(JSON.parse(res.formDataDto.formValue))
+        })
+      }
       nextTick(() => {
-        vFormRenderRef.value.setFormData(JSON.parse(res.formDataDto.formValue))
+        vFormRenderRef.value.disableForm()
       })
-    }
+    })
+    // vFormRenderRef.value.setFormJson(JSON.parse(res.formConfigDto.content))
+    // vFormRenderRef.value.disableForm()
+    // if (res.formDataDto.formValue) {
+    //   nextTick(() => {
+    //     vFormRenderRef.value.setFormData(JSON.parse(res.formDataDto.formValue))
+    //   })
+    // }
   })
 }
 
@@ -107,9 +121,7 @@ defineExpose({ show })
 .vform-design-wrap {
   border: 1px solid #f4f5fe;
   padding: 20px;
-  margin: 20px;
   overflow-y: scroll;
-  max-height: 800px;
   :deep .float-right.external-link {
     display: none;
   }

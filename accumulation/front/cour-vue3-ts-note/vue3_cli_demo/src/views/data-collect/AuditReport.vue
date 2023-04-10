@@ -8,34 +8,42 @@
 
       <!-- 表格 -->
       <template #tableContent>
-        <el-table :data="tableData" style="width: 100%">
-          <el-table-column prop="formName" label="审核对象" fixed>
+        <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+          <el-tab-pane label="全部" name=""></el-tab-pane>
+          <el-tab-pane label="待审核" name="3"></el-tab-pane>
+          <!-- <el-tab-pane label="已完成" name="1,2,4"></el-tab-pane> -->
+        </el-tabs>
+        <el-table border stripe :data="tableData" style="width: 100%" tooltip-effect="dark">
+          <el-table-column prop="title" label="审核对象" fixed min-width="150" show-overflow-tooltip>
             <template #default="scope">
-              <el-button link type="primary" @click="reportNameClick(scope.row)">{{ scope.row.formName }}</el-button>
+              <!-- <el-button link type="primary" @click="reportNameClick(scope.row)">{{ scope.row.title }}</el-button> -->
+              <div class="text-hidden color-primary pointer" link type="primary" @click="reportNameClick(scope.row)">
+                {{ scope.row.title }}
+              </div>
             </template>
           </el-table-column>
           <!-- <el-table-column prop="formName" label="审核对象" fixed /> -->
-          <el-table-column prop="OrgName" label="收集单位" fixed />
-          <el-table-column prop="ReceiverName" label="收集用户" fixed />
-          <el-table-column prop="auditorStatus" label="状态" width="180">
+          <el-table-column prop="orgName" label="收集单位" fixed min-width="110" show-overflow-tooltip />
+          <el-table-column prop="receiverName" label="收集用户" fixed />
+          <el-table-column prop="auditorStatus" label="状态" min-width="100">
             <template #default="scope">
-              <i v-if="scope.row.auditorStatus == 0" class="circle_yellow"></i>
+              <!-- <i v-if="scope.row.auditorStatus == 0" class="circle_yellow"></i> -->
               <i v-if="scope.row.auditorStatus == 1" class="circle_red"></i>
               <i v-if="scope.row.auditorStatus == 2" class="circle_green"></i>
               <i v-if="scope.row.auditorStatus == 3" class="circle_blue"></i>
-              <i v-if="scope.row.auditorStatus == 4" class="circle_blue"></i>
-              <span v-if="scope.row.auditorStatus == 0">审核中</span>
-              <span v-if="scope.row.auditorStatus == 1">审核失败</span>
-              <span v-if="scope.row.auditorStatus == 2">审核成功</span>
-              <span v-if="scope.row.auditorStatus == 3">等待提交</span>
-              <span v-if="scope.row.auditorStatus == 4">撤回审核</span>
+              <!-- <i v-if="scope.row.auditorStatus == 4" class="circle_blue"></i> -->
+              <!-- <span v-if="scope.row.auditorStatus == 0">审核中</span> -->
+              <span v-if="scope.row.auditorStatus == 1">审核退回</span>
+              <span v-if="scope.row.auditorStatus == 2">审核通过</span>
+              <span v-if="scope.row.auditorStatus == 3">待审核</span>
+              <!-- <span v-if="scope.row.auditorStatus == 4">撤回审核</span> -->
             </template>
           </el-table-column>
-          <el-table-column prop="checkTime" label="提交审核时间" fixed />
-          <el-table-column prop="CheckNames" label="提交人" fixed />
-          <el-table-column prop="address" label="操作">
+          <el-table-column prop="submitTime" label="提交审核时间" fixed min-width="180" />
+          <el-table-column prop="checkNames" label="提交人" fixed />
+          <el-table-column prop="address" label="操作" min-width="110" fixed="right">
             <template #default="scope">
-              <el-button link type="primary" v-if="scope.row.auditorStatus != 1" @click="showAuditDialog(scope.row)">审核</el-button>
+              <el-button link type="primary" :disabled="scope.row.auditorStatus != 3" @click="showAuditDialog(scope.row)">审核</el-button>
               <el-tooltip class="box-item" effect="dark" :content="scope.row.auditRemark" placement="top" v-if="scope.row.auditorStatus === 1">
                 <el-button link type="primary" v-if="scope.row.auditorStatus === 1">审核意见</el-button>
               </el-tooltip>
@@ -46,8 +54,8 @@
           v-model:current-page="queryParams.page"
           v-model:page-size="queryParams.size"
           background
-          layout="prev, pager, next"
-          :page-sizes="[100, 200, 300, 400]"
+          layout="sizes,prev, pager, next"
+          :page-sizes="[15, 30, 50, 100]"
           :total="totalPage"
           class="fr mt12"
           @size-change="handleSizeChange"
@@ -76,7 +84,7 @@
 
 <script setup>
 // 引入vue3功能模块
-import { ref, toRefs, toRef, reactive, computed, defineProps } from 'vue'
+import { ref, toRefs, toRef, reactive, computed, onActivated, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 // 表格页面公共页面
 import TablePage from '@/components/global/tablePage/index.vue'
@@ -108,30 +116,41 @@ const formOptions = ref([
 // 表单参数
 let queryParams = ref({
   page: 1,
-  size: 10
+  size: 15
 })
-
+let activeName = ref('3')
+//切换状态
+const handleClick = (tab) => {
+  console.log(setProxy(tab))
+  queryParams.value.auditorStatus = tab.paneName
+  getTableData(setProxy(queryParams.value))
+}
 instance?.proxy?.emitter.on('refreshAuditTable', () => {
   getTableData(setProxy(queryParams.value))
 })
 
-function showAuditDialog(row) {
+const showAuditDialog = (row) => {
+  row.reportName = row.title
+  console.log(row)
   VFormRenderForAuditDialogRef.value.show(row)
 }
 // 表单初始化
 const resetFrom = () => {
   queryParams.value = {
     page: 1,
-    size: 10
+    size: 15
   }
 
   getTableData(setProxy(queryParams.value))
 }
 // 获取子组件查询方法
 const searchHolder = (val) => {
-  // console.log(val, queryParams.value)
+  queryParams.value = setProxy(queryParams.value)
 
-  queryParams.value = Object.assign(val, queryParams.value)
+  for (let item in val) {
+    console.log(val[item])
+    queryParams.value[item] = val[item]
+  }
 
   getTableData(setProxy(queryParams.value))
 }
@@ -146,6 +165,8 @@ const createReport = () => {
  */
 // 点击表单详情
 const reportNameClick = (row) => {
+  row.reportName = row.title
+  console.log(row)
   RefVFormRenderForDetailDialog.value.show(row)
 }
 // 初始化表格数据
@@ -156,13 +177,21 @@ let totalPage = ref(0)
 // const createReport = (data) => {}
 // 获取表格数据
 const getTableData = (params) => {
-  http('auditList', params).then((res) => {
-    tableData.value = res
-    totalPage.value = res.length
+  const query = {
+    ...params,
+    page: params.page - 1
+  }
+  http('auditList', query).then((res) => {
+    // http('getMyReportList', query).then((res) => {
+    /* tableData.value = res
+    totalPage.value = res.length */
+    tableData.value = res.content
+    totalPage.value = res.totalElements
   })
 }
 const handleSizeChange = (val) => {
   queryParams.value.size = val
+  getTableData(setProxy(queryParams.value))
 }
 const handleCurrentChange = (val) => {
   // console.log(val)
@@ -189,9 +218,15 @@ const distributeNow = (row) => {
 /**
  * 初始化
  */
+
 const initPage = () => {
+  queryParams.value.auditorStatus = activeName.value
   getTableData(setProxy(queryParams.value))
+  // })
 }
+onActivated(() => {
+  initPage()
+})
 initPage()
 </script>
 

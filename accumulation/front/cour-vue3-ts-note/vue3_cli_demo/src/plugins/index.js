@@ -3,14 +3,13 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { ID_INJECTION_KEY } from 'element-plus'
+import axios from 'axios'
 
 import mitt from 'mitt'
 const Mit = mitt()
 
 import VForm3 from '@/../lib/vform/designer.umd.js'
 import '../../lib/vform/designer.style.css'
-
-import VForm3Render from '@/../lib/vform/render.umd.js'
 import '../../lib/vform/render.style.css'
 
 import 'virtual:svg-icons-register'
@@ -28,7 +27,8 @@ const plugins = {
       .use(ElementPlus, {
         locale: zhCn
       })
-
+    // 复位为自己的 axios
+    window.axios = axios
     app.config.globalProperties.emitter = Mit
   }
 }

@@ -26,6 +26,7 @@ export const request = (method, url, params, headers, preventRepeat = true, uplo
           config.cancelToken = new axios.CancelToken((cancelToken) => {
             // 判断是否存在请求中的当前请求 如果有取消当前请求
             if (existInPending(key)) {
+              console.log(existInPending(key))
               cancelToken()
             } else {
               pushPending({ key, cancelToken })
@@ -49,6 +50,12 @@ export const request = (method, url, params, headers, preventRepeat = true, uplo
         return response
       },
       (err) => {
+        console.log(err)
+        if (err.response.status === 400) {
+          err.response.data.isError = true
+          resolve(err.response.data)
+          return
+        }
         handlerResponseError(err)
         return Promise.reject(error)
       }
@@ -71,6 +78,7 @@ export const request = (method, url, params, headers, preventRepeat = true, uplo
 
 function handlerResponseError(err) {
   if (err.code === 'ERR_CANCELED') return
+
   if (err && err.response) {
     switch (err.response.status) {
       case 400:
@@ -110,7 +118,7 @@ function handlerResponseError(err) {
         err.message = `连接出错(${err.response.status})!`
     }
   } else {
-    err.message = '连接服务器失败!'
+    err.message = '服务器连接失败，请稍后重试!'
   }
   ElMessage.error({ message: err.message })
 }
