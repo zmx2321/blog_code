@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    </style>
+  </head>
+  <body>
+    <div id="root">
+    </div>
+    <!-- 引入react的核心库 -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <!-- 引入react-dom用于支持react操作dom -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <!-- 引入babel转换js为jsx -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      class Test extends React.Component{
+        constructor(props){
+          super(props)
+          this.state={text:'react'}
+        }
+        // 组件将要挂载生命周期函数
+        componentWillMount(){
+          console.log('componentWillMount')
+        }
+
+        // 组件挂载完成生命周期函数
+        componentDidMount(){
+          console.log('componentDidMount')
+          // 组件卸载
+          ReactDOM.unmountComponentAtNode(document.getElementById("root"))
+        }
+
+        // 组件卸载生命周期函数
+        componentWillUnmount(){
+          console.log('componentWillUnmount')
+        }
+        
+        render(){
+          console.log('render')
+          return <div>小滴课堂{this.state.text}课程</div>
+        }
+      }
+      ReactDOM.render(<Test/>,document.getElementById("root"));
+    </script>
+  </body>
+</html>

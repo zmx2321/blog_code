@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- 引入react的核心库 -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18.2/umd/react.development.js"
+    ></script>
+    <!-- 引入react-dom用于支持react操作dom -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18.2/umd/react-dom.development.js"
+    ></script>
+    <!-- 引入babel转换jsx为js -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      // 1.创建虚拟DOM
+      const VDOM = <div>hello word</div>;
+      console.log("虚拟DOM:", VDOM);
+      const TDOM = document.getElementById("root");
+      console.log("真实DOM:", TDOM);
+      debugger;
+      // 2.找到容器，将虚拟DOM渲染在页面中
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(VDOM);
+    </script>
+  </body>
+</html>
