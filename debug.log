@@ -1,0 +1,6 @@
+[0119/101858.365:ERROR:registration_protocol_win.cc(107)] CreateFile: 系统找不到指定的文件。 (0x2)
+[0119/101902.696:ERROR:registration_protocol_win.cc(107)] CreateFile: 系统找不到指定的文件。 (0x2)
+[0119/101902.915:ERROR:crashpad_client_win.cc(844)] not connected
+[0119/101903.014:ERROR:registration_protocol_win.cc(107)] CreateFile: 系统找不到指定的文件。 (0x2)
+[0119/101903.477:ERROR:registration_protocol_win.cc(107)] CreateFile: 系统找不到指定的文件。 (0x2)
+[0119/101903.571:ERROR:crashpad_client_win.cc(844)] not connected

@@ -2,8 +2,7 @@
     "editor.formatOnSave": true, // #每次保存的时候自动格式化*
     "editor.formatOnPaste": true, // #每次粘贴的时候自动格式化*
     "editor.codeActionsOnSave": {
-      // #每次保存的时候将代码按eslint格式进行修复*
-      "source.fixAll.eslint": true
+      "source.fixAll.eslint": "explicit"
     },
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[vue]": {
