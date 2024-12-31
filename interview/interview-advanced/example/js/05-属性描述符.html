@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>05-属性描述符</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    鼠标右击查看源码
+</body>
+<script>
+    // 示例一：
+    let ajax = (type, url, successFn)=> {
+        const xhr = new XMLHttpRequest()
+        xhr.open(type, url, true)
+        xhr.onreadystatechange = function() {
+            if(xhr.readyState === 4) {
+                if(xhr.status === 200) {
+                    successFn(JSON.parse(xhr.responseText))
+                }
+            }
+        }
+
+        xhr.send(null)
+    }
+
+    ajax('GET', "https://jsonplaceholder.typicode.com/users", data=> {
+        console.log("简易写法", data);
+    })
+
+    // 示例二: promise
+    let ajaxPro = (type, url)=> {
+        const p = new Promise((resolve, reject)=> {
+            const xhr = new XMLHttpRequest()
+            xhr.open(type, url, true)
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState === 4) {
+                    if(xhr.status === 200) {
+                        resolve(JSON.parse(xhr.responseText))
+                    } else if(xhr.status === 404) {
+                        reject(new Error('404 not find'));
+                    }
+                }
+            }
+
+            xhr.send(null)
+        })
+
+        return p
+    }
+    
+    ajaxPro("GET", "https://jsonplaceholder.typicode.com/posts").then(res=> {
+        console.log("promise写法", res);
+    }).catch(err=> {
+        console.error("promise写法报错", err);
+    })
+</script>
+</html>
