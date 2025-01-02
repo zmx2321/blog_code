@@ -12,50 +12,58 @@
     鼠标右击查看源码
 </body>
 <script>
-    // 示例一：
-    let ajax = (type, url, successFn)=> {
-        const xhr = new XMLHttpRequest()
-        xhr.open(type, url, true)
-        xhr.onreadystatechange = function() {
-            if(xhr.readyState === 4) {
-                if(xhr.status === 200) {
-                    successFn(JSON.parse(xhr.responseText))
-                }
-            }
-        }
+    const observe = (obj)=> {
+        // console.log('observe', obj)
+        for(let key in obj) {
+            let internalValue = obj[key]
+            // let funcs = new Set()
+            let funcs = []
 
-        xhr.send(null)
-    }
-
-    ajax('GET', "https://jsonplaceholder.typicode.com/users", data=> {
-        console.log("简易写法", data);
-    })
-
-    // 示例二: promise
-    let ajaxPro = (type, url)=> {
-        const p = new Promise((resolve, reject)=> {
-            const xhr = new XMLHttpRequest()
-            xhr.open(type, url, true)
-            xhr.onreadystatechange = function() {
-                if(xhr.readyState === 4) {
-                    if(xhr.status === 200) {
-                        resolve(JSON.parse(xhr.responseText))
-                    } else if(xhr.status === 404) {
-                        reject(new Error('404 not find'));
+            // 对每个属性设置get,set
+            Object.defineProperty(obj, key, {
+                get() {
+                    // 依赖收集: 要记录是哪个函数在用我
+                    // funcs.add() // 添加一个函数
+                    if(window.__func && !funcs.includes(window.__func)) {
+                        funcs.push(window.__func)
+                        // console.log('get', funcs)
                     }
+
+                    return internalValue
+                },
+                set(val) {
+                    internalValue = val
+                    // 自动调用依赖该属性的函数
+                    // 某个函数在运行期间,用到了这个属性
+                    // 即某个函数在运行期间,用到了这个get方法
+                    // 派发更新: 运行: 执行用我的函数
+                    funcs.forEach(func => func())
                 }
-            }
-
-            xhr.send(null)
-        })
-
-        return p
+            })
+        }
     }
-    
-    ajaxPro("GET", "https://jsonplaceholder.typicode.com/posts").then(res=> {
-        console.log("promise写法", res);
-    }).catch(err=> {
-        console.error("promise写法报错", err);
-    })
+
+    const autorun = (func) => {
+        window.__func = func
+        func()
+        window.__func = null
+    }
+
+    let obj = { name: 'zhangsan', age: 18 }; 
+    observe(obj)  // 对obj进行观察
+
+    // 每次修改age时,需要-3
+    const setAge = () => {
+        obj.age = obj.age -3    
+        console.log('setAge', obj.age)
+    }
+
+    /* window.__func = setAge
+    setAge()
+    window.__func = null */
+
+    // 调用autorun,自动执行setAge
+    obj.age = 20
+    autorun(setAge)
 </script>
 </html>
