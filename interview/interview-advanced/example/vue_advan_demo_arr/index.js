@@ -22,6 +22,8 @@ const obj = relative({
     }
 })
 
+const arr = relative([1, 2, 3])
+
 /* // 经过响应式(reactive)之后,每一次返回的都是新的代理,所以两个数据不是同一个对象
 // 将它进行缓存之后,就可以解决这个问题,返回同一个代理对象
 const state1 = relative(obj)
@@ -51,10 +53,31 @@ const fn = () => {
 // 在外面改变了数据,fn也需要被重新执行,因为可能会改变结果
 // obj.e = 5
 
-obj.a = 5  // set
+/* obj.a = 5  // set
 obj.e = 5  // add
 delete obj.d  // delete
 delete obj.g  // 删原来没有的东西,不需要触发
-obj.b = 2  // 数据没有改,不算是派发更新,所以不需要触发
+obj.b = 2  // 数据没有改,不算是派发更新,所以不需要触发 */
+
+// 数组的依赖收集
+// arr[0]  // 下标就是属性名,所以会触发get
+// arr.push(4) // push会触发set
+// arr.length  // 会触发get
+// delete arr[0]  // 触发delete
+
+// 三种循环触发的依赖更新不一样
+// arr.forEach(element => {});  // 需要判断has
+// for(let key in arr) {}  // iterate
+// for(let i = 0; i < arr.length; i++) {}  
+// for of  // iterate
+// Cannot convert a Symbol value to a string => 报错,无法将一个符号转换成字符串
+// trck方法中的key
+// for of实际上就是调用对象的iterator的符号属性(Symbol.iterator),来得到一个迭代器
+// for(let item of arr) {}
+// 数组的方法
+// 依赖收集 [get] includes => 读对象的某一个属性 includes,判断该属性需要不需要被收集,需要这样想: 将来这个信息变化过后,要不要重新运行这个函数
+// 依赖收集 [get] length => 读对象的某一个属性 length, 如何以后数组长度变化,有没有可能影响它判断的结果,有就需要进行依赖收集
+// 依赖收集 [get] 0
+arr.includes(1)
 
 fn()

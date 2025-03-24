@@ -10,11 +10,11 @@ export const track = (target, type, key) => {
     }
 
     // console.log('track - 依赖收集', target, type, key)
-    console.log(`%c 依赖收集 [${type} ${key}]`, 'color: #f00')
+    console.log(`%c 依赖收集 [${type}]`, 'color: #f00', key)
 }
 
 // 派发更新
 export const tigger = (target, type, key) => {
     // console.log('tigger - 派发更新', target, type, key)
-    console.log(`%c 派发更新 [${type} ${key}]`, 'color: #00f')
+    console.log(`%c 派发更新 [${type}]`, 'color: #00f', key)
 }
