@@ -78,6 +78,34 @@ obj.b = 2  // 数据没有改,不算是派发更新,所以不需要触发 */
 // 依赖收集 [get] includes => 读对象的某一个属性 includes,判断该属性需要不需要被收集,需要这样想: 将来这个信息变化过后,要不要重新运行这个函数
 // 依赖收集 [get] length => 读对象的某一个属性 length, 如何以后数组长度变化,有没有可能影响它判断的结果,有就需要进行依赖收集
 // 依赖收集 [get] 0
-arr.includes(1)
+// arr.includes(1)
 
-fn()
+// let arr1 = relative([4, obj])
+// 这里的this指向的不是代理对象,所以不会收集依赖
+// 改变includes的this指向,需要改变includes的内部方法
+// 有两种解决办法
+// 1、传入的原始对象转换为代理对象
+// 2、当无法在代理对象中找到时,去原始数组中重新找一次(vue3里面使用的是第二种方法)
+// 需要改变依赖收集的方法
+// let i = arr1.includes(obj)
+// console.log(i)
+
+let arr2 = relative([1, 2, 3])
+let state2 = relative(arr2)
+// 隐式改变length
+// arr2[5] = 5
+// 等价于 - 这种情况,需要手动触发length属性的变化
+// Object.defineProperty(arr2, 5, {value: 5})
+// console.log(state2)
+
+// state2.length = 1
+// console.log(state2)
+
+// 会触发length的依赖收集
+// 但不希望收集这个依赖
+// 有2种方法(vue使用的是第二种方法)
+// 1、把那些会对数组发生改动的方法全部重写
+// 2、判断当前操作是否是改变数组长度,如果是,就不收集依赖
+state2.push(4)
+
+// fn()
