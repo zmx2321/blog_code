@@ -191,8 +191,6 @@
   <!-- <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/build/ol.js"></script> -->
   <script src="./ol.js"></script>
   <script>
-    let url = ""
-
     var resolutions = [];
         for (var i = 0; i < 20; i++) {
             resolutions[i] = Math.pow(2, 18 - i);
@@ -226,9 +224,7 @@
                         y = 'M' + (-y);
                     }
 
-                    url = `https://maponline0.bdimg.com/tile/?qt=vtile&x=${x}&y=${y}&z=${z}&styles=pl&scaler=1&udt=20210730&from=jsapi3_0`;
-
-                    return url;
+                    return `https://maponline0.bdimg.com/tile/?qt=vtile&x=${x}&y=${y}&z=${z}&styles=pl&scaler=1&udt=20210730&from=jsapi3_0`;
                 }
             })
         });
