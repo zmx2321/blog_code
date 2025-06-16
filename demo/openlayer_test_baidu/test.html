@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenLayers Map</title>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/css/ol.css"> -->
+  <link rel="stylesheet" href="./ol.css">
+  <style>
+    #map_dom, #map {
+      width: 100%;
+      height: 96.5vh;
+      position: relative;
+      cursor: pointer;
+    }
+
+    #map .ol-zoom .ol-zoom-out {
+      margin-top: 204px;
+    }
+
+    #map .ol-zoomslider {
+      background-color: transparent;
+      top: 2.3em;
+    }
+
+    #map .ol-touch .ol-zoom .ol-zoom-out {
+      margin-top: 212px;
+    }
+
+    #map .ol-touch .ol-zoomslider {
+      top: 2.75em;
+    }
+
+    #map .ol-zoom-in.ol-has-tooltip:hover [role="tooltip"],
+    #map .ol-zoom-in.ol-has-tooltip:focus [role="tooltip"] {
+      top: 3px;
+    }
+
+    #map .ol-zoom-out.ol-has-tooltip:hover [role="tooltip"],
+    #map .ol-zoom-out.ol-has-tooltip:focus [role="tooltip"] {
+      top: 232px;
+    }
+
+    #map .ol-zoom-extent {
+      top: 280px;
+    }
+
+    .ol-custom-overviewmap,
+    .ol-custom-overviewmap.ol-uncollapsible {
+      bottom: auto;
+      left: auto;
+      right: 0;
+      top: 0;
+    }
+
+    .ol-custom-overviewmap:not(.ol-collapsed) {
+      border: 1px solid black;
+    }
+
+    .ol-custom-overviewmap .ol-overviewmap-map {
+      border: none;
+    }
+
+    .ol-custom-overviewmap .ol-overviewmap-box {
+      border: 2px solid red;
+    }
+
+    .ol-custom-overviewmap:not(.ol-collapsed) button {
+      bottom: auto;
+      left: auto;
+      right: 1px;
+      top: 1px;
+    }
+
+    .layer-switcher {
+      top: auto;
+      bottom: 50px;
+    }
+
+    .ol-popup {
+      position: absolute;
+      background-color: white;
+      -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+      filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #cccccc;
+      bottom: 12px;
+      left: -50px;
+    }
+
+    .ol-popup h5 {
+      margin-block-start: 0.5em;
+      margin-block-end: 0.5em;
+    }
+
+    .ol-popup:after,
+    .ol-popup:before {
+      top: 100%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .ol-popup:after {
+      border-top-color: white;
+      border-width: 10px;
+      left: 48px;
+      margin-left: -10px;
+    }
+
+    .ol-popup:before {
+      border-top-color: #cccccc;
+      border-width: 11px;
+      left: 48px;
+      margin-left: -11px;
+    }
+
+    .ol-popup-closer {
+      text-decoration: none;
+      position: absolute;
+      top: 2px;
+      right: 8px;
+    }
+
+    .popup-content {
+      width: 250px;
+    }
+
+    .popup-content h4 {
+      font-size: 14px;
+    }
+
+    .popup-content h5 {
+      font-weight: initial;
+      font-size: 13px;
+    }
+
+    .ol-popup-closer:after {
+      content: "✖";
+    }
+
+    .info {
+      width: 100px;
+      min-width: 120px;
+      padding: 6px 8px;
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      background: white;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      z-index: 99999;
+      position: absolute;
+      bottom: 1px;
+      left: 1px;
+    }
+
+    .info h4 {
+      margin: 0 0 5px;
+      color: #777;
+    }
+
+    .legend {
+      text-align: left;
+      line-height: 18px;
+      color: #555;
+    }
+
+    .legend i {
+      width: 18px;
+      height: 18px;
+      float: left;
+      margin-right: 8px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div id="map_dom">
+    <div id="map"></div>
+    <div id="legend" class="info legend"></div>
+    <div id="popup" class="ol-popup">
+      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+      <div id="popup-content" class="popup-content"></div>
+    </div>
+  </div>
+
+  <!-- <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/build/ol.js"></script> -->
+  <script src="./ol.js"></script>
+  <script>
+    let url = ""
+
+    var resolutions = [];
+        for (var i = 0; i < 20; i++) {
+            resolutions[i] = Math.pow(2, 18 - i);
+        }
+
+    var tilegrid = new ol.tilegrid.TileGrid({
+            origin: [0, 0],
+            resolutions: resolutions,
+            tileSize: [256, 256],
+        });
+
+    var baiduMapLayer = new ol.layer.Tile({
+            title: '百度地图瓦片图',
+            source: new ol.source.TileImage({
+                projection: 'EPSG:3857',
+                tileGrid: tilegrid,
+                tilePixelRatio: devicePixelRatio,
+                tileUrlFunction: function (tileCoord, pixelRatio, proj) {
+                    if (!tileCoord) {
+                        return '';
+                    }
+                    var z = tileCoord[0];
+                    var x = tileCoord[1];
+                    var y = -tileCoord[2] - 1;
+
+                    if (x < 0) {
+                        x = 'M' + (-x);
+                    }
+
+                    if (y < 0) {
+                        y = 'M' + (-y);
+                    }
+
+                    url = `https://maponline0.bdimg.com/tile/?qt=vtile&x=${x}&y=${y}&z=${z}&styles=pl&scaler=1&udt=20210730&from=jsapi3_0`;
+
+                    return url;
+                }
+            })
+        });
+
+    const initMap = () => {
+      // 定义百度地图的范围（经度和纬度范围）
+      const e_4326 = [73.66, 3.86, 135.05, 53.55];
+
+      const map = new ol.Map({
+        target: 'map',
+        layers: [
+        baiduMapLayer
+        ],
+        view: new ol.View({
+          projection: "EPSG:3857",
+      center: ol.proj.fromLonLat([116.404, 39.915]), // 北京的经纬度
+      zoom: 10
+        })
+      });
+
+      // 修改后的鹰眼控件配置
+const overviewMap = new ol.control.OverviewMap({
+    className: "ol-overviewmap ol-custom-overviewmap",
+    layers: [
+        // 创建新的图层实例（使用相同的源配置）
+        new ol.layer.Tile({
+            source: baiduMapLayer.getSource()
+        })
+    ],
+    collapseLabel: "\u00BB",
+    label: "\u00AB",
+    collapsed: false,
+    minWidth: 150,  // 设置最小宽度
+    maxHeight: 150,  // 设置最大高度
+    view: new ol.View({
+        projection: 'EPSG:3857',
+        zoom: 6,  // 初始缩放级别
+        minZoom: 4  // 最小缩放级别
+    })
+});
+
+
+  map.addControl(overviewMap);
+  map.addControl(new ol.control.ZoomSlider());
+  map.addControl(new ol.control.ZoomToExtent({
+    extent: ol.proj.transformExtent([116.397428, 39.908724, 116.417428, 39.918724], 'EPSG:4326', 'EPSG:3857'),
+  }));
+
+      return map;
+    };
+
+    const loadStyle = (color, type) => {
+      let image = new ol.style.Circle({
+        radius: 3,
+        fill: new ol.style.Fill({ color: color }),
+        stroke: new ol.style.Stroke({ color: color, width: 1 })
+      });
+      let styles = {
+        Point: [
+          new ol.style.Style({
+            image: image
+          })
+        ],
+        LineString: [
+          new ol.style.Style({
+            stroke: new ol.style.Stroke({
+              color: color,
+              width: 1
+            })
+          })
+        ],
+        MultiLineString: [
+          new ol.style.Style({
+            stroke: new ol.style.Stroke({
+              color: color,
+              width: 1
+            })
+          })
+        ],
+        MultiPoint: [
+          new ol.style.Style({
+            image: image
+          })
+        ],
+        MultiPolygon: [
+          new ol.style.Style({
+            stroke: new ol.style.Stroke({
+              color: color,
+              width: 1
+            }),
+            fill: new ol.style.Fill({
+              color: "rgba(255, 255, 0, 0.1)"
+            })
+          })
+        ],
+        Polygon: [
+          new ol.style.Style({
+            stroke: new ol.style.Stroke({
+              color: color,
+              width: 1
+            }),
+            fill: new ol.style.Fill({
+              color: "rgba(0, 0, 255, 0.1)"
+            })
+          })
+        ],
+        GeometryCollection: [
+          new ol.style.Style({
+            stroke: new ol.style.Stroke({
+              color: color,
+              width: 2
+            }),
+            fill: new ol.style.Fill({
+              color: color
+            }),
+            image: new ol.style.Circle({
+              radius: 10,
+              fill: null,
+              stroke: new ol.style.Stroke({
+                color: color
+              })
+            })
+          })
+        ],
+        Circle: [
+          new ol.style.Style({
+            stroke: new ol.style.Stroke({
+              color: color,
+              width: 2
+            }),
+            fill: new ol.style.Fill({
+              color: color
+            })
+          })
+        ]
+      };
+      return styles[type];
+    };
+
+    const styleFunction = (feature) => {
+      let color = loadStyle(
+        feature.get('color') || 'red',
+        feature.getGeometry().getType()
+      );
+      return color;
+    };
+
+    const loadVectData = (map) => {
+      const geojsonData = {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [121.561099, 29.871172]
+            },
+            "properties": {
+              "color": "red",
+              "name": "Sample Point"
+            }
+          }
+        ]
+      };
+
+      const features = new ol.format.GeoJSON().readFeatures(geojsonData, {
+        featureProjection: 'EPSG:3857'
+      });
+
+      const vectorLayer = new ol.layer.Vector({
+        source: new ol.source.Vector({
+          features
+        }),
+        style: styleFunction
+      });
+
+      map.addLayer(vectorLayer);
+    };
+
+    const initLegend = () => {
+      const grades = ["大于-85", "-95 ~ -85", "-100 ~ -95"];
+      const colors = ["red", "orange", "yellow"];
+      const labels = [];
+      for (let i = 0; i < grades.length; i++) {
+        labels.push('<i style="background:' + colors[i] + '"></i> ' + grades[i]);
+      }
+      document.getElementById("legend").innerHTML = labels.join("<br>");
+    };
+
+    const initPopup = (map) => {
+      const container = document.getElementById("popup");
+      const closer = document.getElementById("popup-closer");
+      const content = document.getElementById("popup-content");
+
+      const overlay = new ol.Overlay({
+        element: container,
+        autoPan: true,
+        autoPanAnimation: {
+          duration: 250
+        }
+      });
+
+      map.addOverlay(overlay);
+
+      map.on("click", function (evt) {
+        const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
+          return feature;
+        });
+
+        if (feature) {
+          const featureItemData = {
+            avg_noise: feature.get("avg_noise"),
+            cell_c_name: feature.get("cell_c_name"),
+            cgi: feature.get("cgi"),
+            city_c_name: feature.get("city_c_name"),
+            color: feature.get("color"),
+            eci: feature.get("eci"),
+            frequency: feature.get("frequency"),
+            prod_c_name: feature.get("prod_c_name")
+          };
+
+          if (!featureItemData.cgi) {
+            return;
+          }
+
+          content.innerHTML = [
+            `<h4>${featureItemData.cell_c_name}</h4>`,
+            `<h5>产品名称: ${featureItemData.prod_c_name}</h5>`,
+            `<h5>avg-noise: ${featureItemData.avg_noise}</h5>`,
+            `<h5>ECI: ${featureItemData.eci}</h5>`,
+            `<h5>CGI: ${featureItemData.cgi}</h5>`,
+            `<h5>城市名称: ${featureItemData.city_c_name}</h5>`,
+            `<h5>频率: ${featureItemData.frequency}</h5>`,
+          ].join("");
+
+          overlay.setPosition(evt.coordinate);
+        }
+      });
+
+      closer.onclick = function () {
+        overlay.setPosition(undefined);
+        closer.blur();
+        return false;
+      };
+    };
+
+    const map = initMap();
+    initLegend();
+    // loadVectData(map);
+    // initPopup(map);
+  </script>
+</body>
+</html>
