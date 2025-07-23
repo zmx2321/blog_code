@@ -5,6 +5,8 @@ import Example1 from './example1/index.js'
 import Example2 from './example2/index'
 import Example3 from './example3/index'
 import Example4 from './example4/index'
+import Example5 from './example5/index'
+import Example6 from './example6/index'
 
 const name = "first app"
 
@@ -13,9 +15,17 @@ const exam3Name = "example3Data"
 function App () {
     return (
         <div className="App">
+            example6:
+            <Example6 />
+            <br />
+
+            example5:
+            <Example5 />
+            <br />
+
             example4:
             <Example4 />
-            <br /><br />
+            <br />
 
             example3:  父传子
             <Example3 name={exam3Name} testData="testData" testData2="testData2" />
@@ -30,7 +40,7 @@ function App () {
             <Example1 />
             <br />
 
-            app + { name }
+            app + {name}
         </div>
     );
 }
