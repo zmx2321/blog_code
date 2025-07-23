@@ -16,7 +16,7 @@ function App () {
     return (
         <div className="App">
             example6:
-            <Example6 />
+            <Example6 initialMsg="hello world" />
             <br />
 
             example5:
