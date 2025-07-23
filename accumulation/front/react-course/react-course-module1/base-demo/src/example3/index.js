@@ -30,9 +30,10 @@ export default Example3; */
  * 类组件 - 真实项目中应用最多
  */
 
-/* import React from 'react';
+/* import React, { Component } from 'react';
 
-class Example3 extends React.Component {
+// class Example3 extends React.Component {
+class Example3 extends Component {
     // 如果有构造函数,默认就会调用super(props)
     constructor(props) {
         // 有构造函数必须调用super

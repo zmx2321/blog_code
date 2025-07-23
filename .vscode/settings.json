@@ -19,7 +19,10 @@
     "javascript.format.insertSpaceBeforeFunctionParenthesis": true, //  #让函数(名)和后面的括号之间加个空格*
     "javascript.updateImportsOnFileMove.enabled": "always",
     "html.format.endWithNewline": true,
-    "html.format.enable": false
+    "html.format.enable": false,
+    "[javascript]": {
+      "editor.defaultFormatter": "vscode.typescript-language-features"
+    }
   
     // "vetur.format.defaultFormatterOptions": { "js-beautify-html": { "wrap_line_length": 120, "wrap_attributes": "auto", "end_with_newline": false } }
     // "vetur.format.defaultFormatter.js": "vscode-typescript", // #让vue中的js按编辑器自带的ts格式进行格式化*
