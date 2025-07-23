@@ -21,7 +21,7 @@ const ulEle2 = (
     </ul>
 )
 
-function Example2 () {
+/* function Example2 () {
     return (
         <div className="example2">
             ulEle1:
@@ -32,4 +32,15 @@ function Example2 () {
     );
 }
 
-export default Example2;
+export default Example2; */
+
+export default function Example2 () {
+    return (
+        <div className="example2">
+            ulEle1:
+            { ulEle }
+            ulEle2:
+            { ulEle2 }
+        </div>
+    );
+}

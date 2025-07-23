@@ -1,6 +1,7 @@
 import './App.css';
 // 组件名称要大写,否则会报错
-import Example1 from './example1/index'
+import Example1 from './example1/index.js'
+// .js文件可以省略
 import Example2 from './example2/index'
 import Example3 from './example3/index'
 import Example4 from './example4/index'
