@@ -22,9 +22,15 @@ const deleteHandle = (data) => {
 }
 
 export default class SubmitBtn extends Component {
+    constructor(props) {
+        super(props)
+        // console.log('SubmitBtn', this.props) // 可以获取到父组件传递的参数
+    }
     render () {
         return (
-            <button onClick={() => handle(this.props.alt, this.props.data, this.props.aa, this.props.bb, this.props.cc)}>{this.props.name}</button>
+            <>
+                <button onClick={() => handle(this.props.alt, this.props.data, this.props.aa, this.props.bb, this.props.cc)}>{this.props.name}</button>
+            </>
         )
     }
 }
