@@ -1,23 +1,34 @@
-import { useState, useEffect } from 'react';
+// react中组件传参实际上就是函数传参,使用props来接收参数
+/* function Example3 (props) {
+    console.log(props);
 
-let liList = ['111', '222', '333']
-
-const ulEle = (
-    <ul>
-        {
-            liList.map((item, index) => {
-                return <li key={index}>{item}</li>
-            })
-        }
-    </ul>
-)
-
-function Example2 () {
     return (
-        <div className="example2">
-            { ulEle }
+        <div className="example3">
+            { props.name }
         </div>
     );
 }
 
-export default Example2;
+export default Example3; */
+
+/**
+ * 类组件
+ */
+
+import React from 'react';
+
+class Example3 extends React.Component {
+    render() {
+        console.log(this.props);
+
+        return (
+            <div className="example3">
+                { this.props.name }
+                <br />
+                { this.props.testData }
+            </div>
+        );
+    }
+}
+
+export default Example3; 

@@ -5,6 +5,8 @@ import Example3 from './example3/index'
 
 const name = "first app"
 
+const exam3Name = "example3Data"
+
 function App () {
     return (
         <div className="App">
@@ -23,7 +25,7 @@ function App () {
             <br />
 
             example3:
-            <Example3 />
+            <Example3 name={exam3Name} testData="testData" testData2="testData2" />
         </div>
     );
 }
