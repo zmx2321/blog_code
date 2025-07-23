@@ -1,30 +1,30 @@
 import React, { Component } from 'react'
 
-const handle = (value) => {
+const handle = (value, data) => {
     switch (value) {
         case 'add':
-            addHandle()
+            addHandle(data)
             break
         case 'delete':
-            deleteHandle()
+            deleteHandle(data)
             break
         default:
             break
     }
 }
 
-const addHandle = () => {
-    console.log('submit add')
+const addHandle = (data) => {
+    console.log('submit add', data)
 }
 
-const deleteHandle = () => {
-    console.log('submit delete')
+const deleteHandle = (data) => {
+    console.log('submit delete', data)
 }
 
 export default class SubmitBtn extends Component {
     render () {
         return (
-            <button onClick={() => handle(this.props.alt)}>{this.props.name}</button>
+            <button onClick={() => handle(this.props.alt, this.props.data)}>{this.props.name}</button>
         )
     }
 }

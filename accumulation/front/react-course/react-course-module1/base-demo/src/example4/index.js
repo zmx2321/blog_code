@@ -5,11 +5,16 @@
  */
 import SubmitBtn from './component/SubmitBtn';
 
+const dataObj = {
+    name: 'zs',
+    age: 18,
+}
+
 const Example4 = () => {
     return (
         <div className="example4">
-            <SubmitBtn name="新增" alt='add' />
-            <SubmitBtn name="删除" alt='delete' />
+            <SubmitBtn name="新增" alt='add' data={dataObj} />
+            <SubmitBtn name="删除" alt='delete' data={dataObj} />
         </div>
     );
 }
