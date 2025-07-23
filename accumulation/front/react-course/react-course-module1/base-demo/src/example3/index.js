@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 let liList = ['111', '222', '333']
 
 const ulEle = (
@@ -10,24 +12,10 @@ const ulEle = (
     </ul>
 )
 
-// 过滤条件
-const ulEle2 = (
-    <ul>
-        {
-            liList.map((item, index) => {
-                return parseInt(item) > 120 ? <li key={index}>{item}</li> : null
-            })
-        }
-    </ul>
-)
-
 function Example2 () {
     return (
         <div className="example2">
-            ulEle1:
             { ulEle }
-            ulEle2:
-            { ulEle2 }
         </div>
     );
 }
