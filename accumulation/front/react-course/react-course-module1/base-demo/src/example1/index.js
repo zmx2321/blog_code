@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+// 组件名称要大写,否则会报错
 function Example1 () {
     const [time, setTime] = useState(new Date().toLocaleTimeString())
     

@@ -1,4 +1,5 @@
 import './App.css';
+// 组件名称要大写,否则会报错
 import Example1 from './example1/index'
 import Example2 from './example2/index'
 import Example3 from './example3/index'
@@ -15,6 +16,7 @@ function App () {
             <br /><br />
 
             example1:
+            {/* // 组件名称要大写,否则会报错 - react认为,小写的组件是html标签 */}
             <Example1 />
 
             <br />
@@ -24,7 +26,7 @@ function App () {
 
             <br />
 
-            example3:
+            example3:  父传子
             <Example3 name={exam3Name} testData="testData" testData2="testData2" />
         </div>
     );
