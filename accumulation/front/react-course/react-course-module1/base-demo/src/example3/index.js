@@ -1,5 +1,5 @@
 // react中组件传参实际上就是函数传参,使用props来接收参数
-/* function Example3 (props) {
+function Example3 (props) {
     console.log(props);
 
     return (
@@ -9,13 +9,13 @@
     );
 }
 
-export default Example3; */
+export default Example3;
 
 /**
  * 类组件
  */
 
-import React from 'react';
+/* import React from 'react';
 
 class Example3 extends React.Component {
     render() {
@@ -31,4 +31,4 @@ class Example3 extends React.Component {
     }
 }
 
-export default Example3; 
+export default Example3;  */
