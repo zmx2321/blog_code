@@ -10,10 +10,17 @@ const dataObj = {
     age: 18,
 }
 
+// 结构传值
+const dataObj2 = {
+    aa: '111',
+    bb: '222',
+    cc: '333',
+}
+
 const Example4 = () => {
     return (
         <div className="example4">
-            <SubmitBtn name="新增" alt='add' data={dataObj} />
+            <SubmitBtn name="新增" alt='add' data={dataObj} {...dataObj2} />
             <SubmitBtn name="删除" alt='delete' data={dataObj} />
         </div>
     );
