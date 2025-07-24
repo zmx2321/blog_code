@@ -117,14 +117,14 @@ function App () {
 
             example11:
             <Example11 />
-            <br />
+            <br />*/}
 
             example10:
             <Example10 />
             <br />
 
             example9:
-            <Example9 />*/}
+            {/* <Example9 /> */}
             <br />
 
             example8:<br />
