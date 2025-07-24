@@ -7,6 +7,8 @@ import Example3 from './example3/index'
 import Example4 from './example4/index'
 import Example5 from './example5/index'
 import Example6 from './example6/index'
+import Example7 from './example7/index'
+import Example8 from './example8/index'
 
 const name = "first app"
 
@@ -15,6 +17,14 @@ const exam3Name = "example3Data"
 function App () {
     return (
         <div className="App">
+            example8:
+            <Example8 />
+            <br />
+
+            example7:
+            <Example7 />
+            <br />
+
             example6:
             <Example6 initialMsg="hello world" />
             <br />
