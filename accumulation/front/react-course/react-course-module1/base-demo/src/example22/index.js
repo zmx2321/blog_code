@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Example8 extends Component {
-    render () {
-        return (
-            <>
-                <h2>
-                    111
-                </h2>
-            </>
-        )
-    }
+const Example22 = () => {
+    return (
+        <>
+            <h2>
+                111
+            </h2>
+        </>
+    )
 }
 
-export default Example8;
+export default Example22;

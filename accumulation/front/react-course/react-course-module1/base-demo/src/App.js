@@ -136,7 +136,7 @@ function App () {
             <br />
 
             example6:
-            <Example6 initialMsg="hello world" />
+            {/* <Example6 initialMsg="hello world" /> */}
             <br />
 
             example5:
