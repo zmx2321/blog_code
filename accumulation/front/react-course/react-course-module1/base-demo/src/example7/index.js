@@ -20,7 +20,9 @@ const Example7 = () => {
 
     const handleClick = () => {
         console.log('handleClick+++++', val);
+        if (!val) return;
         setData(prevData => [...prevData, val]);
+        setVal('');
     }
 
     return (

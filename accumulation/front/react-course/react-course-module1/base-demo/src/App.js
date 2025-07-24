@@ -124,14 +124,15 @@ function App () {
             <br />
 
             example9:
-            <Example9 />
+            <Example9 />*/}
             <br />
 
-            example8:
+            example8:<br />
             <Example8 />
-            <br /> */}
+            <br />
+            <br />
 
-            example7:
+            example7:<br />
             <Example7 />
             <br />
 
