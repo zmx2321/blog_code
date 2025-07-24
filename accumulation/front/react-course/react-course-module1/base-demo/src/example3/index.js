@@ -1,11 +1,11 @@
 // react中组件传参实际上就是函数传参,使用props来接收参数
 const Example3 = (props) => {
     // 会将jsx所接收的属性转换为单个对象,传递到组件中,这个对象就是props
-    console.log(props);
+    // console.log(props);
 
     return (
         <div className="example3">
-            { props.name }
+            {props.name}
         </div>
     );
 }

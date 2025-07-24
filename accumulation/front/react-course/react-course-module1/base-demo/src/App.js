@@ -120,11 +120,14 @@ function App () {
             <br />*/}
 
             example10:
+            <br />
             <Example10 />
+            <br />
             <br />
 
             example9:
             {/* <Example9 /> */}
+            <br />
             <br />
 
             example8:<br />
