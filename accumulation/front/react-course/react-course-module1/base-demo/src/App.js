@@ -109,7 +109,7 @@ function App () {
 
             example13:
             <Example13 />
-            <br />
+            <br />*/}
 
             example12:
             <Example12 />
@@ -117,7 +117,7 @@ function App () {
 
             example11:
             <Example11 />
-            <br />*/}
+            <br />
 
             example10:
             <br />

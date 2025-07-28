@@ -4,6 +4,7 @@ import React from 'react';
 import EnhancedComponent from './components/EnhancedComponent';
 
 import HOC from './components/HOC';
+import LogHOC from './components/LogHOC';
 
 /**
  * 高阶组件不是组件,本质上是一个函数
@@ -21,6 +22,11 @@ const Example10 = () => {
             HOC:
             <br />
             <HOC />
+            <br />
+            <br />
+            <br />
+            <LogHOC />
+
         </>
     );
 };
