@@ -1,4 +1,5 @@
 import React from 'react';
+import ContextSimple from './components/contextSimple';
 
 const Example13 = () => {
     return (
@@ -6,6 +7,7 @@ const Example13 = () => {
             <h2>
                 13
             </h2>
+            <ContextSimple />
         </>
     )
 }
