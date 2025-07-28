@@ -4,6 +4,26 @@
  */
 import React, { useEffect, useState } from 'react';
 
+/* function withFetching (fetchType) {
+    return function (WrappedComponent) {
+        return function WithFetchingWrapper (props) {
+            // 实现代码...
+        }
+    }
+} */
+
+// // 箭头函数柯里化
+// const funcA = a => b => c => { /* 逻辑 */ }
+
+// // 等价于传统函数
+// function funcA (a) {
+//     return function (b) {
+//         return function (c) {
+//             // 逻辑
+//         }
+//     }
+// }
+
 // 函数式高阶组件：withFetching
 const withFetching = (fetchType) => (WrappedComponent) => {
     return function WithFetchingWrapper (props) {
