@@ -93,7 +93,7 @@ function App () {
 
             example17:
             <Example17 />
-            <br />
+            <br />*/}
 
             example16:
             <Example16 />
@@ -105,7 +105,7 @@ function App () {
 
             example14:
             <Example14 />
-            <br />*/}
+            <br />
 
             example13:
             <Example13 />

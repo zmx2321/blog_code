@@ -1,10 +1,7 @@
-import { Provider } from 'react-redux';
-import { store } from './utils/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement } from './utils/counterSlice';
+import { increment, decrement } from './counterSlice';
 
-// 正确层级：Provider应该包裹整个应用根组件
-const Example15 = () => {
+const CounterView = () => {
     const count = useSelector(state => state.counter.value);
     const dispatch = useDispatch();
 
@@ -20,9 +17,4 @@ const Example15 = () => {
     );
 }
 
-// 用Provider包裹根组件
-export default () => (
-    <Provider store={store}>
-        <Example15 />
-    </Provider>
-);
+export default CounterView;
