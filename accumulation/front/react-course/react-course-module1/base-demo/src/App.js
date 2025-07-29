@@ -80,11 +80,11 @@ function App () {
 
             example21:
             <Example21 />
-            <br />
+            <br />*/}
 
             example20:
             <Example20 />
-            <br />*/}
+            <br />
 
             <Router>
                 <Routes>
@@ -93,14 +93,6 @@ function App () {
                 </Routes>
             </Router>
             example19:
-            {/* <Router>
-                <Example19 />
-                <About />
-            </Router> */}
-            {/* <Routes>
-                <Route path="/" element={<Example19 />} />
-                <Route path="/about" element={<About />} />
-            </Routes> */}
             <br />
 
             example18:
