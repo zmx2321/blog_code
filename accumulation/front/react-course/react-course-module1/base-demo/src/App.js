@@ -20,6 +20,7 @@ import Example16 from './example16/index'
 import Example17 from './example17/index'
 import Example18 from './example18/index'
 import Example19 from './example19/index'
+import About from './example19/about.js';
 import Example20 from './example20/index'
 import Example21 from './example21/index'
 import Example22 from './example22/index'
@@ -31,6 +32,8 @@ import Example27 from './example27/index'
 import Example28 from './example28/index'
 import Example29 from './example29/index'
 import Example30 from './example30/index'
+
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const name = "first app"
 
@@ -84,7 +87,10 @@ function App () {
             <br />*/}
 
             example19:
-            <Example19 />
+            <Router>
+                <Example19 />
+                <About />
+            </Router>
             <br />
 
             example18:
