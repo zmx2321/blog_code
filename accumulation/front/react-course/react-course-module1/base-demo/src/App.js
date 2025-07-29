@@ -89,11 +89,11 @@ function App () {
 
             example18:
             <Example18 />
-            <br />
+            <br />*/}
 
             example17:
             <Example17 />
-            <br />*/}
+            <br />
 
             example16:
             <Example16 />
