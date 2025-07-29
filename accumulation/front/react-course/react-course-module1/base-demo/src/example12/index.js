@@ -7,6 +7,9 @@ import MovieB from './components/MovieB';
 
 
 // 高阶组件
+/**
+ * 利用js的闭包,[柯里化函数]
+ */
 
 // 高阶组件复用页面
 const Example12 = () => {
