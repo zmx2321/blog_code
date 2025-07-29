@@ -33,7 +33,7 @@ import Example28 from './example28/index'
 import Example29 from './example29/index'
 import Example30 from './example30/index'
 
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const name = "first app"
 
@@ -86,11 +86,21 @@ function App () {
             <Example20 />
             <br />*/}
 
-            example19:
             <Router>
+                <Routes>
+                    <Route path="/" element={<Example19 />} />
+                    <Route path="/about" element={<About />} />
+                </Routes>
+            </Router>
+            example19:
+            {/* <Router>
                 <Example19 />
                 <About />
-            </Router>
+            </Router> */}
+            {/* <Routes>
+                <Route path="/" element={<Example19 />} />
+                <Route path="/about" element={<About />} />
+            </Routes> */}
             <br />
 
             example18:
