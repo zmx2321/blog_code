@@ -9,7 +9,7 @@ const Demo = (props) => {
     return (
         <>
             <h2>
-                我是Demo组件
+                我是Demo组件1
             </h2>
         </>
     )
@@ -30,6 +30,7 @@ const proxyTest = Component => {
     return props => {
         console.log('proxyTest', props);
 
+        // 我们可以使用类组件,形成高阶组件
         return <Component {...props} isUse={isUse} />
 
     }
