@@ -10,7 +10,7 @@ let posts = [
 ]
 
 /** 生成新 id */
-function nextId() {
+function nextId () {
   const ids = posts.map((p) => parseInt(p.id, 10)).filter((n) => !Number.isNaN(n))
   return String(ids.length > 0 ? Math.max(...ids) + 1 : 1)
 }
@@ -19,7 +19,7 @@ function nextId() {
  * 获取所有文章
  * @returns {Array<{id: string, title: string, content: string, createdAt: string}>}
  */
-export function getAllPosts() {
+export function getAllPosts () {
   return [...posts]
 }
 
@@ -28,7 +28,7 @@ export function getAllPosts() {
  * @param {string} id
  * @returns {Object|undefined}
  */
-export function getPostById(id) {
+export function getPostById (id) {
   return posts.find((p) => p.id === String(id))
 }
 
@@ -37,7 +37,7 @@ export function getPostById(id) {
  * @param {{ title: string, content: string }} data
  * @returns {{ id: string, title: string, content: string, createdAt: string }}
  */
-export function createPost(data) {
+export function createPost (data) {
   const now = new Date().toISOString()
   const post = {
     id: nextId(),
@@ -55,7 +55,7 @@ export function createPost(data) {
  * @param {{ title?: string, content?: string }} data
  * @returns {Object|undefined}
  */
-export function updatePost(id, data) {
+export function updatePost (id, data) {
   const index = posts.findIndex((p) => p.id === String(id))
   if (index === -1) return undefined
   posts[index] = { ...posts[index], ...data }
@@ -67,7 +67,7 @@ export function updatePost(id, data) {
  * @param {string} id
  * @returns {boolean}
  */
-export function deletePost(id) {
+export function deletePost (id) {
   const index = posts.findIndex((p) => p.id === String(id))
   if (index === -1) return false
   posts.splice(index, 1)
