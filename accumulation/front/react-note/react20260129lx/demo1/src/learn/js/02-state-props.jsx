@@ -12,7 +12,9 @@ function CounterDisplay({ count, onIncrement }) {
   return (
     <div>
       <span>当前：{count} </span>
-      <button type="button" onClick={onIncrement}>+1</button>
+      <button type="button" onClick={onIncrement}>
+        +1
+      </button>
     </div>
   )
 }
@@ -28,9 +30,11 @@ function Learn02StateProps() {
       <p className="vue-tip">
         Vue: ref + props/emit → React: useState + props（父传 onIncrement 回调 = 子传父）
       </p>
+      {/* onIncrement 是父给的"遥控器"，子按按钮就是在"遥控"父的状态。 */}
       <CounterDisplay count={count} onIncrement={() => setCount((c) => c + 1)} />
     </div>
   )
 }
 
 export default Learn02StateProps
+

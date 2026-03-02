@@ -31,7 +31,7 @@ function TodoApp() {
 
   const toggleTodo = (id) => {
     setTodos((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t))
+      prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t)),
     )
   }
 
@@ -53,3 +53,4 @@ function TodoApp() {
 }
 
 export default TodoApp
+

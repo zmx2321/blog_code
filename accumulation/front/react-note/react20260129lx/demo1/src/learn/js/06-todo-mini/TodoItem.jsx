@@ -14,9 +14,12 @@ function TodoItem({ item, onToggle, onRemove }) {
       <span style={{ textDecoration: item.done ? 'line-through' : 'none', flex: 1 }}>
         {item.text}
       </span>
-      <button type="button" onClick={() => onRemove(item.id)}>删除</button>
+      <button type="button" onClick={() => onRemove(item.id)}>
+        删除
+      </button>
     </li>
   )
 }
 
 export default TodoItem
+
