@@ -14,7 +14,12 @@
 // - name: string
 // - age: number
 // - isVip?: boolean（可选）
-type User = any
+type User = {
+  id: number,
+  name: string,
+  age: number,
+  isVip: boolean
+}
 
 // TODO 2：补全 Product 类型
 // 要求：
@@ -22,20 +27,25 @@ type User = any
 // - name: string
 // - price: number
 // - tags?: string[]（可选）
-type Product = any
+type Product = {
+  id: number,
+  name: string,
+  price: number,
+  tags?: string[]
+}
 
 // TODO 3：定义 Role 联合类型
 // 要求：'admin' | 'editor' | 'viewer'
-type Role = any
+type Role = 'admin' | 'editor' | 'viewer'
 
 // TODO 4：实现函数 discountPrice
 // 要求：
 // - 参数 product: Product
 // - 参数 discount: number（0-1 之间）
 // - 返回：打折后价格 number
-function discountPrice(product: any, discount: any) {
+function discountPrice(product: Product, discount: number): number {
   // 在这里写你的实现
-  return 0
+  return product.price * (1 - discount)
 }
 
 // TODO 5：实现函数 canEdit
@@ -45,7 +55,7 @@ function discountPrice(product: any, discount: any) {
 // - 逻辑：admin / editor 返回 true，viewer 返回 false
 function canEdit(role: any) {
   // 在这里写你的实现
-  return false
+  return role === 'admin' || role === 'editor'
 }
 
 // 示例数据（你可以修改）

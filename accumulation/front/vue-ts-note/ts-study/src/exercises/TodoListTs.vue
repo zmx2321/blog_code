@@ -14,7 +14,11 @@
 // - id: number
 // - title: string
 // - done: boolean
-type Todo = any
+type Todo = {
+  id: number,
+  title: string,
+  done: boolean
+}
 
 // TODO 2：定义状态
 // 建议：
@@ -22,8 +26,8 @@ type Todo = any
 // - todos: Ref<Todo[]>
 // 或者用 reactive 包一整个对象也可以
 
-// const newTitle = ...
-// const todos = ...
+const newTitle = ref<string>("")
+const todos = ref<Todo[]>([])
 
 // TODO 3：实现 addTodo 函数
 // - 从 newTitle 中读取文本
@@ -32,6 +36,14 @@ type Todo = any
 // - 最后清空输入框
 function addTodo() {
   // 在这里实现
+  const title = newTitle.value.trim()
+  if (!title) return
+  todos.value.push({
+    id: Date.now(),
+    title,
+    done: false
+  })
+  newTitle.value = ""
 }
 
 // TODO 4：实现 toggleTodo 函数
@@ -39,6 +51,9 @@ function addTodo() {
 // - 找到对应 todo，切换 done 状态
 function toggleTodo(id: number) {
   // 在这里实现
+  const todo = todos.value.find(t => t.id === id)
+  if (!todo) return
+  todo.done = !todo.done
 }
 
 // TODO 5（可选）：实现 removeTodo 函数
@@ -46,6 +61,7 @@ function toggleTodo(id: number) {
 // - 从列表中删除对应项
 function removeTodo(id: number) {
   // 在这里实现
+  todos.value = todos.value.filter(t => t.id !== id)
 }
 </script>
 
